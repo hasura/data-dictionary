@@ -1,0 +1,37 @@
+{
+  "name": "react-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "generate-gql-client": "genql --esm --endpoint http://localhost:3000/api/graphql --output ./generated-gql-client"
+  },
+  "dependencies": {
+    "@genql/runtime": "^2.3.3",
+    "@visx/event": "^1.0.0",
+    "@visx/group": "^1.0.0",
+    "@visx/hierarchy": "^1.0.0",
+    "@visx/responsive": "^1.1.0",
+    "@visx/scale": "^1.1.0",
+    "@visx/shape": "^1.1.0",
+    "@visx/zoom": "^1.0.0",
+    "apollo-server-micro": "^2.18.2",
+    "easy-peasy": "^4.1.0-alpha.7",
+    "graphiql": "^1.0.6",
+    "graphql": "^15.3.0",
+    "isomorphic-fetch": "^3.0.0",
+    "lodash": "^4.17.20",
+    "next": "9.5.5",
+    "react": "16.14.0",
+    "react-dom": "16.14.0",
+    "tailwindcss": "^1.9.5"
+  },
+  "devDependencies": {
+    "@genql/cli": "^2.3.3",
+    "@types/lodash": "^4.14.162",
+    "@types/react": "^16.9.53",
+    "typescript": "^4.0.3"
+  }
+}
