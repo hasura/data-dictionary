@@ -1,0 +1,2529 @@
+{
+  "columns": [
+    {
+      "table_schema": "public",
+      "table_name": "employees",
+      "column_name": "state",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "employees",
+      "column_name": "postal_code",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "artists",
+      "column_name": "id",
+      "column_default": "nextval('artists_id_seq'::regclass)",
+      "is_nullable": "f",
+      "data_type": "integer",
+      "udt_name": "int4"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "categories",
+      "column_name": "name",
+      "column_default": "NULL",
+      "is_nullable": "f",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "playlists",
+      "column_name": "id",
+      "column_default": "nextval('playlists_id_seq'::regclass)",
+      "is_nullable": "f",
+      "data_type": "integer",
+      "udt_name": "int4"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "albums",
+      "column_name": "title",
+      "column_default": "NULL",
+      "is_nullable": "f",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "employees",
+      "column_name": "last_name",
+      "column_default": "NULL",
+      "is_nullable": "f",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "film_actor",
+      "column_name": "last_update",
+      "column_default": "now()",
+      "is_nullable": "f",
+      "data_type": "timestamp without time zone",
+      "udt_name": "timestamp"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "tracks",
+      "column_name": "composer",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "film_category",
+      "column_name": "last_update",
+      "column_default": "now()",
+      "is_nullable": "f",
+      "data_type": "timestamp without time zone",
+      "udt_name": "timestamp"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "customers",
+      "column_name": "city",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "employees",
+      "column_name": "country",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "films",
+      "column_name": "rental_duration",
+      "column_default": 3,
+      "is_nullable": "f",
+      "data_type": "smallint",
+      "udt_name": "int2"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "invoices",
+      "column_name": "customer_id",
+      "column_default": "NULL",
+      "is_nullable": "f",
+      "data_type": "integer",
+      "udt_name": "int4"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "film_category",
+      "column_name": "film_id",
+      "column_default": "NULL",
+      "is_nullable": "f",
+      "data_type": "smallint",
+      "udt_name": "int2"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "films",
+      "column_name": "length",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "smallint",
+      "udt_name": "int2"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "customers",
+      "column_name": "country",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "tracks",
+      "column_name": "bytes",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "integer",
+      "udt_name": "int4"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "film_actor",
+      "column_name": "actor_id",
+      "column_default": "NULL",
+      "is_nullable": "f",
+      "data_type": "smallint",
+      "udt_name": "int2"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "invoice_lines",
+      "column_name": "track_id",
+      "column_default": "NULL",
+      "is_nullable": "f",
+      "data_type": "integer",
+      "udt_name": "int4"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "tracks",
+      "column_name": "unit_price",
+      "column_default": "NULL",
+      "is_nullable": "f",
+      "data_type": "numeric",
+      "udt_name": "numeric"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "customers",
+      "column_name": "last_name",
+      "column_default": "NULL",
+      "is_nullable": "f",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "tracks",
+      "column_name": "milliseconds",
+      "column_default": "NULL",
+      "is_nullable": "f",
+      "data_type": "integer",
+      "udt_name": "int4"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "films",
+      "column_name": "description",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "text",
+      "udt_name": "text"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "customers",
+      "column_name": "state",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "actors",
+      "column_name": "first_name",
+      "column_default": "NULL",
+      "is_nullable": "f",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "tracks",
+      "column_name": "album_id",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "integer",
+      "udt_name": "int4"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "films",
+      "column_name": "rental_rate",
+      "column_default": 4.99,
+      "is_nullable": "f",
+      "data_type": "numeric",
+      "udt_name": "numeric"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "customers",
+      "column_name": "postal_code",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "films",
+      "column_name": "replacement_cost",
+      "column_default": 19.99,
+      "is_nullable": "f",
+      "data_type": "numeric",
+      "udt_name": "numeric"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "media_types",
+      "column_name": "id",
+      "column_default": "nextval('mediatypes_id_seq'::regclass)",
+      "is_nullable": "f",
+      "data_type": "integer",
+      "udt_name": "int4"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "tracks",
+      "column_name": "id",
+      "column_default": "nextval('tracks_id_seq'::regclass)",
+      "is_nullable": "f",
+      "data_type": "integer",
+      "udt_name": "int4"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "films",
+      "column_name": "release_year",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "integer",
+      "udt_name": "int4"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "customers",
+      "column_name": "company",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "playlist_track",
+      "column_name": "playlist_id",
+      "column_default": "NULL",
+      "is_nullable": "f",
+      "data_type": "integer",
+      "udt_name": "int4"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "employees",
+      "column_name": "phone",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "invoice_lines",
+      "column_name": "unit_price",
+      "column_default": "NULL",
+      "is_nullable": "f",
+      "data_type": "numeric",
+      "udt_name": "numeric"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "employees",
+      "column_name": "reports_to",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "integer",
+      "udt_name": "int4"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "genres",
+      "column_name": "name",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "invoice_lines",
+      "column_name": "id",
+      "column_default": "nextval('invoicelines_id_seq'::regclass)",
+      "is_nullable": "f",
+      "data_type": "integer",
+      "udt_name": "int4"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "employees",
+      "column_name": "email",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "invoices",
+      "column_name": "billing_city",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "films",
+      "column_name": "id",
+      "column_default": "nextval('films_id_seq'::regclass)",
+      "is_nullable": "f",
+      "data_type": "integer",
+      "udt_name": "int4"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "tracks",
+      "column_name": "media_type_id",
+      "column_default": "NULL",
+      "is_nullable": "f",
+      "data_type": "integer",
+      "udt_name": "int4"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "customers",
+      "column_name": "id",
+      "column_default": "nextval('customers_id_seq'::regclass)",
+      "is_nullable": "f",
+      "data_type": "integer",
+      "udt_name": "int4"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "playlist_track",
+      "column_name": "track_id",
+      "column_default": "NULL",
+      "is_nullable": "f",
+      "data_type": "integer",
+      "udt_name": "int4"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "films",
+      "column_name": "last_update",
+      "column_default": "now()",
+      "is_nullable": "f",
+      "data_type": "timestamp without time zone",
+      "udt_name": "timestamp"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "customers",
+      "column_name": "fax",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "actors",
+      "column_name": "last_name",
+      "column_default": "NULL",
+      "is_nullable": "f",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "employees",
+      "column_name": "birth_date",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "timestamp without time zone",
+      "udt_name": "timestamp"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "tracks",
+      "column_name": "name",
+      "column_default": "NULL",
+      "is_nullable": "f",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "customers",
+      "column_name": "first_name",
+      "column_default": "NULL",
+      "is_nullable": "f",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "films",
+      "column_name": "title",
+      "column_default": "NULL",
+      "is_nullable": "f",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "films",
+      "column_name": "special_features",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "ARRAY",
+      "udt_name": "_text"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "genres",
+      "column_name": "id",
+      "column_default": "nextval('genres_id_seq'::regclass)",
+      "is_nullable": "f",
+      "data_type": "integer",
+      "udt_name": "int4"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "films",
+      "column_name": "rating",
+      "column_default": "'G'::text",
+      "is_nullable": "t",
+      "data_type": "text",
+      "udt_name": "text"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "invoice_lines",
+      "column_name": "invoice_id",
+      "column_default": "NULL",
+      "is_nullable": "f",
+      "data_type": "integer",
+      "udt_name": "int4"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "invoices",
+      "column_name": "billing_state",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "customers",
+      "column_name": "email",
+      "column_default": "NULL",
+      "is_nullable": "f",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "customers",
+      "column_name": "phone",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "actors",
+      "column_name": "last_update",
+      "column_default": "now()",
+      "is_nullable": "f",
+      "data_type": "timestamp without time zone",
+      "udt_name": "timestamp"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "invoices",
+      "column_name": "billing_postal_code",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "employees",
+      "column_name": "address",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "media_types",
+      "column_name": "name",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "actors",
+      "column_name": "id",
+      "column_default": "nextval('actors_id_seq'::regclass)",
+      "is_nullable": "f",
+      "data_type": "integer",
+      "udt_name": "int4"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "invoices",
+      "column_name": "invoice_date",
+      "column_default": "NULL",
+      "is_nullable": "f",
+      "data_type": "timestamp without time zone",
+      "udt_name": "timestamp"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "employees",
+      "column_name": "city",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "film_category",
+      "column_name": "category_id",
+      "column_default": "NULL",
+      "is_nullable": "f",
+      "data_type": "smallint",
+      "udt_name": "int2"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "employees",
+      "column_name": "hire_date",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "timestamp without time zone",
+      "udt_name": "timestamp"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "invoices",
+      "column_name": "total",
+      "column_default": "NULL",
+      "is_nullable": "f",
+      "data_type": "numeric",
+      "udt_name": "numeric"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "categories",
+      "column_name": "last_update",
+      "column_default": "now()",
+      "is_nullable": "f",
+      "data_type": "timestamp without time zone",
+      "udt_name": "timestamp"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "albums",
+      "column_name": "artist_id",
+      "column_default": "NULL",
+      "is_nullable": "f",
+      "data_type": "integer",
+      "udt_name": "int4"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "employees",
+      "column_name": "first_name",
+      "column_default": "NULL",
+      "is_nullable": "f",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "film_actor",
+      "column_name": "film_id",
+      "column_default": "NULL",
+      "is_nullable": "f",
+      "data_type": "smallint",
+      "udt_name": "int2"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "invoices",
+      "column_name": "billing_country",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "employees",
+      "column_name": "fax",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "employees",
+      "column_name": "id",
+      "column_default": "nextval('employees_id_seq'::regclass)",
+      "is_nullable": "f",
+      "data_type": "integer",
+      "udt_name": "int4"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "artists",
+      "column_name": "name",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "categories",
+      "column_name": "id",
+      "column_default": "nextval('categories_id_seq'::regclass)",
+      "is_nullable": "f",
+      "data_type": "integer",
+      "udt_name": "int4"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "playlists",
+      "column_name": "name",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "albums",
+      "column_name": "id",
+      "column_default": "nextval('albums_id_seq'::regclass)",
+      "is_nullable": "f",
+      "data_type": "integer",
+      "udt_name": "int4"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "tracks",
+      "column_name": "genre_id",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "integer",
+      "udt_name": "int4"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "invoices",
+      "column_name": "billing_address",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "customers",
+      "column_name": "address",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "films",
+      "column_name": "language_id",
+      "column_default": "NULL",
+      "is_nullable": "f",
+      "data_type": "smallint",
+      "udt_name": "int2"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "invoices",
+      "column_name": "id",
+      "column_default": "nextval('invoices_id_seq'::regclass)",
+      "is_nullable": "f",
+      "data_type": "integer",
+      "udt_name": "int4"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "customers",
+      "column_name": "support_rep_id",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "integer",
+      "udt_name": "int4"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "invoice_lines",
+      "column_name": "quantity",
+      "column_default": "NULL",
+      "is_nullable": "f",
+      "data_type": "integer",
+      "udt_name": "int4"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "employees",
+      "column_name": "title",
+      "column_default": "NULL",
+      "is_nullable": "t",
+      "data_type": "character varying",
+      "udt_name": "varchar"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "films",
+      "column_name": "fulltext",
+      "column_default": "NULL",
+      "is_nullable": "f",
+      "data_type": "tsvector",
+      "udt_name": "tsvector"
+    }
+  ],
+  "tables": [
+    {
+      "id": 16811,
+      "catalog": "postgres",
+      "table_schema": "public",
+      "table_name": "artists",
+      "comment": "NULL"
+    },
+    {
+      "id": 16805,
+      "catalog": "postgres",
+      "table_schema": "public",
+      "table_name": "albums",
+      "comment": "NULL"
+    },
+    {
+      "id": 16823,
+      "catalog": "postgres",
+      "table_schema": "public",
+      "table_name": "employees",
+      "comment": "NULL"
+    },
+    {
+      "id": 16817,
+      "catalog": "postgres",
+      "table_schema": "public",
+      "table_name": "customers",
+      "comment": "NULL"
+    },
+    {
+      "id": 16835,
+      "catalog": "postgres",
+      "table_schema": "public",
+      "table_name": "invoices",
+      "comment": "NULL"
+    },
+    {
+      "id": 16841,
+      "catalog": "postgres",
+      "table_schema": "public",
+      "table_name": "invoice_lines",
+      "comment": "NULL"
+    },
+    {
+      "id": 16864,
+      "catalog": "postgres",
+      "table_schema": "public",
+      "table_name": "tracks",
+      "comment": "NULL"
+    },
+    {
+      "id": 16853,
+      "catalog": "postgres",
+      "table_schema": "public",
+      "table_name": "playlists",
+      "comment": "NULL"
+    },
+    {
+      "id": 16859,
+      "catalog": "postgres",
+      "table_schema": "public",
+      "table_name": "playlist_track",
+      "comment": "NULL"
+    },
+    {
+      "id": 16829,
+      "catalog": "postgres",
+      "table_schema": "public",
+      "table_name": "genres",
+      "comment": "NULL"
+    },
+    {
+      "id": 16847,
+      "catalog": "postgres",
+      "table_schema": "public",
+      "table_name": "media_types",
+      "comment": "NULL"
+    },
+    {
+      "id": 16967,
+      "catalog": "postgres",
+      "table_schema": "public",
+      "table_name": "film_category",
+      "comment": "NULL"
+    },
+    {
+      "id": 16946,
+      "catalog": "postgres",
+      "table_schema": "public",
+      "table_name": "actors",
+      "comment": "NULL"
+    },
+    {
+      "id": 16941,
+      "catalog": "postgres",
+      "table_schema": "public",
+      "table_name": "categories",
+      "comment": "NULL"
+    },
+    {
+      "id": 16951,
+      "catalog": "postgres",
+      "table_schema": "public",
+      "table_name": "films",
+      "comment": "NULL"
+    },
+    {
+      "id": 16963,
+      "catalog": "postgres",
+      "table_schema": "public",
+      "table_name": "film_actor",
+      "comment": "NULL"
+    }
+  ],
+  "views": [
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_check_constraint",
+      "comment": "NULL"
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_computed_field_function",
+      "comment": "NULL"
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_cron_events_stats",
+      "comment": "NULL"
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_foreign_key_constraint",
+      "comment": "NULL"
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_function_agg",
+      "comment": "NULL"
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_function_info_agg",
+      "comment": "NULL"
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_permission_agg",
+      "comment": "NULL"
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_primary_key",
+      "comment": "NULL"
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_role",
+      "comment": "NULL"
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_table_info_agg",
+      "comment": "NULL"
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_unique_constraint",
+      "comment": "NULL"
+    }
+  ],
+  "indexes": [
+    {
+      "user_name": "postgres",
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_catalog.hdb_version",
+      "index_name": "hdb_version_pkey",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": 1,
+      "index_keys": [
+        "hasura_uuid"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_catalog.hdb_version",
+      "index_name": "hdb_version_one_row",
+      "is_unique": "t",
+      "is_primary": "f",
+      "index_type": "btree",
+      "indkey": 0,
+      "index_keys": [
+        "(version IS NOT NULL)"
+      ],
+      "is_functional": "t",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_catalog.hdb_table",
+      "index_name": "hdb_table_pkey",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": "1 2",
+      "index_keys": [
+        "table_schema",
+        "table_name"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_catalog.hdb_relationship",
+      "index_name": "hdb_relationship_pkey",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": "1 2 3",
+      "index_keys": [
+        "table_schema",
+        "table_name",
+        "rel_name"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_catalog.hdb_remote_relationship",
+      "index_name": "hdb_remote_relationship_pkey",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": "1 2 3",
+      "index_keys": [
+        "remote_relationship_name",
+        "table_schema",
+        "table_name"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_catalog.hdb_permission",
+      "index_name": "hdb_permission_pkey",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": "1 2 3 4",
+      "index_keys": [
+        "table_schema",
+        "table_name",
+        "role_name",
+        "perm_type"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_catalog.event_triggers",
+      "index_name": "event_triggers_pkey",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": 1,
+      "index_keys": [
+        "name"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_catalog.event_log",
+      "index_name": "event_log_pkey",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": 1,
+      "index_keys": [
+        "id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_catalog.event_log",
+      "index_name": "event_log_trigger_name_idx",
+      "is_unique": "f",
+      "is_primary": "f",
+      "index_type": "btree",
+      "indkey": 4,
+      "index_keys": [
+        "trigger_name"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_catalog.event_log",
+      "index_name": "event_log_locked_idx",
+      "is_unique": "f",
+      "is_primary": "f",
+      "index_type": "btree",
+      "indkey": 10,
+      "index_keys": [
+        "locked"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_catalog.event_log",
+      "index_name": "event_log_delivered_idx",
+      "is_unique": "f",
+      "is_primary": "f",
+      "index_type": "btree",
+      "indkey": 6,
+      "index_keys": [
+        "delivered"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_catalog.event_log",
+      "index_name": "event_log_created_at_idx",
+      "is_unique": "f",
+      "is_primary": "f",
+      "index_type": "btree",
+      "indkey": 9,
+      "index_keys": [
+        "created_at"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_catalog.event_invocation_logs",
+      "index_name": "event_invocation_logs_pkey",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": 1,
+      "index_keys": [
+        "id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_catalog.event_invocation_logs",
+      "index_name": "event_invocation_logs_event_id_idx",
+      "is_unique": "f",
+      "is_primary": "f",
+      "index_type": "btree",
+      "indkey": 2,
+      "index_keys": [
+        "event_id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_catalog.hdb_function",
+      "index_name": "hdb_function_pkey",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": "1 2",
+      "index_keys": [
+        "function_schema",
+        "function_name"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_catalog.remote_schemas",
+      "index_name": "remote_schemas_pkey",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": 1,
+      "index_keys": [
+        "id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_catalog.remote_schemas",
+      "index_name": "remote_schemas_name_key",
+      "is_unique": "t",
+      "is_primary": "f",
+      "index_type": "btree",
+      "indkey": 2,
+      "index_keys": [
+        "name"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_catalog.hdb_schema_update_event",
+      "index_name": "hdb_schema_update_event_one_row",
+      "is_unique": "t",
+      "is_primary": "f",
+      "index_type": "btree",
+      "indkey": 0,
+      "index_keys": [
+        "(occurred_at IS NOT NULL)"
+      ],
+      "is_functional": "t",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_catalog.hdb_query_collection",
+      "index_name": "hdb_query_collection_pkey",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": 1,
+      "index_keys": [
+        "collection_name"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_catalog.hdb_allowlist",
+      "index_name": "hdb_allowlist_collection_name_key",
+      "is_unique": "t",
+      "is_primary": "f",
+      "index_type": "btree",
+      "indkey": 1,
+      "index_keys": [
+        "collection_name"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_catalog.hdb_computed_field",
+      "index_name": "hdb_computed_field_pkey",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": "1 2 3",
+      "index_keys": [
+        "table_schema",
+        "table_name",
+        "computed_field_name"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_catalog.hdb_action",
+      "index_name": "hdb_action_pkey",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": 1,
+      "index_keys": [
+        "action_name"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_catalog.hdb_action_permission",
+      "index_name": "hdb_action_permission_pkey",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": "1 2",
+      "index_keys": [
+        "action_name",
+        "role_name"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_catalog.hdb_action_log",
+      "index_name": "hdb_action_log_pkey",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": 1,
+      "index_keys": [
+        "id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_catalog.hdb_cron_triggers",
+      "index_name": "hdb_cron_triggers_pkey",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": 1,
+      "index_keys": [
+        "name"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_catalog.hdb_cron_events",
+      "index_name": "hdb_cron_events_pkey",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": 1,
+      "index_keys": [
+        "id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_catalog.hdb_cron_events",
+      "index_name": "hdb_cron_event_status",
+      "is_unique": "f",
+      "is_primary": "f",
+      "index_type": "btree",
+      "indkey": 4,
+      "index_keys": [
+        "status"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_catalog.hdb_cron_event_invocation_logs",
+      "index_name": "hdb_cron_event_invocation_logs_pkey",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": 1,
+      "index_keys": [
+        "id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_catalog.hdb_scheduled_events",
+      "index_name": "hdb_scheduled_events_pkey",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": 1,
+      "index_keys": [
+        "id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_catalog.hdb_scheduled_events",
+      "index_name": "hdb_scheduled_event_status",
+      "is_unique": "f",
+      "is_primary": "f",
+      "index_type": "btree",
+      "indkey": 7,
+      "index_keys": [
+        "status"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_catalog.hdb_scheduled_event_invocation_logs",
+      "index_name": "hdb_scheduled_event_invocation_logs_pkey",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": 1,
+      "index_keys": [
+        "id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_catalog.schema_migrations",
+      "index_name": "schema_migrations_pkey",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": 1,
+      "index_keys": [
+        "version"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_catalog.migration_settings",
+      "index_name": "migration_settings_pkey",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": 1,
+      "index_keys": [
+        "setting"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "public",
+      "table_name": "albums",
+      "index_name": "pk_albums",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": 1,
+      "index_keys": [
+        "id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "public",
+      "table_name": "artists",
+      "index_name": "pk_artists",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": 1,
+      "index_keys": [
+        "id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "public",
+      "table_name": "customers",
+      "index_name": "pk_customers",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": 1,
+      "index_keys": [
+        "id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "public",
+      "table_name": "employees",
+      "index_name": "pk_employees",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": 1,
+      "index_keys": [
+        "id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "public",
+      "table_name": "genres",
+      "index_name": "pk_genres",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": 1,
+      "index_keys": [
+        "id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "public",
+      "table_name": "invoices",
+      "index_name": "pk_invoices",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": 1,
+      "index_keys": [
+        "id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "public",
+      "table_name": "invoice_lines",
+      "index_name": "ok_invoice_lines",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": 1,
+      "index_keys": [
+        "id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "public",
+      "table_name": "media_types",
+      "index_name": "pk_media_types",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": 1,
+      "index_keys": [
+        "id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "public",
+      "table_name": "playlists",
+      "index_name": "pk_playlists",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": 1,
+      "index_keys": [
+        "id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "public",
+      "table_name": "playlist_track",
+      "index_name": "pk_playlist_track",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": "1 2",
+      "index_keys": [
+        "playlist_id",
+        "track_id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "public",
+      "table_name": "tracks",
+      "index_name": "pk_tracks",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": 1,
+      "index_keys": [
+        "id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "public",
+      "table_name": "albums",
+      "index_name": "ifk_album_artist_id",
+      "is_unique": "f",
+      "is_primary": "f",
+      "index_type": "btree",
+      "indkey": 3,
+      "index_keys": [
+        "artist_id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "public",
+      "table_name": "customers",
+      "index_name": "ifk_customer_support_rep_id",
+      "is_unique": "f",
+      "is_primary": "f",
+      "index_type": "btree",
+      "indkey": 13,
+      "index_keys": [
+        "support_rep_id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "public",
+      "table_name": "employees",
+      "index_name": "ifk_employee_reports_to",
+      "is_unique": "f",
+      "is_primary": "f",
+      "index_type": "btree",
+      "indkey": 5,
+      "index_keys": [
+        "reports_to"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "public",
+      "table_name": "invoices",
+      "index_name": "ifk_invoice_customer_id",
+      "is_unique": "f",
+      "is_primary": "f",
+      "index_type": "btree",
+      "indkey": 2,
+      "index_keys": [
+        "customer_id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "public",
+      "table_name": "invoice_lines",
+      "index_name": "ifk_invoice_line_invoice_id",
+      "is_unique": "f",
+      "is_primary": "f",
+      "index_type": "btree",
+      "indkey": 2,
+      "index_keys": [
+        "invoice_id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "public",
+      "table_name": "invoice_lines",
+      "index_name": "ifk_invoice_line_track_id",
+      "is_unique": "f",
+      "is_primary": "f",
+      "index_type": "btree",
+      "indkey": 3,
+      "index_keys": [
+        "track_id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "public",
+      "table_name": "playlist_track",
+      "index_name": "ifk_playlist_track_track_id",
+      "is_unique": "f",
+      "is_primary": "f",
+      "index_type": "btree",
+      "indkey": 2,
+      "index_keys": [
+        "track_id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "public",
+      "table_name": "tracks",
+      "index_name": "ifk_track_album_id",
+      "is_unique": "f",
+      "is_primary": "f",
+      "index_type": "btree",
+      "indkey": 3,
+      "index_keys": [
+        "album_id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "public",
+      "table_name": "tracks",
+      "index_name": "ifk_track_genre_id",
+      "is_unique": "f",
+      "is_primary": "f",
+      "index_type": "btree",
+      "indkey": 5,
+      "index_keys": [
+        "genre_id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "public",
+      "table_name": "tracks",
+      "index_name": "ifk_track_media_type_id",
+      "is_unique": "f",
+      "is_primary": "f",
+      "index_type": "btree",
+      "indkey": 4,
+      "index_keys": [
+        "media_type_id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "public",
+      "table_name": "actors",
+      "index_name": "idx_actors_last_name",
+      "is_unique": "f",
+      "is_primary": "f",
+      "index_type": "btree",
+      "indkey": 3,
+      "index_keys": [
+        "last_name"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "public",
+      "table_name": "actors",
+      "index_name": "actors_pkey",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": 1,
+      "index_keys": [
+        "id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "public",
+      "table_name": "categories",
+      "index_name": "categories_pkey",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": 1,
+      "index_keys": [
+        "id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "public",
+      "table_name": "films",
+      "index_name": "films_fulltext_idx",
+      "is_unique": "f",
+      "is_primary": "f",
+      "index_type": "gist",
+      "indkey": 13,
+      "index_keys": [
+        "fulltext"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "public",
+      "table_name": "films",
+      "index_name": "idx_fk_language_id",
+      "is_unique": "f",
+      "is_primary": "f",
+      "index_type": "btree",
+      "indkey": 5,
+      "index_keys": [
+        "language_id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "public",
+      "table_name": "films",
+      "index_name": "idx_title",
+      "is_unique": "f",
+      "is_primary": "f",
+      "index_type": "btree",
+      "indkey": 2,
+      "index_keys": [
+        "title"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "public",
+      "table_name": "films",
+      "index_name": "films_pkey",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": 1,
+      "index_keys": [
+        "id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "public",
+      "table_name": "film_actor",
+      "index_name": "idx_fk_films_id",
+      "is_unique": "f",
+      "is_primary": "f",
+      "index_type": "btree",
+      "indkey": 2,
+      "index_keys": [
+        "film_id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    },
+    {
+      "user_name": "postgres",
+      "table_schema": "public",
+      "table_name": "film_actor",
+      "index_name": "film_actor_pkey",
+      "is_unique": "t",
+      "is_primary": "t",
+      "index_type": "btree",
+      "indkey": "1 2",
+      "index_keys": [
+        "actor_id",
+        "film_id"
+      ],
+      "is_functional": "f",
+      "is_partial": "f"
+    }
+  ],
+  "primaryKeys": [
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "event_invocation_logs",
+      "constraint_name": "event_invocation_logs_pkey",
+      "columns": [
+        "id"
+      ]
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "event_log",
+      "constraint_name": "event_log_pkey",
+      "columns": [
+        "id"
+      ]
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "event_triggers",
+      "constraint_name": "event_triggers_pkey",
+      "columns": [
+        "name"
+      ]
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_action",
+      "constraint_name": "hdb_action_pkey",
+      "columns": [
+        "action_name"
+      ]
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_action_log",
+      "constraint_name": "hdb_action_log_pkey",
+      "columns": [
+        "id"
+      ]
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_action_permission",
+      "constraint_name": "hdb_action_permission_pkey",
+      "columns": [
+        "role_name",
+        "action_name"
+      ]
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_computed_field",
+      "constraint_name": "hdb_computed_field_pkey",
+      "columns": [
+        "computed_field_name",
+        "table_schema",
+        "table_name"
+      ]
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_cron_event_invocation_logs",
+      "constraint_name": "hdb_cron_event_invocation_logs_pkey",
+      "columns": [
+        "id"
+      ]
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_cron_events",
+      "constraint_name": "hdb_cron_events_pkey",
+      "columns": [
+        "id"
+      ]
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_cron_triggers",
+      "constraint_name": "hdb_cron_triggers_pkey",
+      "columns": [
+        "name"
+      ]
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_function",
+      "constraint_name": "hdb_function_pkey",
+      "columns": [
+        "function_schema",
+        "function_name"
+      ]
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_permission",
+      "constraint_name": "hdb_permission_pkey",
+      "columns": [
+        "table_schema",
+        "role_name",
+        "perm_type",
+        "table_name"
+      ]
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_query_collection",
+      "constraint_name": "hdb_query_collection_pkey",
+      "columns": [
+        "collection_name"
+      ]
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_relationship",
+      "constraint_name": "hdb_relationship_pkey",
+      "columns": [
+        "table_schema",
+        "rel_name",
+        "table_name"
+      ]
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_remote_relationship",
+      "constraint_name": "hdb_remote_relationship_pkey",
+      "columns": [
+        "remote_relationship_name",
+        "table_schema",
+        "table_name"
+      ]
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_scheduled_event_invocation_logs",
+      "constraint_name": "hdb_scheduled_event_invocation_logs_pkey",
+      "columns": [
+        "id"
+      ]
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_scheduled_events",
+      "constraint_name": "hdb_scheduled_events_pkey",
+      "columns": [
+        "id"
+      ]
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_table",
+      "constraint_name": "hdb_table_pkey",
+      "columns": [
+        "table_name",
+        "table_schema"
+      ]
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_version",
+      "constraint_name": "hdb_version_pkey",
+      "columns": [
+        "hasura_uuid"
+      ]
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "migration_settings",
+      "constraint_name": "migration_settings_pkey",
+      "columns": [
+        "setting"
+      ]
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "remote_schemas",
+      "constraint_name": "remote_schemas_pkey",
+      "columns": [
+        "id"
+      ]
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "schema_migrations",
+      "constraint_name": "schema_migrations_pkey",
+      "columns": [
+        "version"
+      ]
+    },
+    {
+      "table_schema": "public",
+      "table_name": "actors",
+      "constraint_name": "actors_pkey",
+      "columns": [
+        "id"
+      ]
+    },
+    {
+      "table_schema": "public",
+      "table_name": "albums",
+      "constraint_name": "pk_albums",
+      "columns": [
+        "id"
+      ]
+    },
+    {
+      "table_schema": "public",
+      "table_name": "artists",
+      "constraint_name": "pk_artists",
+      "columns": [
+        "id"
+      ]
+    },
+    {
+      "table_schema": "public",
+      "table_name": "categories",
+      "constraint_name": "categories_pkey",
+      "columns": [
+        "id"
+      ]
+    },
+    {
+      "table_schema": "public",
+      "table_name": "customers",
+      "constraint_name": "pk_customers",
+      "columns": [
+        "id"
+      ]
+    },
+    {
+      "table_schema": "public",
+      "table_name": "employees",
+      "constraint_name": "pk_employees",
+      "columns": [
+        "id"
+      ]
+    },
+    {
+      "table_schema": "public",
+      "table_name": "film_actor",
+      "constraint_name": "film_actor_pkey",
+      "columns": [
+        "film_id",
+        "actor_id"
+      ]
+    },
+    {
+      "table_schema": "public",
+      "table_name": "films",
+      "constraint_name": "films_pkey",
+      "columns": [
+        "id"
+      ]
+    },
+    {
+      "table_schema": "public",
+      "table_name": "genres",
+      "constraint_name": "pk_genres",
+      "columns": [
+        "id"
+      ]
+    },
+    {
+      "table_schema": "public",
+      "table_name": "invoice_lines",
+      "constraint_name": "ok_invoice_lines",
+      "columns": [
+        "id"
+      ]
+    },
+    {
+      "table_schema": "public",
+      "table_name": "invoices",
+      "constraint_name": "pk_invoices",
+      "columns": [
+        "id"
+      ]
+    },
+    {
+      "table_schema": "public",
+      "table_name": "media_types",
+      "constraint_name": "pk_media_types",
+      "columns": [
+        "id"
+      ]
+    },
+    {
+      "table_schema": "public",
+      "table_name": "playlist_track",
+      "constraint_name": "pk_playlist_track",
+      "columns": [
+        "track_id",
+        "playlist_id"
+      ]
+    },
+    {
+      "table_schema": "public",
+      "table_name": "playlists",
+      "constraint_name": "pk_playlists",
+      "columns": [
+        "id"
+      ]
+    },
+    {
+      "table_schema": "public",
+      "table_name": "tracks",
+      "constraint_name": "pk_tracks",
+      "columns": [
+        "id"
+      ]
+    }
+  ],
+  "foreignKeys": [
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "event_invocation_logs",
+      "constraint_name": "event_invocation_logs_event_id_fkey",
+      "ref_table_table_schema": "hdb_catalog",
+      "ref_table": "event_log",
+      "column_mapping": {
+        "event_id": "id"
+      },
+      "on_update": "a",
+      "on_delete": "a"
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "event_triggers",
+      "constraint_name": "event_triggers_schema_name_table_name_fkey",
+      "ref_table_table_schema": "hdb_catalog",
+      "ref_table": "hdb_table",
+      "column_mapping": {
+        "schema_name": "table_schema",
+        "table_name": "table_name"
+      },
+      "on_update": "c",
+      "on_delete": "a"
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_action_permission",
+      "constraint_name": "hdb_action_permission_action_name_fkey",
+      "ref_table_table_schema": "hdb_catalog",
+      "ref_table": "hdb_action",
+      "column_mapping": {
+        "action_name": "action_name"
+      },
+      "on_update": "c",
+      "on_delete": "a"
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_allowlist",
+      "constraint_name": "hdb_allowlist_collection_name_fkey",
+      "ref_table_table_schema": "hdb_catalog",
+      "ref_table": "hdb_query_collection",
+      "column_mapping": {
+        "collection_name": "collection_name"
+      },
+      "on_update": "a",
+      "on_delete": "a"
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_computed_field",
+      "constraint_name": "hdb_computed_field_table_schema_table_name_fkey",
+      "ref_table_table_schema": "hdb_catalog",
+      "ref_table": "hdb_table",
+      "column_mapping": {
+        "table_name": "table_name",
+        "table_schema": "table_schema"
+      },
+      "on_update": "c",
+      "on_delete": "a"
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_cron_event_invocation_logs",
+      "constraint_name": "hdb_cron_event_invocation_logs_event_id_fkey",
+      "ref_table_table_schema": "hdb_catalog",
+      "ref_table": "hdb_cron_events",
+      "column_mapping": {
+        "event_id": "id"
+      },
+      "on_update": "c",
+      "on_delete": "c"
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_cron_events",
+      "constraint_name": "hdb_cron_events_trigger_name_fkey",
+      "ref_table_table_schema": "hdb_catalog",
+      "ref_table": "hdb_cron_triggers",
+      "column_mapping": {
+        "trigger_name": "name"
+      },
+      "on_update": "c",
+      "on_delete": "c"
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_permission",
+      "constraint_name": "hdb_permission_table_schema_table_name_fkey",
+      "ref_table_table_schema": "hdb_catalog",
+      "ref_table": "hdb_table",
+      "column_mapping": {
+        "table_schema": "table_schema",
+        "table_name": "table_name"
+      },
+      "on_update": "c",
+      "on_delete": "a"
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_relationship",
+      "constraint_name": "hdb_relationship_table_schema_table_name_fkey",
+      "ref_table_table_schema": "hdb_catalog",
+      "ref_table": "hdb_table",
+      "column_mapping": {
+        "table_schema": "table_schema",
+        "table_name": "table_name"
+      },
+      "on_update": "c",
+      "on_delete": "a"
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_remote_relationship",
+      "constraint_name": "hdb_remote_relationship_table_schema_table_name_fkey",
+      "ref_table_table_schema": "hdb_catalog",
+      "ref_table": "hdb_table",
+      "column_mapping": {
+        "table_name": "table_name",
+        "table_schema": "table_schema"
+      },
+      "on_update": "c",
+      "on_delete": "a"
+    },
+    {
+      "table_schema": "hdb_catalog",
+      "table_name": "hdb_scheduled_event_invocation_logs",
+      "constraint_name": "hdb_scheduled_event_invocation_logs_event_id_fkey",
+      "ref_table_table_schema": "hdb_catalog",
+      "ref_table": "hdb_scheduled_events",
+      "column_mapping": {
+        "event_id": "id"
+      },
+      "on_update": "c",
+      "on_delete": "c"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "albums",
+      "constraint_name": "fk_album_artist_id",
+      "ref_table_table_schema": "public",
+      "ref_table": "artists",
+      "column_mapping": {
+        "artist_id": "id"
+      },
+      "on_update": "a",
+      "on_delete": "a"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "customers",
+      "constraint_name": "fk_customer_support_rep_id",
+      "ref_table_table_schema": "public",
+      "ref_table": "employees",
+      "column_mapping": {
+        "support_rep_id": "id"
+      },
+      "on_update": "a",
+      "on_delete": "a"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "employees",
+      "constraint_name": "fk_employee_reports_to",
+      "ref_table_table_schema": "public",
+      "ref_table": "employees",
+      "column_mapping": {
+        "reports_to": "id"
+      },
+      "on_update": "a",
+      "on_delete": "a"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "invoice_lines",
+      "constraint_name": "fk_invoice_line_invoice_id",
+      "ref_table_table_schema": "public",
+      "ref_table": "invoices",
+      "column_mapping": {
+        "invoice_id": "id"
+      },
+      "on_update": "a",
+      "on_delete": "a"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "invoice_lines",
+      "constraint_name": "fk_invoice_line_track_id",
+      "ref_table_table_schema": "public",
+      "ref_table": "tracks",
+      "column_mapping": {
+        "track_id": "id"
+      },
+      "on_update": "a",
+      "on_delete": "a"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "invoices",
+      "constraint_name": "fk_invoice_customer_id",
+      "ref_table_table_schema": "public",
+      "ref_table": "customers",
+      "column_mapping": {
+        "customer_id": "id"
+      },
+      "on_update": "a",
+      "on_delete": "a"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "playlist_track",
+      "constraint_name": "fk_playlist_track_playlist_id",
+      "ref_table_table_schema": "public",
+      "ref_table": "playlists",
+      "column_mapping": {
+        "playlist_id": "id"
+      },
+      "on_update": "a",
+      "on_delete": "a"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "playlist_track",
+      "constraint_name": "fk_playlist_track_track_id",
+      "ref_table_table_schema": "public",
+      "ref_table": "tracks",
+      "column_mapping": {
+        "track_id": "id"
+      },
+      "on_update": "a",
+      "on_delete": "a"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "tracks",
+      "constraint_name": "fk_track_album_id",
+      "ref_table_table_schema": "public",
+      "ref_table": "albums",
+      "column_mapping": {
+        "album_id": "id"
+      },
+      "on_update": "a",
+      "on_delete": "a"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "tracks",
+      "constraint_name": "fk_track_genre_id",
+      "ref_table_table_schema": "public",
+      "ref_table": "genres",
+      "column_mapping": {
+        "genre_id": "id"
+      },
+      "on_update": "a",
+      "on_delete": "a"
+    },
+    {
+      "table_schema": "public",
+      "table_name": "tracks",
+      "constraint_name": "fk_track_media_type_id",
+      "ref_table_table_schema": "public",
+      "ref_table": "media_types",
+      "column_mapping": {
+        "media_type_id": "id"
+      },
+      "on_update": "a",
+      "on_delete": "a"
+    }
+  ]
+}
