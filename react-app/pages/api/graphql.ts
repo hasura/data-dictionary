@@ -449,6 +449,7 @@ const typeDefs = gql`
   }
 `
 
+// TODO: Environment variable for endpoint or something
 const runMetadataQuery = createHasuraMetadataClient({
   endpoint: "http://localhost:8085/v1/query",
   headers: { "X-Hasura-Admin-Secret": "mysecret" }

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@genql/runtime": "^2.3.3",
+    "@mrblenny/react-flow-chart": "^0.0.14",
     "@visx/event": "^1.0.0",
     "@visx/group": "^1.0.0",
     "@visx/hierarchy": "^1.0.0",
@@ -17,15 +18,19 @@
     "@visx/scale": "^1.1.0",
     "@visx/shape": "^1.1.0",
     "@visx/zoom": "^1.0.0",
+    "ag-grid-community": "^24.1.0",
+    "ag-grid-react": "^24.1.0",
     "apollo-server-micro": "^2.18.2",
     "easy-peasy": "^4.1.0-alpha.7",
     "graphiql": "^1.0.6",
     "graphql": "^15.3.0",
+    "graphql-type-json": "^0.3.2",
     "isomorphic-fetch": "^3.0.0",
     "lodash": "^4.17.20",
     "next": "9.5.5",
     "react": "16.14.0",
     "react-dom": "16.14.0",
+    "styled-components": "^5.2.0",
     "tailwindcss": "^1.9.5"
   },
   "devDependencies": {
