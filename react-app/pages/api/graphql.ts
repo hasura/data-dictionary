@@ -19,7 +19,6 @@ const typeDefs = gql`
   type Query {
     metadata: HasuraMetadata
     postgres: Postgres
-    random_words_totaling_kilobytes(kilobytes: Float!): [String!]!
   }
 
   ###########################################
@@ -66,6 +65,7 @@ const typeDefs = gql`
     is_nullable: String!
     data_type: String! # integer
     udt_name: String! # int4
+    comment: String
   }
 
   # Using: indexes.sql

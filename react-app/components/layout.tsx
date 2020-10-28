@@ -63,7 +63,7 @@ export default function Layout({ children }) {
       <Header />
       <div className="flex w-screen pt-20">
         <NavMenu />
-        <main className="w-full bg-white">{children}</main>
+        <main className="w-full max-w-full bg-white">{children}</main>
       </div>
     </div>
   )

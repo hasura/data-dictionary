@@ -1,3 +1,5 @@
+directive @cacheControl(maxAge: Int, scope: CacheControlScope) on FIELD_DEFINITION | OBJECT | INTERFACE
+
 """
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
@@ -11,7 +13,6 @@ scalar JSONObject
 type Query {
   metadata: HasuraMetadata
   postgres: Postgres
-  random_words_totaling_kilobytes(kilobytes: Float!): [String!]!
 }
 
 type Postgres {
@@ -46,7 +47,6 @@ type PostgresTable {
   indexes: [PostgresIndex]
 }
 
-"""Using: columns.sql"""
 type PostgresColumn implements BelongsToTable {
   table_schema: String!
   table_name: String!
@@ -55,9 +55,9 @@ type PostgresColumn implements BelongsToTable {
   is_nullable: String!
   data_type: String!
   udt_name: String!
+  comment: String
 }
 
-"""Using: indexes.sql"""
 type PostgresIndex implements BelongsToTable {
   table_schema: String!
   table_name: String!
@@ -69,9 +69,6 @@ type PostgresIndex implements BelongsToTable {
   is_partial: String!
 }
 
-"""
-Using: primary_keys.sql (NOTE: indexes.sql returns "is_primary" as well, could use that)
-"""
 type PostgresPrimaryKey implements BelongsToTable {
   table_schema: String!
   table_name: String!
@@ -79,7 +76,6 @@ type PostgresPrimaryKey implements BelongsToTable {
   columns: [String!]!
 }
 
-"""Using: foreign_keys.sql"""
 type PostgresForeignKey implements BelongsToTable {
   table_schema: String!
   table_name: String!
@@ -265,10 +261,6 @@ type RemoteRelationship {
 type RemoteRelationshipDef {
   hasura_fields: [String!]!
   remote_schema: String!
-
-  """
-  The actual type is more strict than JSON Object but can't be modeled with GraphQL honestly
-  """
   remote_field: JSONObject
 }
 
@@ -437,3 +429,11 @@ type RetryConfST {
   timeout_seconds: Int
   tolerance_seconds: Int
 }
+
+enum CacheControlScope {
+  PUBLIC
+  PRIVATE
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload

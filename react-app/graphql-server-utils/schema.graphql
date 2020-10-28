@@ -53,6 +53,7 @@ type PostgresColumn implements BelongsToTable {
   is_nullable: String!
   data_type: String! # integer
   udt_name: String! # int4
+  comment: String
 }
 
 # Using: indexes.sql

@@ -15,6 +15,7 @@ export interface Column {
   is_nullable: PostgresBoolean
   data_type: string
   udt_name: string
+  comment: string
 }
 
 export type PostgresBoolean = "t" | "f"

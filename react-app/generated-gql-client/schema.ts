@@ -4,15 +4,14 @@ export type Scalars = {
     JSON: any,
     JSONObject: any,
     String: string,
-    Float: number,
     Int: number,
     Boolean: boolean,
+    Upload: any,
 }
 
 export interface Query {
     metadata?: HasuraMetadata
     postgres?: Postgres
-    random_words_totaling_kilobytes: Scalars['String'][]
     __typename?: 'Query'
 }
 
@@ -49,8 +48,6 @@ export interface PostgresTable {
     __typename?: 'PostgresTable'
 }
 
-
-/** Using: columns.sql */
 export interface PostgresColumn {
     table_schema: Scalars['String']
     table_name: Scalars['String']
@@ -59,11 +56,10 @@ export interface PostgresColumn {
     is_nullable: Scalars['String']
     data_type: Scalars['String']
     udt_name: Scalars['String']
+    comment?: Scalars['String']
     __typename?: 'PostgresColumn'
 }
 
-
-/** Using: indexes.sql */
 export interface PostgresIndex {
     table_schema: Scalars['String']
     table_name: Scalars['String']
@@ -76,8 +72,6 @@ export interface PostgresIndex {
     __typename?: 'PostgresIndex'
 }
 
-
-/** Using: primary_keys.sql (NOTE: indexes.sql returns "is_primary" as well, could use that) */
 export interface PostgresPrimaryKey {
     table_schema: Scalars['String']
     table_name: Scalars['String']
@@ -86,8 +80,6 @@ export interface PostgresPrimaryKey {
     __typename?: 'PostgresPrimaryKey'
 }
 
-
-/** Using: foreign_keys.sql */
 export interface PostgresForeignKey {
     table_schema: Scalars['String']
     table_name: Scalars['String']
@@ -300,7 +292,6 @@ export interface RemoteRelationship {
 export interface RemoteRelationshipDef {
     hasura_fields: Scalars['String'][]
     remote_schema: Scalars['String']
-    /** The actual type is more strict than JSON Object but can't be modeled with GraphQL honestly */
     remote_field?: Scalars['JSONObject']
     __typename?: 'RemoteRelationshipDef'
 }
@@ -498,10 +489,11 @@ export interface RetryConfST {
     __typename?: 'RetryConfST'
 }
 
+export type CacheControlScope = 'PUBLIC' | 'PRIVATE'
+
 export interface QueryRequest{
     metadata?: HasuraMetadataRequest
     postgres?: PostgresRequest
-    random_words_totaling_kilobytes?: [{kilobytes: Scalars['Float']}]
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -552,8 +544,6 @@ export interface PostgresTableRequest{
     __scalar?: boolean | number
 }
 
-
-/** Using: columns.sql */
 export interface PostgresColumnRequest{
     table_schema?: boolean | number
     table_name?: boolean | number
@@ -562,12 +552,11 @@ export interface PostgresColumnRequest{
     is_nullable?: boolean | number
     data_type?: boolean | number
     udt_name?: boolean | number
+    comment?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
 
-
-/** Using: indexes.sql */
 export interface PostgresIndexRequest{
     table_schema?: boolean | number
     table_name?: boolean | number
@@ -581,8 +570,6 @@ export interface PostgresIndexRequest{
     __scalar?: boolean | number
 }
 
-
-/** Using: primary_keys.sql (NOTE: indexes.sql returns "is_primary" as well, could use that) */
 export interface PostgresPrimaryKeyRequest{
     table_schema?: boolean | number
     table_name?: boolean | number
@@ -592,8 +579,6 @@ export interface PostgresPrimaryKeyRequest{
     __scalar?: boolean | number
 }
 
-
-/** Using: foreign_keys.sql */
 export interface PostgresForeignKeyRequest{
     table_schema?: boolean | number
     table_name?: boolean | number
@@ -833,7 +818,6 @@ export interface RemoteRelationshipRequest{
 export interface RemoteRelationshipDefRequest{
     hasura_fields?: boolean | number
     remote_schema?: boolean | number
-    /** The actual type is more strict than JSON Object but can't be modeled with GraphQL honestly */
     remote_field?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1581,14 +1565,12 @@ export const isRetryConfST = (obj?: { __typename?: any } | null): obj is RetryCo
 
 export interface QueryPromiseChain{
     metadata: (HasuraMetadataPromiseChain & {get: <R extends HasuraMetadataRequest>(request: R, defaultValue?: (FieldsSelection<HasuraMetadata, R> | undefined)) => Promise<(FieldsSelection<HasuraMetadata, R> | undefined)>}),
-    postgres: (PostgresPromiseChain & {get: <R extends PostgresRequest>(request: R, defaultValue?: (FieldsSelection<Postgres, R> | undefined)) => Promise<(FieldsSelection<Postgres, R> | undefined)>}),
-    random_words_totaling_kilobytes: ((args: {kilobytes: Scalars['Float']}) => {get: (request?: boolean|number, defaultValue?: Scalars['String'][]) => Promise<Scalars['String'][]>})
+    postgres: (PostgresPromiseChain & {get: <R extends PostgresRequest>(request: R, defaultValue?: (FieldsSelection<Postgres, R> | undefined)) => Promise<(FieldsSelection<Postgres, R> | undefined)>})
 }
 
 export interface QueryObservableChain{
     metadata: (HasuraMetadataObservableChain & {get: <R extends HasuraMetadataRequest>(request: R, defaultValue?: (FieldsSelection<HasuraMetadata, R> | undefined)) => Observable<(FieldsSelection<HasuraMetadata, R> | undefined)>}),
-    postgres: (PostgresObservableChain & {get: <R extends PostgresRequest>(request: R, defaultValue?: (FieldsSelection<Postgres, R> | undefined)) => Observable<(FieldsSelection<Postgres, R> | undefined)>}),
-    random_words_totaling_kilobytes: ((args: {kilobytes: Scalars['Float']}) => {get: (request?: boolean|number, defaultValue?: Scalars['String'][]) => Observable<Scalars['String'][]>})
+    postgres: (PostgresObservableChain & {get: <R extends PostgresRequest>(request: R, defaultValue?: (FieldsSelection<Postgres, R> | undefined)) => Observable<(FieldsSelection<Postgres, R> | undefined)>})
 }
 
 export interface PostgresPromiseChain{
@@ -1655,8 +1637,6 @@ export interface PostgresTableObservableChain{
     indexes: ({get: <R extends PostgresIndexRequest>(request: R, defaultValue?: ((FieldsSelection<PostgresIndex, R> | undefined)[] | undefined)) => Observable<((FieldsSelection<PostgresIndex, R> | undefined)[] | undefined)>})
 }
 
-
-/** Using: columns.sql */
 export interface PostgresColumnPromiseChain{
     table_schema: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
     table_name: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
@@ -1664,11 +1644,10 @@ export interface PostgresColumnPromiseChain{
     column_default: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>}),
     is_nullable: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
     data_type: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
-    udt_name: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>})
+    udt_name: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
+    comment: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Promise<(Scalars['String'] | undefined)>})
 }
 
-
-/** Using: columns.sql */
 export interface PostgresColumnObservableChain{
     table_schema: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>}),
     table_name: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>}),
@@ -1676,11 +1655,10 @@ export interface PostgresColumnObservableChain{
     column_default: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>}),
     is_nullable: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>}),
     data_type: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>}),
-    udt_name: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>})
+    udt_name: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>}),
+    comment: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'] | undefined)) => Observable<(Scalars['String'] | undefined)>})
 }
 
-
-/** Using: indexes.sql */
 export interface PostgresIndexPromiseChain{
     table_schema: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
     table_name: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
@@ -1692,8 +1670,6 @@ export interface PostgresIndexPromiseChain{
     is_partial: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>})
 }
 
-
-/** Using: indexes.sql */
 export interface PostgresIndexObservableChain{
     table_schema: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>}),
     table_name: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>}),
@@ -1705,8 +1681,6 @@ export interface PostgresIndexObservableChain{
     is_partial: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>})
 }
 
-
-/** Using: primary_keys.sql (NOTE: indexes.sql returns "is_primary" as well, could use that) */
 export interface PostgresPrimaryKeyPromiseChain{
     table_schema: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
     table_name: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
@@ -1714,8 +1688,6 @@ export interface PostgresPrimaryKeyPromiseChain{
     columns: ({get: (request?: boolean|number, defaultValue?: Scalars['String'][]) => Promise<Scalars['String'][]>})
 }
 
-
-/** Using: primary_keys.sql (NOTE: indexes.sql returns "is_primary" as well, could use that) */
 export interface PostgresPrimaryKeyObservableChain{
     table_schema: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>}),
     table_name: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>}),
@@ -1723,8 +1695,6 @@ export interface PostgresPrimaryKeyObservableChain{
     columns: ({get: (request?: boolean|number, defaultValue?: Scalars['String'][]) => Observable<Scalars['String'][]>})
 }
 
-
-/** Using: foreign_keys.sql */
 export interface PostgresForeignKeyPromiseChain{
     table_schema: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
     table_name: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
@@ -1734,8 +1704,6 @@ export interface PostgresForeignKeyPromiseChain{
     column_mapping: ({get: (request?: boolean|number, defaultValue?: Scalars['JSONObject']) => Promise<Scalars['JSONObject']>})
 }
 
-
-/** Using: foreign_keys.sql */
 export interface PostgresForeignKeyObservableChain{
     table_schema: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>}),
     table_name: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>}),
@@ -2090,17 +2058,13 @@ export interface RemoteRelationshipObservableChain{
 export interface RemoteRelationshipDefPromiseChain{
     hasura_fields: ({get: (request?: boolean|number, defaultValue?: Scalars['String'][]) => Promise<Scalars['String'][]>}),
     remote_schema: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
-    
-/** The actual type is more strict than JSON Object but can't be modeled with GraphQL honestly */
-remote_field: ({get: (request?: boolean|number, defaultValue?: (Scalars['JSONObject'] | undefined)) => Promise<(Scalars['JSONObject'] | undefined)>})
+    remote_field: ({get: (request?: boolean|number, defaultValue?: (Scalars['JSONObject'] | undefined)) => Promise<(Scalars['JSONObject'] | undefined)>})
 }
 
 export interface RemoteRelationshipDefObservableChain{
     hasura_fields: ({get: (request?: boolean|number, defaultValue?: Scalars['String'][]) => Observable<Scalars['String'][]>}),
     remote_schema: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>}),
-    
-/** The actual type is more strict than JSON Object but can't be modeled with GraphQL honestly */
-remote_field: ({get: (request?: boolean|number, defaultValue?: (Scalars['JSONObject'] | undefined)) => Observable<(Scalars['JSONObject'] | undefined)>})
+    remote_field: ({get: (request?: boolean|number, defaultValue?: (Scalars['JSONObject'] | undefined)) => Observable<(Scalars['JSONObject'] | undefined)>})
 }
 
 export interface InsertPermissionEntryPromiseChain{

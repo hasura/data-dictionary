@@ -2,667 +2,661 @@ export default {
     "scalars": [
         0,
         1,
-        3,
-        4,
-        15,
-        17
+        5,
+        14,
+        16,
+        70,
+        71
     ],
     "types": {
         "JSON": {},
         "JSONObject": {},
         "Query": {
             "metadata": [
-                14
+                13
             ],
             "postgres": [
-                5
-            ],
-            "random_words_totaling_kilobytes": [
-                3,
-                {
-                    "kilobytes": [
-                        4,
-                        "Float!"
-                    ]
-                }
+                3
             ],
             "__typename": [
-                3
+                5
             ]
         },
-        "String": {},
-        "Float": {},
         "Postgres": {
             "schemas": [
-                6
+                4
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "Schema": {
             "name": [
-                3
+                5
             ],
             "tables": [
-                9
-            ],
-            "views": [
                 8
             ],
+            "views": [
+                7
+            ],
             "__typename": [
-                3
+                5
             ]
         },
+        "String": {},
         "BelongsToTable": {
             "table_schema": [
-                3
+                5
             ],
             "table_name": [
-                3
+                5
             ],
             "on_PostgresColumn": [
-                10
+                9
             ],
             "on_PostgresIndex": [
-                11
+                10
             ],
             "on_PostgresPrimaryKey": [
-                12
+                11
             ],
             "on_PostgresForeignKey": [
-                13
+                12
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "PostgresView": {
             "table_schema": [
-                3
+                5
             ],
             "table_name": [
-                3
+                5
             ],
             "comment": [
-                3
+                5
             ],
             "columns": [
-                10
+                9
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "PostgresTable": {
             "table_schema": [
-                3
+                5
             ],
             "table_name": [
-                3
+                5
             ],
             "comment": [
-                3
+                5
             ],
             "columns": [
-                10
+                9
             ],
             "primary_key": [
-                12
-            ],
-            "foreign_keys": [
-                13
-            ],
-            "indexes": [
                 11
             ],
+            "foreign_keys": [
+                12
+            ],
+            "indexes": [
+                10
+            ],
             "__typename": [
-                3
+                5
             ]
         },
         "PostgresColumn": {
             "table_schema": [
-                3
+                5
             ],
             "table_name": [
-                3
+                5
             ],
             "column_name": [
-                3
+                5
             ],
             "column_default": [
-                3
+                5
             ],
             "is_nullable": [
-                3
+                5
             ],
             "data_type": [
-                3
+                5
             ],
             "udt_name": [
-                3
+                5
+            ],
+            "comment": [
+                5
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "PostgresIndex": {
             "table_schema": [
-                3
+                5
             ],
             "table_name": [
-                3
+                5
             ],
             "index_name": [
-                3
+                5
             ],
             "index_type": [
-                3
+                5
             ],
             "index_keys": [
-                3
+                5
             ],
             "is_unique": [
-                3
+                5
             ],
             "is_primary": [
-                3
+                5
             ],
             "is_partial": [
-                3
+                5
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "PostgresPrimaryKey": {
             "table_schema": [
-                3
+                5
             ],
             "table_name": [
-                3
+                5
             ],
             "constraint_name": [
-                3
+                5
             ],
             "columns": [
-                3
+                5
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "PostgresForeignKey": {
             "table_schema": [
-                3
+                5
             ],
             "table_name": [
-                3
+                5
             ],
             "constraint_name": [
-                3
+                5
             ],
             "ref_table_table_schema": [
-                3
+                5
             ],
             "ref_table": [
-                3
+                5
             ],
             "column_mapping": [
                 1
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "HasuraMetadata": {
             "version": [
-                15
+                14
             ],
             "tables": [
-                16
+                15
             ],
             "actions": [
-                19
+                18
             ],
             "custom_types": [
-                52
+                51
             ],
             "functions": [
-                61
+                60
             ],
             "remote_schemas": [
-                63
+                62
             ],
             "query_collections": [
-                65
+                64
             ],
             "allowlist": [
-                68
+                67
             ],
             "cron_triggers": [
-                69
+                68
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "Int": {},
         "TableEntry": {
             "table": [
-                18
-            ],
-            "is_enum": [
                 17
             ],
+            "is_enum": [
+                16
+            ],
             "configuration": [
-                26
+                25
             ],
             "event_triggers": [
-                28
+                27
             ],
             "computed_fields": [
-                32
+                31
             ],
             "object_relationships": [
-                35
+                34
             ],
             "array_relationships": [
-                38
+                37
             ],
             "remote_relationships": [
-                42
+                41
             ],
             "insert_permissions": [
-                44
+                43
             ],
             "select_permissions": [
-                46
+                45
             ],
             "update_permissions": [
-                48
+                47
             ],
             "delete_permissions": [
-                50
+                49
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "Boolean": {},
         "QualifiedTable": {
             "name": [
-                3
+                5
             ],
             "schema": [
-                3
+                5
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "Action": {
             "name": [
-                3
+                5
             ],
             "definition": [
-                21
-            ],
-            "comment": [
-                3
-            ],
-            "permissions": [
                 20
             ],
+            "comment": [
+                5
+            ],
+            "permissions": [
+                19
+            ],
             "__typename": [
-                3
+                5
             ]
         },
         "ActionPermission": {
             "role": [
-                3
+                5
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "ActionDefinition": {
             "arguments": [
-                22
+                21
             ],
             "output_type": [
-                3
+                5
             ],
             "kind": [
-                3
+                5
             ],
             "headers": [
-                25
+                24
             ],
             "forward_client_headers": [
-                17
+                16
             ],
             "handler": [
-                3
+                5
             ],
             "type": [
-                3
+                5
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "InputArgument": {
             "name": [
-                3
+                5
             ],
             "type": [
-                3
+                5
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "HeaderFromEnv": {
             "name": [
-                3
+                5
             ],
             "value_from_env": [
-                3
+                5
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "HeaderFromValue": {
             "name": [
-                3
+                5
             ],
             "value": [
-                3
+                5
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "Header": {
             "on_HeaderFromEnv": [
-                23
+                22
             ],
             "on_HeaderFromValue": [
-                24
+                23
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "TableConfig": {
             "custom_root_fields": [
-                27
+                26
             ],
             "custom_column_names": [
                 1
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "CustomRootFields": {
             "select": [
-                3
+                5
             ],
             "select_by_pk": [
-                3
+                5
             ],
             "select_aggregate": [
-                3
+                5
             ],
             "insert": [
-                3
+                5
             ],
             "insert_one": [
-                3
+                5
             ],
             "update": [
-                3
+                5
             ],
             "update_by_pk": [
-                3
+                5
             ],
             "delete": [
-                3
+                5
             ],
             "delete_by_pk": [
-                3
+                5
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "EventTrigger": {
             "name": [
-                3
+                5
             ],
             "definition": [
-                29
+                28
             ],
             "retry_conf": [
-                31
+                30
             ],
             "webhook": [
-                3
+                5
             ],
             "webhook_from_env": [
-                3
+                5
             ],
             "headers": [
-                25
+                24
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "EventTriggerDefinition": {
             "enable_manual": [
-                17
+                16
             ],
             "insert": [
-                30
+                29
             ],
             "delete": [
-                30
+                29
             ],
             "update": [
-                30
+                29
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "OperationSpec": {
             "columns": [
-                3
+                5
             ],
             "payload": [
-                3
+                5
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "RetryConf": {
             "num_retries": [
-                15
+                14
             ],
             "interval_sec": [
-                15
+                14
             ],
             "timeout_sec": [
-                15
+                14
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "ComputedField": {
             "name": [
-                3
+                5
             ],
             "definition": [
-                34
+                33
             ],
             "comment": [
-                3
+                5
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "QualifiedFunction": {
             "name": [
-                3
+                5
             ],
             "schema": [
-                3
+                5
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "ComputedFieldDefinition": {
             "function": [
-                33
+                32
             ],
             "table_argument": [
-                3
+                5
             ],
             "session_argument": [
-                3
+                5
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "ObjectRelationship": {
             "name": [
-                3
+                5
             ],
             "using": [
-                36
+                35
             ],
             "comment": [
-                3
+                5
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "ObjRelUsing": {
             "foreign_key_constraint_on": [
-                3
+                5
             ],
             "manual_configuration": [
-                37
+                36
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "ObjRelUsingManualMapping": {
             "remote_table": [
-                18
+                17
             ],
             "column_mapping": [
                 1
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "ArrayRelationship": {
             "name": [
-                3
+                5
             ],
             "using": [
-                39
+                38
             ],
             "comment": [
-                3
+                5
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "ArrRelUsing": {
             "foreign_key_constraint_on": [
-                40
+                39
             ],
             "manual_configuration": [
-                41
+                40
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "ArrRelUsingFKeyOn": {
             "column": [
-                3
+                5
             ],
             "table": [
-                18
+                17
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "ArrRelUsingManualMapping": {
             "remote_table": [
-                18
+                17
             ],
             "column_mapping": [
                 1
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "RemoteRelationship": {
             "name": [
-                3
+                5
             ],
             "definition": [
-                43
+                42
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "RemoteRelationshipDef": {
             "hasura_fields": [
-                3
+                5
             ],
             "remote_schema": [
-                3
+                5
             ],
             "remote_field": [
                 1
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "InsertPermissionEntry": {
             "role": [
-                3
+                5
             ],
             "permission": [
-                45
+                44
             ],
             "comment": [
-                3
+                5
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "InsertPermission": {
@@ -673,61 +667,61 @@ export default {
                 1
             ],
             "columns": [
-                3
+                5
             ],
             "backend_only": [
-                17
+                16
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "SelectPermissionEntry": {
             "role": [
-                3
+                5
             ],
             "permission": [
-                47
+                46
             ],
             "comment": [
-                3
+                5
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "SelectPermission": {
             "columns": [
-                3
+                5
             ],
             "computed_fields": [
-                3
+                5
             ],
             "limit": [
-                15
+                14
             ],
             "allow_aggregations": [
-                17
+                16
             ],
             "filter": [
                 1
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "UpdatePermissionEntry": {
             "role": [
-                3
+                5
             ],
             "permission": [
-                49
+                48
             ],
             "comment": [
-                3
+                5
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "UpdatePermission": {
@@ -738,27 +732,27 @@ export default {
                 1
             ],
             "columns": [
-                3
+                5
             ],
             "filter": [
                 1
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "DeletePermissionEntry": {
             "role": [
-                3
+                5
             ],
             "permission": [
-                51
+                50
             ],
             "comment": [
-                3
+                5
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "DeletePermission": {
@@ -766,280 +760,282 @@ export default {
                 1
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "CustomTypes": {
             "input_objects": [
-                53
+                52
             ],
             "objects": [
-                55
+                54
             ],
             "scalars": [
-                58
+                57
             ],
             "enums": [
-                59
+                58
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "InputObjectType": {
             "name": [
-                3
+                5
             ],
             "fields": [
-                54
+                53
             ],
             "description": [
-                3
+                5
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "InputObjectField": {
             "name": [
-                3
+                5
             ],
             "type": [
-                3
+                5
             ],
             "description": [
-                3
+                5
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "ObjectType": {
             "name": [
-                3
+                5
             ],
             "fields": [
-                56
+                55
             ],
             "relationships": [
-                57
+                56
             ],
             "description": [
-                3
+                5
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "ObjectField": {
             "name": [
-                3
+                5
             ],
             "type": [
-                3
+                5
             ],
             "description": [
-                3
+                5
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "CustomTypeObjectRelationship": {
             "name": [
-                3
+                5
             ],
             "type": [
-                3
+                5
             ],
             "remote_table": [
-                18
+                17
             ],
             "field_mapping": [
                 1
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "ScalarType": {
             "name": [
-                3
+                5
             ],
             "description": [
-                3
+                5
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "EnumType": {
             "name": [
-                3
+                5
             ],
             "values": [
-                60
+                59
             ],
             "description": [
-                3
+                5
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "EnumValue": {
             "value": [
-                3
+                5
             ],
             "is_deprecated": [
-                17
+                16
             ],
             "description": [
-                3
+                5
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "CustomFunction": {
             "function": [
-                33
+                32
             ],
             "configuration": [
-                62
+                61
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "FunctionConfiguration": {
             "session_argument": [
-                3
+                5
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "RemoteSchema": {
             "name": [
-                3
+                5
             ],
             "definition": [
-                64
+                63
             ],
             "comment": [
-                3
+                5
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "RemoteSchemaDef": {
             "url": [
-                3
+                5
             ],
             "url_from_env": [
-                3
+                5
             ],
             "headers": [
-                25
+                24
             ],
             "forward_client_headers": [
-                17
+                16
             ],
             "timeout_seconds": [
-                15
+                14
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "QueryCollectionEntry": {
             "name": [
-                3
+                5
             ],
             "definition": [
-                66
+                65
             ],
             "comment": [
-                3
+                5
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "QueryCollectionDefinition": {
             "queries": [
-                67
+                66
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "QueryCollection": {
             "name": [
-                3
+                5
             ],
             "query": [
-                3
+                5
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "AllowList": {
             "collection": [
-                3
+                5
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "CronTrigger": {
             "name": [
-                3
+                5
             ],
             "webhook": [
-                3
+                5
             ],
             "schedule": [
-                3
+                5
             ],
             "payload": [
                 1
             ],
             "headers": [
-                25
+                24
             ],
             "retry_conf": [
-                70
+                69
             ],
             "include_in_metadata": [
-                17
+                16
             ],
             "comment": [
-                3
+                5
             ],
             "__typename": [
-                3
+                5
             ]
         },
         "RetryConfST": {
             "num_retries": [
-                15
+                14
             ],
             "retry_interval_seconds": [
-                15
+                14
             ],
             "timeout_seconds": [
-                15
+                14
             ],
             "tolerance_seconds": [
-                15
+                14
             ],
             "__typename": [
-                3
+                5
             ]
-        }
+        },
+        "CacheControlScope": {},
+        "Upload": {}
     }
 }

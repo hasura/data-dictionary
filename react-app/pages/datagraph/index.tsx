@@ -185,6 +185,22 @@ const NodeInnerCustom = ({ node, config }: INodeInnerDefaultProps) => {
       <Table
         headers={tableValues.headers}
         columns={tableValues.columns}
+        Header={header => (
+          <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-50">
+            {header.displayName}
+          </th>
+        )}
+        Cell={value => (
+          <td className="px-2 py-4 whitespace-no-wrap">
+            <div className="flex items-center">
+              <div className="ml-4">
+                <div className="text-sm font-medium leading-5 text-gray-900">
+                  {value}
+                </div>
+              </div>
+            </div>
+          </td>
+        )}
       />
     </div>
   )
@@ -198,7 +214,7 @@ const testChart = groupedMetadataToChartNodeStructure(
 export default function Datagraph() {
   return (
     <div>
-      <div className="flex max-h-screen">
+      <div className="flex w-full max-h-screen">
         <FlowChartWithState
           initialValue={testChart}
           config={{ smartRouting: false, readonly: true }}
@@ -208,7 +224,7 @@ export default function Datagraph() {
         />
       </div>
 
-      <SchemaVisualizer />
+      {/* <SchemaVisualizer /> */}
     </div>
   )
 }

@@ -14,7 +14,7 @@ assertSameVersion(version)
 export var createClient = function(options) {
   options = options || {}
   var optionsCopy = {
-    url: 'http://localhost:4000/graphql',
+    url: 'http://localhost:3000/api/graphql',
     queryRoot: typeMap.Query,
     mutationRoot: typeMap.Mutation,
     subscriptionRoot: typeMap.Subscription,
