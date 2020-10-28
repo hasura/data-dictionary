@@ -45,7 +45,7 @@ const NavMenu = () => {
   return (
     <nav className="w-1/6 p-4 bg-gray-300">
       {navItems.map(it => (
-        <div className="flex w-full h-12 pl-4 mt-6 text-left border-l-4 border-indigo-700 place-items-center">
+        <div key={it.route} className="flex w-full h-12 pl-4 mt-6 text-left border-l-4 border-indigo-700 place-items-center">
           <Link href={it.route}>
             <p className="text-lg font-medium text-gray-800 hover:text-indigo-700">
               {it.text}
@@ -63,7 +63,7 @@ export default function Layout({ children }) {
       <Header />
       <div className="flex w-screen pt-20">
         <NavMenu />
-        <main className="w-full max-w-full bg-white">{children}</main>
+        <main id="graphmain" className="w-full max-w-full bg-white">{children}</main>
       </div>
     </div>
   )

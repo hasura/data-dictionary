@@ -1,230 +1,95 @@
+import React, { useEffect, useState } from 'react'
+import {useRouter } from 'next/router'
+import useDimensions from "react-cool-dimensions"
+import Modal from 'react-modal';
+
+import { useStoreState } from "../../store"
 import { SchemaVisualizer } from "../../components/visualization"
 
-import {
-  FlowChartWithState,
-  INodeInnerDefaultProps,
-  IChart,
-} from "@mrblenny/react-flow-chart"
-
-import { Table, TableProps } from "../../components/table"
-import { GroupedMetadataAndPostgresTables } from "../../store/utils"
-import { sampleGroupedMetadataAndPostgresTables } from "../../utils/sampleGroupedMetadataResult"
-
-type ValueOf<T> = T[keyof T]
-
-/**
- * Converts one of the grouped metadata objects to headers and column values for display in <Table> component
- */
-function groupedMetadataToDatavizTableProps(
-  metadata: ValueOf<GroupedMetadataAndPostgresTables>
-): TableProps {
-  return {
-    headers: [
-      {
-        key: "column",
-        displayName: "Column"
-      },
-      {
-        key: "type",
-        displayName: "Type"
-      },
-      {
-        key: "comment",
-        displayName: "Comment"
-      }
-    ],
-    columns: metadata.database_table.columns.map(col => ({
-      column: col.column_name,
-      type: col.udt_name,
-      comment: col.column_default
-    }))
+const customModalStyles = {
+  content : {
+    margin: 'auto',
+    maxHeight: '400px',
+    maxWidth: '600px'
   }
-}
+};
 
-/**
- * Converts the entirety of the grouped metadata object into an object structure that @mrblenny/react-flow-chart can render
- * TODO: This doesn't seem to handle join-tables, like "film_category" in the "film <-> film_category <-> category" relationship structure
- */ 
-function groupedMetadataToChartNodeStructure(
-  metadata: GroupedMetadataAndPostgresTables
-): IChart {
-  const tablesPerRow = 5
-  let currentTable = 0
+export default function Datagraph() {
+  const tablesMetadata = useStoreState(store => store.groupedMetadataAndDatabaseTables)
+  const {ref, width, height} = useDimensions()
+  const router = useRouter()
+  const [data, setData] = useState()
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedNode, setSelectedNode] = useState()
 
-  let xOffset = 0
-  let yOffset = 0
+  const toggleModal = () => setIsModalOpen(prev => !prev)
 
-  const xOffsetIncrement = 900
-  const yOffsetIncrement = 900
+  const navToModel = () => router.push(`/models/database/${selectedNode.id}`)
 
-  const getXOffset = () => {
-    if (currentTable % tablesPerRow == 0) xOffset = 0
-    xOffset += xOffsetIncrement
-    return xOffset
+  const onSelectNode = (node) => {
+    setSelectedNode(node)
+    toggleModal(true)
   }
 
-  const getYOffset = () => {
-    if (currentTable % tablesPerRow == 0) yOffset += yOffsetIncrement
-    return yOffset
-  }
-
-  const res = {
-    scale: 1,
-    offset: { x: 0, y: 0 },
-    nodes: {},
-    links: {},
-    selected: {},
-    hovered: {}
-  } as IChart
-
-  for (const entry of Object.values(metadata)) {
-    currentTable += 1
-    let currentXOffset = getXOffset()
-    let currentYOffset = getYOffset()
-
-    // A child relationship might have created this entry already, in the loop below
-    // If not, init the current table's "node" object
-    if (!res.nodes[entry.table.name]) {
-      res.nodes[entry.table.name] = {
-        id: entry.table.name,
-        type: "input-output",
-        position: {
-          x: currentXOffset,
-          y: currentYOffset
-        },
-        ports: {}
-      }
+  async function loadData() {
+    if (!tablesMetadata) {
+        return null
     }
-
-    // Find all related tables by searching where the table's foreign key referenced table = the current table's name
-    const relatedTables = Object.values(metadata).filter(it =>
-      it.database_table.foreign_keys.find(
-        fk => fk.ref_table == entry.table.name
-      )
-    )
-
-    // Create a "port" on the node containing a unique ID, which later we need to create a "link" to, in the top-level object
-    for (const relatedTable of relatedTables) {
-      const relatedFields = relatedTable.database_table.foreign_keys.filter(
-        fk => fk.ref_table == entry.table.name
-      )
-
-      for (const field of relatedFields) {
-        const columnMappings = Object.entries(field.column_mapping)
-        for (const [refColumn, selfColumn] of columnMappings) {
-          // Port creation
-          res.nodes[entry.table.name].ports[selfColumn as string] ||= {
-            id: selfColumn as string,
-            type: "input-output"
-          }
-
-          // Check if the node/port we are about to reference in the link below on the other table already exists
-          // If not, we need to create it
-          if (!res.nodes[relatedTable.table.name]) {
-            currentTable += 1
-            let currentXOffset = getXOffset()
-            let currentYOffset = getYOffset()
-            res.nodes[relatedTable.table.name] = {
-              id: relatedTable.table.name,
-              type: "read-only",
-              position: {
-                x: currentXOffset,
-                y: currentYOffset
-              },
-              ports: {}
-            }
-          }
-
-          // Create a "port" on the related table's "node" that contains the referring column name
-          // So that the UI can connect the two ports with a "link" later
-          Object.assign(res.nodes[relatedTable.table.name].ports, {
-            [refColumn as string]: {
-              id: refColumn,
-              type: "input-output",
-              properties: {
-                // TODO: Maybe put some metadata here for styling/identifying ports
-              }
-            }
-          })
-
-          // Create the "link" between the two tables while we're here in the relationship
-          const linkName = entry.table.name + "_" + relatedTable.table.name
-          res.links[linkName] = {
-            id: linkName,
-            from: {
-              nodeId: entry.table.name,
-              portId: selfColumn as string
-            },
-            to: {
-              nodeId: relatedTable.table.name,
-              portId: refColumn
-            },
-            properties: {
-              // TODO: Maybe put some metadata here for styling/identifying links
-            }
-          }
+    let nodes = Object.entries(tablesMetadata).map(([tableName, value]) =>  ({ ...value, id: tableName }))
+    let links = nodes.map((val) =>  {
+    const arrays = val.array_relationships?.map(rel => ({
+        ...rel,
+        target: val.id,
+        source: rel.using.foreign_key_constraint_on.table.name
+    })) || []
+    const objects = val.object_relationships?.map(rel => {
+      const target = nodes.find(x => x.id === val.id)
+      const sourcekey = rel?.using?.foreign_key_constraint_on || rel?.using?.manual_configuration?.remote_table?.name
+      const sourcenode = val.database_table.foreign_keys?.find(fk => fk.column_mapping[sourcekey])
+      const source = nodes.find(x => x.id === sourcenode.ref_table)
+        return {
+          ...rel,
+          target,
+          source
         }
-      }
-    }
+      }) || []
+      const all_relationships = arrays.concat(objects)
+      return all_relationships
+    }).filter(l => l.length > 0).flat()
+    setTimeout(() => setData({ nodes, links }), 500)
   }
 
-  console.log("Got result:", res)
-  return res
-}
+   useEffect(() => {
+      if(tablesMetadata) {
+        Modal.setAppElement('#graphmain');
+        loadData();
+      }
+    },[tablesMetadata])
 
-/**
- * Custom "node" component for the chart, rendering the table schema
- */
-const NodeInnerCustom = ({ node, config }: INodeInnerDefaultProps) => {
-  const tableValues = groupedMetadataToDatavizTableProps(
-    sampleGroupedMetadataAndPostgresTables[node.id]
-  )
+  console.log('selectedNode: ', selectedNode)
+
   return (
-    <div className="text-lg text-center rounded-lg shadow-md">
-      <p className="p-2 capitalize">{node.id}</p>
-      <Table
-        headers={tableValues.headers}
-        columns={tableValues.columns}
-        Header={header => (
-          <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-50">
-            {header.displayName}
-          </th>
-        )}
-        Cell={value => (
-          <td className="px-2 py-4 whitespace-no-wrap">
-            <div className="flex items-center">
-              <div className="ml-4">
-                <div className="text-sm font-medium leading-5 text-gray-900">
-                  {value}
-                </div>
-              </div>
-            </div>
-          </td>
-        )}
-      />
+    <div ref={ref} style={{ width: "100%", height: "100%"}}>
+      <SchemaVisualizer width={width} height={height} {...data} onSelectNode={onSelectNode} />
+      <Modal isOpen={isModalOpen} onRequestClose={toggleModal} contentLabel="details modal" style={customModalStyles}>
+        <NodeDetails {...selectedNode} />
+        <button className="font-bold py-2 px-4 my-2 rounded" onClick={toggleModal}>Close modal</button>
+        <button className="font-bold py-2 px-4 my-2 mr-4 rounded bg-blue-500 text-white" onClick={navToModel}>Detail page</button>
+      </Modal>
     </div>
   )
 }
 
-// This is the value of grouped metadata taken from store and saved as variable for testing
-const testChart = groupedMetadataToChartNodeStructure(
-  sampleGroupedMetadataAndPostgresTables
-)
-
-export default function Datagraph() {
+const NodeDetails = ({id, array_relationships, object_relationships, remote_relationships, __typename }) => {
   return (
-    <div>
-      <div className="flex w-full max-h-screen">
-        <FlowChartWithState
-          initialValue={testChart}
-          config={{ smartRouting: false, readonly: true }}
-          Components={{
-            NodeInner: NodeInnerCustom
-          }}
-        />
+    <div className="flex-initial">
+      <h2 className="text-xl font-bold">{id}</h2>
+      <div className="flex-initial" >
+        <p>Array relationships: {array_relationships?.length || 0}</p>
+        {array_relationships?.map(ar => <p className="px-6">{ar.using.foreign_key_constraint_on ? `Foreign key constraint on column ${ar.using.foreign_key_constraint_on.column} of table ${ar.using.foreign_key_constraint_on.table.name}` : `Manual configuration: ${JSON.stringify(ar.manual_configuration)}`}</p>)}
+        <p>Object relationships: {object_relationships?.length || 0}</p>
+        {object_relationships?.map(or => <p className="px-6">{or.using.foreign_key_constraint_on ? `Foreign key constraint on ${or.using.foreign_key_constraint_on}` : `Manual configuration: ${JSON.stringify(or.using.manual_configuration)}`}</p>)}
       </div>
-
-      {/* <SchemaVisualizer /> */}
     </div>
   )
 }

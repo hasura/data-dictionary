@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react'
 import { useRouter } from "next/router"
 import { useStoreState } from "../../../store"
 import { Table } from "../../../components/table"
@@ -9,6 +10,10 @@ export default function DatabaseModelTableView() {
     store => store.groupedMetadataAndDatabaseTables
   )
   const currentItem = metadata[router.query.table as string]
+  
+  if (!currentItem) {
+    return null
+  }
 
   return (
     <div className="w-5/6 py-10 mx-auto">
@@ -68,7 +73,9 @@ export default function DatabaseModelTableView() {
       <h1 className="mt-6 mb-2 text-xl font-bold text-gray-800">
         Related Types
       </h1>
-      <SchemaVisualizer />
+      
     </div>
   )
 }
+// {/* <SchemaVisualizer width={650} height={300} /> */}
+
