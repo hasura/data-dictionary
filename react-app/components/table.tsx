@@ -1,6 +1,7 @@
 interface TableHeader {
   key: string
   displayName: string
+  onClick?: (...args: any) => any
 }
 
 export interface TableProps {
@@ -8,7 +9,15 @@ export interface TableProps {
   columns: Record<string, any>[]
 
   Header: (header: TableHeader) => JSX.Element
-  Cell: (value: unknown) => JSX.Element
+  Cell: ({
+    column,
+    header,
+    index
+  }: {
+    column: Record<string, any>
+    header: TableHeader
+    index: number
+  }) => JSX.Element
 }
 
 export function Table(props: TableProps) {
@@ -25,7 +34,11 @@ export function Table(props: TableProps) {
                 {props.columns?.map(col => (
                   <tr className="even:bg-gray-100">
                     {Object.keys(col).map((_, idx) =>
-                      props.Cell(col[props?.headers[idx].key])
+                      props.Cell({
+                        column: col,
+                        header: props?.headers[idx],
+                        index: idx
+                      })
                     )}
                   </tr>
                 ))}

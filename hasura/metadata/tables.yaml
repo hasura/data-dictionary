@@ -1,6 +1,14 @@
 - table:
     schema: public
     name: actors
+  array_relationships:
+  - name: film_actors
+    using:
+      foreign_key_constraint_on:
+        column: actor_id
+        table:
+          schema: public
+          name: film_actor
 - table:
     schema: public
     name: albums
@@ -30,6 +38,14 @@
 - table:
     schema: public
     name: categories
+  array_relationships:
+  - name: film_categories
+    using:
+      foreign_key_constraint_on:
+        column: category_id
+        table:
+          schema: public
+          name: film_category
 - table:
     schema: public
     name: customers
@@ -70,12 +86,41 @@
 - table:
     schema: public
     name: film_actor
+  object_relationships:
+  - name: actor
+    using:
+      foreign_key_constraint_on: actor_id
+  - name: film
+    using:
+      foreign_key_constraint_on: film_id
 - table:
     schema: public
     name: film_category
+  object_relationships:
+  - name: category
+    using:
+      foreign_key_constraint_on: category_id
+  - name: film
+    using:
+      foreign_key_constraint_on: film_id
 - table:
     schema: public
     name: films
+  array_relationships:
+  - name: film_actors
+    using:
+      foreign_key_constraint_on:
+        column: film_id
+        table:
+          schema: public
+          name: film_actor
+  - name: film_categories
+    using:
+      foreign_key_constraint_on:
+        column: film_id
+        table:
+          schema: public
+          name: film_category
 - table:
     schema: public
     name: genres
@@ -123,6 +168,9 @@
         table:
           schema: public
           name: tracks
+- table:
+    schema: public
+    name: new_table
 - table:
     schema: public
     name: playlist_track

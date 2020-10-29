@@ -18,7 +18,7 @@ export default function Home() {
   // TODO: Figure out loading this on app init, and not inside of a component
   useEffect(() => {
     loadMetadataAndDatabaseInfo()
-    // loadGraphQLSchemaByIntrospection()
+    loadGraphQLSchemaByIntrospection()
   }, [])
 
   return (
@@ -120,13 +120,13 @@ const DataModels = () => {
             {header.displayName}
           </th>
         )}
-        Cell={value => (
-          <Link href={"/models/database/" + value}>
+        Cell={cell => (
+          <Link href={"/models/database/" + cell.column[cell.header.key]}>
             <td className="px-2 py-4 whitespace-no-wrap">
               <div className="flex items-center">
                 <div className="ml-4">
                   <div className="text-sm font-medium leading-5 text-gray-900">
-                    {value}
+                    {cell.column[cell.header.key]}
                   </div>
                 </div>
               </div>

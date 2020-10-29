@@ -1,8 +1,10 @@
 import { action, thunk, computed } from "easy-peasy"
 import type { Action, Thunk, Computed } from "easy-peasy"
 
+import { getIntrospectionQuery, buildClientSchema, GraphQLSchema } from 'graphql'
+import type { IntrospectionQuery } from 'graphql'
+
 import { client } from '../utils/graphqlClient'
-import { getIntrospectionQuery, buildClientSchema, IntrospectionQuery, GraphQLSchema, print } from 'graphql'
 
 import { metadataAndPostgresSelectionSet } from '../utils/querySelectionSets'
 import type { MetadataAndPostgresQueryResult } from '../utils/querySelectionSets'
@@ -19,17 +21,20 @@ import type { GroupedMetadataAndPostgresTables } from './utils'
 
 export interface Store {
   search: string
-  graphqlSchema: GraphQLSchema
+  currentTryItOutOperationName: string
+  introspectionQuery: IntrospectionQuery
   metadata: MetadataAndPostgresQueryResult['metadata']
   database: MetadataAndPostgresQueryResult['postgres']
 
-  setGraphQLSchema: Action<Store, GraphQLSchema>
+  setIntrospectionQuery: Action<Store, IntrospectionQuery>
+  setcurrentTryItOutOperationName: Action<Store, string>
   setMetadata: Action<Store, MetadataAndPostgresQueryResult['metadata']>
   setDatabase: Action<Store, MetadataAndPostgresQueryResult['postgres']>
 
-  loadMetadataAndDatabaseInfo: Thunk<Store>
-  loadGraphQLSchemaByIntrospection: Thunk<Store>
+  loadMetadataAndDatabaseInfo: Thunk<Store, null>
+  loadGraphQLSchemaByIntrospection: Thunk<Store, null>
 
+  graphqlSchema: Computed<Store, GraphQLSchema | null>
   groupedMetadataAndDatabaseTables: Computed<Store, GroupedMetadataAndPostgresTables>
 }
 
@@ -43,15 +48,19 @@ const model: Store = {
   search: "",
   metadata: null,
   database: null,
-  graphqlSchema: null,
+  currentTryItOutOperationName: null,
+  introspectionQuery: null,
   setMetadata: action((state, payload) => {
     state.metadata = payload
   }),
   setDatabase: action((state, payload) => {
     state.database = payload
   }),
-  setGraphQLSchema: action((state, payload) => {
-    state.graphqlSchema = payload
+  setcurrentTryItOutOperationName: action((state, payload) => {
+    state.currentTryItOutOperationName = payload
+  }),
+  setIntrospectionQuery: action((state, payload) => {
+    state.introspectionQuery = payload
   }),
   loadMetadataAndDatabaseInfo: thunk(async (actions, _payload) => {
     const request = await client.query(metadataAndPostgresSelectionSet)
@@ -71,10 +80,11 @@ const model: Store = {
     })
     const result = await request.json()
     const introspectionQuery: IntrospectionQuery = result.data
-    const schema = buildClientSchema(introspectionQuery)
-    console.log(print(schema.astNode))
-    console.log('schema in store:', schema)
-    actions.setGraphQLSchema(schema)
+    actions.setIntrospectionQuery(introspectionQuery)
+  }),
+  graphqlSchema: computed((state) => {
+    if (!state.introspectionQuery) return null
+    return buildClientSchema(state.introspectionQuery)
   }),
   groupedMetadataAndDatabaseTables: computed((state) => {
     return groupMetadataAndPostgresInfoByTableName({
