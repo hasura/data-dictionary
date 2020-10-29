@@ -86,9 +86,9 @@ const NodeDetails = ({id, array_relationships, object_relationships, remote_rela
       <h2 className="text-xl font-bold">{id}</h2>
       <div className="flex-initial" >
         <p>Array relationships: {array_relationships?.length || 0}</p>
-        {array_relationships?.map(ar => <p className="px-6">{ar.using.foreign_key_constraint_on ? `Foreign key constraint on column ${ar.using.foreign_key_constraint_on.column} of table ${ar.using.foreign_key_constraint_on.table.name}` : `Manual configuration: ${JSON.stringify(ar.manual_configuration)}`}</p>)}
+        {array_relationships?.map(ar => <p key={ar.name} className="px-6">{ar.using.foreign_key_constraint_on ? `Foreign key constraint on column ${ar.using.foreign_key_constraint_on.column} of table ${ar.using.foreign_key_constraint_on.table.name}` : `Manual configuration: ${JSON.stringify(ar.manual_configuration)}`}</p>)}
         <p>Object relationships: {object_relationships?.length || 0}</p>
-        {object_relationships?.map(or => <p className="px-6">{or.using.foreign_key_constraint_on ? `Foreign key constraint on ${or.using.foreign_key_constraint_on}` : `Manual configuration: ${JSON.stringify(or.using.manual_configuration)}`}</p>)}
+        {object_relationships?.map(or => <p key={or.name} className="px-6">{or.using.foreign_key_constraint_on ? `Foreign key constraint on ${or.using.foreign_key_constraint_on}` : `Manual configuration: ${JSON.stringify(or.using.manual_configuration)}`}</p>)}
       </div>
     </div>
   )

@@ -13,7 +13,7 @@ const NodeComponent = ({ node, onSelectNode }) => {
   const height = 80
   const x = node.x - width / 2
   const y = node.y - height / 2
-  const handleClick = () => onSelectNode(node)
+  const handleClick = () => onSelectNode ? onSelectNode(node) : null
   return (
     <g style={{ cursor: 'pointer' }} onClick={handleClick}>
       <rect x={x} y={y} rx={15} width={width} height={height} fill="white" />
