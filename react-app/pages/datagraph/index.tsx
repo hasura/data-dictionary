@@ -17,19 +17,12 @@ const customModalStyles = {
 
 export default function Datagraph() {
   const router = useRouter()
-
+  const { ref, width, height } = useDimensions()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedNode, setSelectedNode] = useState()
-  const [data, setData] = useState<{
-    nodes: any
-    links: any
-  }>()
-
-  const tablesMetadata = useStoreState(
-    store => store.groupedMetadataAndDatabaseTables
+  const graphedData = useStoreState(
+    store => store.graphedData
   )
-
-  const { ref, width, height } = useDimensions()
 
   const toggleModal = () => setIsModalOpen(prev => !prev)
   const navToModel = () => router.push(`/models/database/${selectedNode?.id}`)
@@ -38,65 +31,18 @@ export default function Datagraph() {
     toggleModal()
   }
 
-  async function loadData() {
-    if (!tablesMetadata) {
-      return null
-    }
+  Modal.setAppElement("#graphmain")
 
-    const nodes = Object.entries(tablesMetadata).map(([tableName, value]) => ({
-      ...value,
-      id: tableName
-    }))
-
-    const links = nodes
-      .map(val => {
-        const arrays =
-          val.array_relationships?.map(rel => ({
-            ...rel,
-            target: val.id,
-            source: rel.using.foreign_key_constraint_on.table.name
-          })) || []
-
-        const objects =
-          val.object_relationships?.map(rel => {
-            const target = nodes.find(x => x.id === val.id)
-            const sourcekey =
-              rel?.using?.foreign_key_constraint_on ||
-              rel?.using?.manual_configuration?.remote_table?.name
-            const sourcenode = val.database_table.foreign_keys?.find(
-              fk => fk.column_mapping[sourcekey]
-            )
-            const source = nodes.find(x => x.id === sourcenode.ref_table)
-            return {
-              ...rel,
-              target,
-              source
-            }
-          }) || []
-
-        const all_relationships = [...arrays, ...objects]
-        return all_relationships
-      })
-      .filter(l => l.length > 0)
-      .flat()
-    setTimeout(() => setData({ nodes, links }), 500)
+  if (!graphedData) {
+    return null
   }
-
-  useEffect(() => {
-    if (tablesMetadata) {
-      Modal.setAppElement("#graphmain")
-      loadData()
-    }
-  }, [tablesMetadata])
-
-  console.log("selectedNode: ", selectedNode)
 
   return (
     <div ref={ref} style={{ width: "100%", height: "100%" }}>
       <SchemaVisualizer
         width={width}
         height={height}
-        {...data}
+        {...graphedData}
         onSelectNode={onSelectNode}
       />
       <Modal

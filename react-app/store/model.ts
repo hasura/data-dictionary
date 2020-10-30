@@ -9,8 +9,8 @@ import { client } from '../utils/graphqlClient'
 import { metadataAndPostgresSelectionSet } from '../utils/querySelectionSets'
 import type { MetadataAndPostgresQueryResult } from '../utils/querySelectionSets'
 
-import { groupMetadataAndPostgresInfoByTableName } from './utils'
-import type { GroupedMetadataAndPostgresTables } from './utils'
+import { groupMetadataAndPostgresInfoByTableName, buildGraphedData, buildGraphedMap } from './utils'
+import type { GroupedMetadataAndPostgresTables, GraphedData, GraphedMap } from './utils'
 
 /**
  * =====================
@@ -36,6 +36,8 @@ export interface Store {
 
   graphqlSchema: Computed<Store, GraphQLSchema | null>
   groupedMetadataAndDatabaseTables: Computed<Store, GroupedMetadataAndPostgresTables>
+  graphedData: Computed<Store, GraphedData>
+  graphedMap: Computed<Store, GraphedMap>
 }
 
 /**
@@ -91,7 +93,15 @@ const model: Store = {
       metadata: state.metadata,
       postgres: state.database
     })
-  })
+  }),
+  graphedData: computed((state) => {
+    if (!state.groupedMetadataAndDatabaseTables) return null
+    return buildGraphedData(state.groupedMetadataAndDatabaseTables)
+  }),
+  graphedMap: computed((state) => {
+    if (!state.graphedData) return null
+    return buildGraphedMap(state.graphedData)
+  }),
 }
 
 export default model

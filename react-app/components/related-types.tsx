@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import {
   forceSimulation,
   forceLink,
@@ -8,9 +8,10 @@ import {
 } from "d3-force"
 import { zoom } from "d3-zoom"
 import { select } from "d3-selection"
+import { Table, TableProps } from "./table"
 
 const LinkComponent = ({ link }: { link: Link }) => {
-  const isArray = link.type === "ArrayRelationship"
+  const isArray = link.__typename === "ArrayRelationship"
   return (
     <line
       stroke={isArray ? "red" : "blue"}
@@ -29,26 +30,82 @@ const NodeComponent = ({
   onSelectNode
 }: {
   node: Node
-  onSelectNode: SchemaVisualizerProps["onSelectNode"]
+  onSelectNode: RelatedVisualizerProps["onSelectNode"]
 }) => {
-  const width = 250
-  const height = 80
-  const x = node.x - width / 2
-  const y = node.y - height / 2
+  const targetRef = useRef();
+  const [dimensions, setDimensions] = useState({ width: 120, height: 80 });
+
+  useEffect(() => {
+    if (targetRef?.current) {
+      setDimensions({
+        width: targetRef.current.offsetWidth,
+        height: targetRef.current.offsetHeight,
+      });
+    }
+  }, [node]);
+  
   const handleClick = () => (onSelectNode ? onSelectNode(node) : null)
+
+  let indexes = node.database_table.indexes
+    .map(i => ({
+        name: i.index_name,
+        keys: i.index_keys.toString(),
+        info: i.index_type
+    }))
+  let keys = node.database_table.foreign_keys
+    .map(f => ({
+        name: f.constraint_name,
+        keys: `${f.ref_table}.${Object.keys(f.column_mapping).toString()}`,
+        info: ''
+    }))
+
   return (
-    <g style={{ cursor: "pointer" }} onClick={handleClick}>
-      <rect x={x} y={y} rx={15} width={width} height={height} fill="#e2e8f0" />
-      <text
-        x={node.x}
-        y={node.y + 10}
-        fill="black"
-        textAnchor="middle"
-        style={{ fontSize: 24, fontWeight: "bold" }}
-      >
-        {node.id}
-      </text>
-    </g>
+    <foreignObject
+      x={node.x - dimensions.width / 2}
+      y={node.y - dimensions.height / 2}
+      height={dimensions.height}
+      width={dimensions.width}
+    >
+      <div ref={targetRef} style={{minWidth: 400, minHeight: 200}}>
+      <h1 className="text-lg font-bold text-gray-800 p-2 bg-white">{node.id}</h1>
+      <Table
+        headers={[
+            {
+              key: "name",
+              displayName: "Type"
+            },
+            {
+              key: "keys",
+              displayName: "Field"
+            },
+            {
+              key: "info",
+              displayName: "Info"
+            }
+          ]}
+        columns={[...indexes, ...keys]}
+        Header={header => (
+          <th key={header.displayName} className="px-4 py-2 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-50">
+            {header.displayName}
+          </th>
+        )}
+        Cell={cell => (
+          <td
+            className="px-2 py-2 whitespace-no-wrap"
+            onClick={() => cell.header.onClick(cell.column)}
+          >
+            <div className="flex items-center">
+              <div className="ml-2">
+                <div className="text-sm font-medium leading-5 text-gray-900">
+                  {cell.column[cell.header.key]}
+                </div>
+              </div>
+            </div>
+          </td>
+        )}
+      />
+      </div>
+    </foreignObject>
   )
 }
 
@@ -71,7 +128,7 @@ export interface Link {
   }
 }
 
-export interface SchemaVisualizerProps {
+export interface RelatedVisualizerProps {
   width: number
   height: number
   nodes: Node[]
@@ -82,13 +139,13 @@ export interface SchemaVisualizerProps {
 /**
  * Requires width, height, nodes (with x, y, id) and links (with __typename, source.x, source.y, target.x, target.y)
  */
-export function SchemaVisualizer({
+export function RelatedVisualizer({
   width,
   height,
   nodes,
   links,
   onSelectNode
-}: SchemaVisualizerProps) {
+}: RelatedVisualizerProps) {
   const [simData, setSimData] = useState<{
     nodes: Node[]
     links: Link[]
@@ -104,7 +161,7 @@ export function SchemaVisualizer({
           .id(function(d) {
             return d.id
           })
-          .distance(200)
+          .distance(250)
           .links(datacopy.links)
       )
       .force(
@@ -113,10 +170,10 @@ export function SchemaVisualizer({
           .strength(-200)
           .distanceMax(250)
       )
-      .force("collision", forceCollide().radius(200))
+      .force("collision", forceCollide().radius(250))
       .force("center", forceCenter(width / 2, height / 2))
       .stop()
-    simulation.tick(300)
+    simulation.tick(200)
     setTimeout(
       () => setSimData({ nodes: datacopy.nodes, links: datacopy.links }),
       800
@@ -124,15 +181,9 @@ export function SchemaVisualizer({
   }
 
   async function loadSvg() {
-    // Checks for previous zoom location on load
-    const initTransform = sessionStorage.getItem("graphviz_transform")
     const svg = select("svg")
     const svgGroup = svg.selectAll("g")
-    if (initTransform) {
-      svgGroup.attr("transform", initTransform)
-    }
     const zoom_handler = zoom().on("zoom", function(event) {
-      sessionStorage.setItem("graphviz_transform", event.transform)
       svgGroup.attr("transform", event.transform)
     })
     zoom_handler(svg)
@@ -168,10 +219,11 @@ export function SchemaVisualizer({
         {simData.links.map((link, index) => (
           <LinkComponent link={link} key={index} />
         ))}
-      </g>
+      
       {simData.nodes.map((node, index) => (
         <NodeComponent node={node} key={index} onSelectNode={onSelectNode} />
       ))}
+      </g>
     </svg>
   )
 }
