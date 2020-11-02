@@ -4,21 +4,36 @@ import type { MetadataAndPostgresQueryResult } from "../utils/querySelectionSets
 interface GroupMetadataAndPostgresInfoParams {
   metadata: MetadataAndPostgresQueryResult["metadata"]
   postgres: MetadataAndPostgresQueryResult["postgres"]
+  role: string
 }
 
 /**
  * Takes the "Metadata" and "Postgres" query results from GraphQL API service,
  * and combines the table values by grouping/keying them by table name
+ * 
+ * NOTE: This could be memoized for performance, the results are deterministic
  */
 export function groupMetadataAndPostgresInfoByTableName(
   params: GroupMetadataAndPostgresInfoParams
 ) {
-  const combinedTables = params.metadata?.tables.map(metadataTable => {
-    const allTables = params.postgres?.schemas.map(schema => schema.tables)
-    const table = _.flatten(allTables).find(it => it.table_name == metadataTable.table.name)
-    return { id: metadataTable.table.name, ...metadataTable, database_table: table }
+  const allTables = params.postgres?.schemas?.flatMap(schema => schema.tables)
+
+  // "Combined Tables" is the result of merging Hasura Metadata tables with Postgres Tables
+  const combinedTables = params.metadata?.tables?.map(metadataTable => {
+    const table = allTables?.find(it => it?.table_name == metadataTable.table?.name)
+    return { id: metadataTable.table?.name, ...metadataTable, database_table: table }
   })
-  return _.keyBy(combinedTables, it => it.table.name)
+
+  // This could probably done in a single pass, in the code above
+  const roleFilteredCombinedTables = combinedTables?.filter(it => {
+    // If the selected role is "admin", always return every table
+    if (params.role == 'admin') return true
+    // Else, check whether the select permissions include the current role
+    return it?.select_permissions?.some(perm => perm.role == params.role)
+  })
+
+  // Key the results by table name to turn it into a dictionary for easier name-based lookups
+  return _.keyBy(roleFilteredCombinedTables, it => it?.table?.name)
 }
 
 export type GroupedMetadataAndPostgresTables = ReturnType<

@@ -107,7 +107,7 @@ const DataModels = () => {
             displayName: "Source"
           }
         ]}
-        columns={Object.entries(tablesMetadata).map(([tableName, it]) => {
+        columns={Object.entries(tablesMetadata || {}).map(([tableName, it]) => {
           if (!tableName.match(search)) return {}
           return {
             name: it.table.name,
