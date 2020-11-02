@@ -23,3 +23,9 @@ a {
 * {
   box-sizing: border-box;
 }
+
+#hasura-logo {
+  width: 135px;
+  margin-right: 10px;
+  margin-top: -5px;
+}
