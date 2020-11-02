@@ -16,7 +16,7 @@ export function groupMetadataAndPostgresInfoByTableName(
   const combinedTables = params.metadata?.tables.map(metadataTable => {
     const allTables = params.postgres?.schemas.map(schema => schema.tables)
     const table = _.flatten(allTables).find(it => it.table_name == metadataTable.table.name)
-    return { ...metadataTable, database_table: table, id: table.table_name }
+    return { id: metadataTable.table.name, ...metadataTable, database_table: table }
   })
   return _.keyBy(combinedTables, it => it.table.name)
 }
@@ -48,10 +48,10 @@ export function buildGraphedData(
             const sourcekey =
               rel?.using?.foreign_key_constraint_on ||
               rel?.using?.manual_configuration?.remote_table?.name
-            const sourcenode = val.database_table.foreign_keys?.find(
+            const sourcenode = val.database_table?.foreign_keys?.find(
               fk => fk.column_mapping[sourcekey]
             )
-            const source = nodes.find(x => x.id === sourcenode.ref_table)
+            const source = nodes.find(x => x.id === sourcenode?.ref_table)
             return {
               ...rel,
               target,
@@ -84,8 +84,8 @@ export function buildGraphedMap(
     .map(n => {
       let adj = []
       links.map(l => {
-        const tar = l.target.id ? l.target.id : l.target
-        const sor = l.source.id ? l.source.id : l.source
+        const tar = l.target?.id ? l.target?.id : l.target
+        const sor = l.source?.id ? l.source?.id : l.source
         if (tar === n.id) {
           adj.push(sor)
         } else if (sor === n.id) {
@@ -101,7 +101,7 @@ export function buildGraphedMap(
   const graphedMap = nodes
     .map(n => {
       const adj = firstAdj[n.id]
-        .map(m => firstAdj[m].filter(x => x !== n.id && !firstAdj[n.id].includes(x)))
+        .map(m => firstAdj[m] ? firstAdj[m].filter(x => x !== n.id && !firstAdj[n.id].includes(x)) : [])
         .flat()
       return {
         [n.id]: {
