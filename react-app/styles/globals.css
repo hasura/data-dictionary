@@ -2,6 +2,11 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+html {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
 /* CHECKBOX TOGGLE SWITCH */
 /* @apply rules for documentation, these do not work as inline style */
 .toggle-checkbox:checked {
@@ -30,4 +35,15 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+#hasura-logo {
+  width: 130px;
+  margin-right: 12px;
+  margin-top: -4px;
+}
+
+.graphiql-container .doc-explorer-title,
+.graphiql-container .history-title {
+  height: 40px !important;
 }

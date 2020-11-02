@@ -1,7 +1,10 @@
 import React, { useState } from "react"
+import { useRouter } from "next/router"
 import Link from "next/link"
 import Modal from "react-modal"
+
 import { useStoreActions, useStoreState, useStore } from "../store"
+import { customModalStyles } from "../pages/datagraph"
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -14,12 +17,12 @@ const Header = () => {
   )
 
   return (
-    <header className="absolute flex w-screen h-20 px-5 py-1 shadow-md place-items-center place-content-start">
-      <h1 className="pr-8 text-4xl font-medium text-gray-800">
-        Hasura Data Dictionary
-      </h1>
-
-      <div className="relative inline-block w-10 mr-2 align-middle transition duration-200 ease-in select-none">
+    <header className="absolute flex w-screen h-20 pl-10 py-1 shadow-md place-items-center place-content-start">
+      <div className="flex">
+        <img src="/hasura_logo.svg" alt="hasura" id="hasura-logo" />
+        <h1 className="pr-10 text-3xl font-medium">Data Dictionary</h1>
+      </div>
+      <div className="relative inline-block w-10 mr-2 align-middle transition duration-200 ease-in select-none pt-2">
         <input
           type="checkbox"
           name="toggle"
@@ -34,11 +37,15 @@ const Header = () => {
         ></label>
       </div>
 
-      <label htmlFor="toggle" className="text-lg text-gray-700">
+      <label htmlFor="toggle" className="text-lg text-gray-700 pt-2">
         Show for specific roles only
       </label>
 
-      <Modal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)}>
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+        style={customModalStyles}
+      >
         <div className="block">
           <span className="text-gray-700">Role</span>
           <div className="mt-2">
@@ -68,6 +75,10 @@ const Header = () => {
 }
 
 const NavMenu = () => {
+  const router = useRouter()
+
+  console.log(router)
+
   // TODO: Extract this maybe to make it cleaner
   const navItems = [
     {
@@ -84,17 +95,22 @@ const NavMenu = () => {
     }
   ]
 
+  const styles =
+    "flex  w-full h-12 mt-6 text-center place-items-center cursor-pointer bg-white shadow-md justify-center rounded delay-75 hover:shadow-lg text-gray-800 border-l-4 border-transparent pr-4"
+
   return (
-    <nav className="w-1/6 p-4 bg-gray-300">
-      {navItems.map(it => (
+    <nav className="w-1/4 p-6 bg-gray-300">
+      {navItems.map(({ route, text }) => (
         <div
-          key={it.route}
-          className="flex w-full h-12 pl-4 mt-6 text-left border-l-4 border-indigo-700 place-items-center"
+          key={route}
+          className={
+            route === router.pathname
+              ? `${styles} border-l-4 border-indigo-700 text-indigo-700 hover:shadow-md`
+              : styles
+          }
         >
-          <Link href={it.route}>
-            <p className="text-lg font-medium text-gray-800 hover:text-indigo-700">
-              {it.text}
-            </p>
+          <Link href={route}>
+            <p className="text-lg font-medium hover:text-indigo-700">{text}</p>
           </Link>
         </div>
       ))}
