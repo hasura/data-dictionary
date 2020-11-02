@@ -4,6 +4,7 @@ import Link from "next/link"
 import Modal from "react-modal"
 
 import { useStoreActions, useStoreState, useStore } from "../store"
+import { customModalStyles } from "../pages/datagraph"
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -40,7 +41,11 @@ const Header = () => {
         Show for specific roles only
       </label>
 
-      <Modal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)}>
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+        style={customModalStyles}
+      >
         <div className="block">
           <span className="text-gray-700">Role</span>
           <div className="mt-2">

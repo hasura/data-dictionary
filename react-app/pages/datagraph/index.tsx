@@ -7,7 +7,7 @@ import Modal from "react-modal"
 import { useStoreState } from "../../store"
 import { SchemaVisualizer } from "../../components/visualization"
 
-const customModalStyles = {
+export const customModalStyles = {
   content: {
     margin: "auto",
     maxHeight: "400px",
@@ -20,9 +20,7 @@ export default function Datagraph() {
   const { ref, width, height } = useDimensions()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedNode, setSelectedNode] = useState()
-  const graphedData = useStoreState(
-    store => store.graphedData
-  )
+  const graphedData = useStoreState(store => store.graphedData)
 
   const toggleModal = () => setIsModalOpen(prev => !prev)
   const navToModel = () => router.push(`/models/database/${selectedNode?.id}`)
