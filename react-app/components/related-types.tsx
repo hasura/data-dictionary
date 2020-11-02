@@ -32,32 +32,30 @@ const NodeComponent = ({
   node: Node
   onSelectNode: RelatedVisualizerProps["onSelectNode"]
 }) => {
-  const targetRef = useRef();
-  const [dimensions, setDimensions] = useState({ width: 120, height: 80 });
+  const targetRef = useRef()
+  const [dimensions, setDimensions] = useState({ width: 120, height: 80 })
 
   useEffect(() => {
     if (targetRef?.current) {
       setDimensions({
-        width: targetRef.current.offsetWidth,
-        height: targetRef.current.offsetHeight,
-      });
+        width: (targetRef as any)?.current?.offsetWidth,
+        height: (targetRef as any)?.current?.offsetHeight
+      })
     }
-  }, [node]);
-  
+  }, [node])
+
   const handleClick = () => (onSelectNode ? onSelectNode(node) : null)
 
-  let indexes = node.database_table.indexes
-    .map(i => ({
-        name: i.index_name,
-        keys: i.index_keys.toString(),
-        info: i.index_type
-    }))
-  let keys = node.database_table.foreign_keys
-    .map(f => ({
-        name: f.constraint_name,
-        keys: `${f.ref_table}.${Object.keys(f.column_mapping).toString()}`,
-        info: ''
-    }))
+  let indexes = (node as any).database_table.indexes.map(i => ({
+    name: i.index_name,
+    keys: i.index_keys.toString(),
+    info: i.index_type
+  }))
+  let keys = (node as any).database_table.foreign_keys.map(f => ({
+    name: f.constraint_name,
+    keys: `${f.ref_table}.${Object.keys(f.column_mapping).toString()}`,
+    info: ""
+  }))
 
   return (
     <foreignObject
@@ -66,10 +64,12 @@ const NodeComponent = ({
       height={dimensions.height}
       width={dimensions.width}
     >
-      <div ref={targetRef} style={{minWidth: 400, minHeight: 200}}>
-      <h1 className="text-lg font-bold text-gray-800 p-2 bg-white">{node.id}</h1>
-      <Table
-        headers={[
+      <div ref={targetRef} style={{ minWidth: 400, minHeight: 200 }}>
+        <h1 className="p-2 text-lg font-bold text-gray-800 bg-white">
+          {node.id}
+        </h1>
+        <Table
+          headers={[
             {
               key: "name",
               displayName: "Type"
@@ -83,27 +83,30 @@ const NodeComponent = ({
               displayName: "Info"
             }
           ]}
-        columns={[...indexes, ...keys]}
-        Header={header => (
-          <th key={header.displayName} className="px-4 py-2 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-50">
-            {header.displayName}
-          </th>
-        )}
-        Cell={cell => (
-          <td
-            className="px-2 py-2 whitespace-no-wrap"
-            onClick={() => cell.header.onClick(cell.column)}
-          >
-            <div className="flex items-center">
-              <div className="ml-2">
-                <div className="text-sm font-medium leading-5 text-gray-900">
-                  {cell.column[cell.header.key]}
+          columns={[...indexes, ...keys]}
+          Header={header => (
+            <th
+              key={header.displayName}
+              className="px-4 py-2 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-50"
+            >
+              {header.displayName}
+            </th>
+          )}
+          Cell={cell => (
+            <td
+              className="px-2 py-2 whitespace-no-wrap"
+              onClick={() => cell.header.onClick(cell.column)}
+            >
+              <div className="flex items-center">
+                <div className="ml-2">
+                  <div className="text-sm font-medium leading-5 text-gray-900">
+                    {cell.column[cell.header.key]}
+                  </div>
                 </div>
               </div>
-            </div>
-          </td>
-        )}
-      />
+            </td>
+          )}
+        />
       </div>
     </foreignObject>
   )
@@ -151,8 +154,12 @@ export function RelatedVisualizer({
     links: Link[]
   }>()
 
+  console.log("RelatedVisualizer render with nodes/links:", { nodes, links })
+
   async function loadSim() {
     const datacopy = Object.assign({}, { nodes, links })
+    console.log("loadSim called, datacopy is", datacopy)
+
     var simulation = forceSimulation()
       .nodes(datacopy.nodes)
       .force(
@@ -213,16 +220,16 @@ export function RelatedVisualizer({
       id="vizgraph"
       width={width}
       height={height}
-      style={{ backgroundColor: "#f0f0f0"}}
+      style={{ backgroundColor: "#f0f0f0" }}
     >
       <g>
         {simData.links.map((link, index) => (
           <LinkComponent link={link} key={index} />
         ))}
-      
-      {simData.nodes.map((node, index) => (
-        <NodeComponent node={node} key={index} onSelectNode={onSelectNode} />
-      ))}
+
+        {simData.nodes.map((node, index) => (
+          <NodeComponent node={node} key={index} onSelectNode={onSelectNode} />
+        ))}
       </g>
     </svg>
   )
