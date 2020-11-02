@@ -42,3 +42,8 @@ a {
   margin-right: 12px;
   margin-top: -4px;
 }
+
+.graphiql-container .doc-explorer-title,
+.graphiql-container .history-title {
+  height: 40px !important;
+}
