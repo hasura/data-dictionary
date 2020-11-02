@@ -1,33 +1,18 @@
 import Head from "next/head"
-import styles from "../styles/Home.module.css"
-
-import { useState, useEffect } from "react"
-import { useStoreState, useStoreActions } from "../store"
-
-import { Table } from "../components/table"
 import Link from "next/link"
 
+import { useState } from "react"
+import { useStoreState } from "../store"
+
+import { Table } from "../components/table"
+
 export default function Home() {
-  const loadMetadataAndDatabaseInfo = useStoreActions(
-    store => store.loadMetadataAndDatabaseInfo
-  )
-  const loadGraphQLSchemaByIntrospection = useStoreActions(
-    store => store.loadGraphQLSchemaByIntrospection
-  )
-
-  // TODO: Figure out loading this on app init, and not inside of a component
-  useEffect(() => {
-    loadMetadataAndDatabaseInfo()
-    loadGraphQLSchemaByIntrospection()
-  }, [])
-
   return (
     <div>
       <Head>
         <title>Hasura Data Dictionary</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <DataModels />
     </div>
   )
