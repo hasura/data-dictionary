@@ -1,6 +1,8 @@
 import React, { useState } from "react"
+import { useRouter } from "next/router"
 import Link from "next/link"
 import Modal from "react-modal"
+
 import { useStoreActions, useStoreState, useStore } from "../store"
 
 const Header = () => {
@@ -68,6 +70,10 @@ const Header = () => {
 }
 
 const NavMenu = () => {
+  const router = useRouter()
+
+  console.log(router)
+
   // TODO: Extract this maybe to make it cleaner
   const navItems = [
     {
@@ -84,17 +90,22 @@ const NavMenu = () => {
     }
   ]
 
+  const styles =
+    "flex  w-full h-12 mt-6 text-center place-items-center cursor-pointer bg-white shadow-md justify-center rounded delay-75 hover:shadow-lg text-gray-800"
+
   return (
     <nav className="w-1/4 p-6 bg-gray-300">
-      {navItems.map(it => (
+      {navItems.map(({ route, text }) => (
         <div
-          key={it.route}
-          className="flex  w-full h-12 mt-6 text-center place-items-center cursor-pointer bg-white shadow-md justify-center rounded delay-75 hover:shadow-lg"
+          key={route}
+          className={
+            route === router.pathname
+              ? `${styles} border-l-4 border-indigo-700 text-indigo-700 hover:shadow-md`
+              : styles
+          }
         >
-          <Link href={it.route}>
-            <p className="text-lg font-medium text-gray-800 hover:text-indigo-700">
-              {it.text}
-            </p>
+          <Link href={route}>
+            <p className="text-lg font-medium hover:text-indigo-700">{text}</p>
           </Link>
         </div>
       ))}
