@@ -472,12 +472,216 @@ const resolvers = {
     },
     postgres: async () => {
       // Declare series of uninvoked promises, for non-blocking parallel fetch below
-      const getColumns = runSQL(runMetadataQuery, sqlQuery.columns)
-      const getTables = runSQL(runMetadataQuery, sqlQuery.tables)
-      const getViews = runSQL(runMetadataQuery, sqlQuery.views)
-      const getIndexes = runSQL(runMetadataQuery, sqlQuery.indexes)
-      const getPrimaryKeys = runSQL(runMetadataQuery, sqlQuery.primary_keys)
-      const getForeignKeys = runSQL(runMetadataQuery, sqlQuery.foreign_keys)
+      const getColumns = runSQL(
+        runMetadataQuery,
+        `
+      select
+          table_schema,
+          table_name,
+          column_name,
+          column_default,
+          is_nullable::bool,
+          data_type,
+          udt_name,
+          pg_catalog.col_description(
+              format('%s.%s', col.table_schema, col.table_name)::regclass::oid,
+              col.ordinal_position
+          ) as comment
+      from
+          information_schema.columns as col
+      where
+          col.table_schema not in ('pg_catalog', 'information_schema', 'hdb_catalog')
+      `
+      )
+      const getTables = runSQL(
+        runMetadataQuery,
+        `
+      SELECT
+        c.oid AS id,
+        table_catalog AS catalog,
+        table_schema,
+        table_name,
+        obj_description(c.oid) AS comment
+      FROM
+        information_schema.tables
+        JOIN pg_class c ON quote_ident(table_schema)::regnamespace = c.relnamespace
+        AND c.relname = table_name
+        LEFT JOIN pg_stat_user_tables ON pg_stat_user_tables.schemaname = tables.table_schema
+        AND pg_stat_user_tables.relname = tables.table_name
+      WHERE
+        table_type = 'BASE TABLE'
+        AND table_schema not in ('hdb_catalog', 'pg_catalog', 'information_schema');
+      `
+      )
+      const getViews = runSQL(
+        runMetadataQuery,
+        `
+      select t.table_schema,
+            t.table_name,
+            obj_description(pg_class.oid) as comment
+            from information_schema.tables t
+          inner join pg_class
+                  on pg_class.relname = t.table_name
+      where table_type = 'VIEW' 
+            and t.table_schema not in ('information_schema', 'pg_catalog')
+      order by table_schema,
+              table_name;
+      `
+      )
+      const getIndexes = runSQL(
+        runMetadataQuery,
+        `
+      SELECT
+        U.usename                AS user_name,
+        ns.nspname               AS table_schema,
+        idx.indrelid :: REGCLASS AS table_name,
+        i.relname                AS index_name,
+        idx.indisunique          AS is_unique,
+        idx.indisprimary         AS is_primary,
+        am.amname                AS index_type,
+        idx.indkey,
+            ARRAY_TO_JSON(ARRAY(
+                SELECT pg_get_indexdef(idx.indexrelid, k + 1, TRUE)
+                FROM
+                  generate_subscripts(idx.indkey, 1) AS k
+                ORDER BY k
+            )) AS index_keys,
+        (idx.indexprs IS NOT NULL) OR (idx.indkey::int[] @> array[0]) AS is_functional,
+        idx.indpred IS NOT NULL AS is_partial
+      FROM pg_index AS idx
+        JOIN pg_class AS i
+          ON i.oid = idx.indexrelid
+        JOIN pg_am AS am
+          ON i.relam = am.oid
+        JOIN pg_namespace AS NS ON i.relnamespace = NS.OID
+        JOIN pg_user AS U ON i.relowner = U.usesysid
+      WHERE NOT nspname LIKE 'pg%'; -- Excluding system tables`
+      )
+      const getPrimaryKeys = runSQL(
+        runMetadataQuery,
+        `
+      SELECT
+          tc.table_schema,
+          tc.table_name,
+          tc.constraint_name,
+          json_agg(constraint_column_usage.column_name) AS columns
+      FROM
+          information_schema.table_constraints tc
+      JOIN (
+        SELECT
+          x.tblschema AS table_schema,
+          x.tblname AS table_name,
+          x.colname AS column_name,
+          x.cstrname AS constraint_name
+        FROM ( SELECT DISTINCT
+            nr.nspname,
+            r.relname,
+            a.attname,
+            c.conname
+          FROM
+            pg_namespace nr,
+            pg_class r,
+            pg_attribute a,
+            pg_depend d,
+            pg_namespace nc,
+            pg_constraint c
+          WHERE
+            nr.oid = r.relnamespace
+            AND r.oid = a.attrelid
+            AND d.refclassid = 'pg_class'::regclass::oid
+            AND d.refobjid = r.oid
+            AND d.refobjsubid = a.attnum
+            AND d.classid = 'pg_constraint'::regclass::oid
+            AND d.objid = c.oid
+            AND c.connamespace = nc.oid
+            AND c.contype = 'c'::"char"
+            AND(r.relkind = ANY (ARRAY ['r'::"char", 'p'::"char"]))
+            AND NOT a.attisdropped
+          UNION ALL
+          SELECT
+            nr.nspname,
+            r.relname,
+            a.attname,
+            c.conname
+          FROM
+            pg_namespace nr,
+            pg_class r,
+            pg_attribute a,
+            pg_namespace nc,
+            pg_constraint c
+          WHERE
+            nr.oid = r.relnamespace
+            AND r.oid = a.attrelid
+            AND nc.oid = c.connamespace
+            AND r.oid = CASE c.contype
+            WHEN 'f'::"char" THEN
+              c.confrelid
+            ELSE
+              c.conrelid
+            END
+            AND(a.attnum = ANY (
+                CASE c.contype
+                WHEN 'f'::"char" THEN
+                  c.confkey
+                ELSE
+                  c.conkey
+                END))
+            AND NOT a.attisdropped
+            AND(c.contype = ANY (ARRAY ['p'::"char", 'u'::"char", 'f'::"char"]))
+            AND(r.relkind = ANY (ARRAY ['r'::"char", 'p'::"char"]))) x (tblschema, tblname, colname, cstrname)) constraint_column_usage ON tc.constraint_name::text = constraint_column_usage.constraint_name::text
+        AND tc.table_schema::text = constraint_column_usage.table_schema::text
+        AND tc.table_name::text = constraint_column_usage.table_name::text
+        AND tc.constraint_type::text = 'PRIMARY KEY'::text
+      GROUP BY
+        tc.table_schema, tc.table_name, tc.constraint_name;      
+      `
+      )
+      const getForeignKeys = runSQL(
+        runMetadataQuery,
+        `
+      SELECT
+        q.table_schema::text AS table_schema,
+        q.table_name::text AS table_name,
+        q.constraint_name::text AS constraint_name,
+        min(q.ref_table_table_schema::text) AS ref_table_table_schema,
+        min(q.ref_table::text) AS ref_table,
+        json_object_agg(ac.attname, afc.attname) AS column_mapping,
+        min(q.confupdtype::text) AS on_update,
+        min(q.confdeltype::text) AS
+        on_delete
+      FROM (
+        SELECT
+          ctn.nspname AS table_schema,
+          ct.relname AS table_name,
+          r.conrelid AS table_id,
+          r.conname AS constraint_name,
+          cftn.nspname AS ref_table_table_schema,
+          cft.relname AS ref_table,
+          r.confrelid AS ref_table_id,
+          r.confupdtype,
+          r.confdeltype,
+          unnest(r.conkey) AS column_id,
+          unnest(r.confkey) AS ref_column_id
+        FROM
+          pg_constraint r
+          JOIN pg_class ct ON r.conrelid = ct.oid
+          JOIN pg_namespace ctn ON ct.relnamespace = ctn.oid
+          JOIN pg_class cft ON r.confrelid = cft.oid
+          JOIN pg_namespace cftn ON cft.relnamespace = cftn.oid
+      WHERE
+        r.contype = 'f'::"char"
+      
+        ) q
+        JOIN pg_attribute ac ON q.column_id = ac.attnum
+          AND q.table_id = ac.attrelid
+        JOIN pg_attribute afc ON q.ref_column_id = afc.attnum
+          AND q.ref_table_id = afc.attrelid
+        GROUP BY
+          q.table_schema,
+          q.table_name,
+          q.constraint_name
+      `
+      )
       const data = {
         columns: await getColumns,
         tables: await getTables,
