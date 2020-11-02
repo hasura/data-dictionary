@@ -1,5 +1,13 @@
 import model, { Store } from "./model"
-import { createStore, createTypedHooks, persist } from "easy-peasy"
+
+import {
+  persist,
+  createStore,
+  createTypedHooks,
+  createTransform
+} from "easy-peasy"
+
+import { printSchema, buildSchema } from "graphql"
 
 /**
  * =====================
@@ -7,8 +15,30 @@ import { createStore, createTypedHooks, persist } from "easy-peasy"
  * =====================
  */
 
+// Transformer to serialize the GraphQL schema when persisting to sessionStorage
 export const store = createStore<Store>(
-  persist(model, { storage: "sessionStorage" })
+  persist(model, {
+    storage: "sessionStorage",
+    transformers: [
+      createTransform(
+        // Inbound (persisting), print the GraphQL Schema object to save
+        (data, key) => {
+          if (!data) return
+          console.log("persisting gql schema", data)
+          return printSchema(data)
+        },
+        // Outbound (hydrating), load the GraphQL Schema object from string
+        (data, key) => {
+          if (!data) return
+          console.log("hydrating gql schema data", data)
+          return buildSchema(data)
+        },
+        {
+          whitelist: ["graphqlSchema"]
+        }
+      )
+    ]
+  })
 )
 
 // Wrapping dev only code like this normally gets stripped out by bundlers
