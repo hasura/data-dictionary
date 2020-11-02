@@ -21,7 +21,7 @@ export default function DatabaseModelTableView() {
   const [showDegrees, setShowDegrees] = useState(2)
 
   const tableName = router.query.table as string
-  const currentItem = metadata[tableName]
+  const currentItem = metadata?.[tableName]
 
   const graphqlFieldsHeaders: TableProps["headers"] = [
     {
@@ -38,11 +38,11 @@ export default function DatabaseModelTableView() {
     }
   ]
 
-  const queryType = graphqlSchema.getQueryType()
-  const queryFields = queryType.getFields()
+  const queryType = graphqlSchema?.getQueryType()
+  const queryFields = queryType?.getFields()
 
-  const mutationType = graphqlSchema.getMutationType()
-  const mutationFields = mutationType.getFields()
+  const mutationType = graphqlSchema?.getMutationType()
+  const mutationFields = mutationType?.getFields()
 
   const graphqlOperationsColumns: TableProps["columns"] = []
 
@@ -74,18 +74,19 @@ export default function DatabaseModelTableView() {
   }
 
   function filterData() {
-    const { first, second } = graphMap[tableName]
+    const { first, second } = graphMap?.[tableName]
     let neighbors =
       showDegrees === 1
         ? first.concat([tableName])
         : first.concat(second, [tableName])
 
-    const filteredNodes = graphData.nodes.filter(node =>
-      neighbors.includes(node.id)
+    const filteredNodes = graphData?.nodes.filter(node =>
+      neighbors.includes(node?.id)
     )
-    const filteredLinks = graphData.links.filter(
+    const filteredLinks = graphData?.links.filter(
       link =>
-        neighbors.includes(link.source.id) && neighbors.includes(link.target.id)
+        neighbors.includes(link?.source?.id) &&
+        neighbors.includes(link?.target?.id)
     )
 
     setData({ nodes: filteredNodes, links: filteredLinks })
