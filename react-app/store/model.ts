@@ -83,10 +83,10 @@ const model: Store = {
   }),
   loadGraphQLSchemaByIntrospection: thunk(async (actions, _payload, helpers) => {
     // TODO: Replace with dynamic value
-    const endpoint = process.env.HASURA_URL
-      ? process.env.HASURA_URL + '/v1/graphql'
+    const endpoint = process.env.NEXT_PUBLIC_HASURA_URL
+      ? process.env.NEXT_PUBLIC_HASURA_URL + '/v1/graphql'
       : 'http://localhost:8085/v1/graphql'
-      
+
     const request = await fetch(endpoint, {
       method: 'POST',
       headers: {

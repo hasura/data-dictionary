@@ -451,8 +451,8 @@ const typeDefs = gql`
 
 // TODO: Environment variable for endpoint or something
 const runMetadataQuery = createHasuraMetadataClient({
-  endpoint: process.env.HASURA_URL
-    ? process.env.HASURA_URL + "/v1/query"
+  endpoint: process.env.NEXT_PUBLIC_HASURA_URL
+    ? process.env.NEXT_PUBLIC_HASURA_URL + "/v1/query"
     : "http://localhost:8085/v1/query",
   headers: {
     "X-Hasura-Admin-Secret": process.env.HASURA_ADMIN_SECRET || "mysecret"

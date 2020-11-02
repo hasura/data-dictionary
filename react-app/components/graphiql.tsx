@@ -13,8 +13,8 @@ import { useStoreState } from "../store"
 import { useState } from "react"
 
 // TODO: Change this to be dynamic or take UI input
-const HASURA_ENDPOINT = process.env.HASURA_URL
-  ? process.env.HASURA_URL + "/v1/graphql"
+const HASURA_ENDPOINT = process.env.NEXT_PUBLIC_HASURA_URL
+  ? process.env.NEXT_PUBLIC_HASURA_URL + "/v1/graphql"
   : "http://localhost:8085/v1/graphql"
 
 function graphQLFetcher(graphQLParams) {
