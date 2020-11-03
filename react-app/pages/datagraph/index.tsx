@@ -7,13 +7,16 @@ import Modal from "react-modal"
 import { useStoreState } from "../../store"
 import { SchemaVisualizer } from "../../components/visualization"
 
-export const customModalStyles = {
+const customModalStyles = {
   content: {
     margin: "auto",
-    minHeight: "400px",
+    marginTop: "100px",
+    minHeight: "350px",
     maxHeight: "400px",
     maxWidth: "600px",
-    background: "#fff"
+    background: "#fff",
+    outline: "none",
+    borderRadius: "6px"
   },
   overlay: { background: "rgba(0,0,0,0.5)" }
 }
@@ -39,6 +42,12 @@ export default function Datagraph() {
     return null
   }
 
+  const closeModal = () => {
+    if (isModalOpen) {
+      setIsModalOpen(false)
+    }
+  }
+
   return (
     <div ref={ref} style={{ width: "100%", height: "100%" }}>
       <SchemaVisualizer
@@ -54,20 +63,16 @@ export default function Datagraph() {
         style={customModalStyles}
         className="react-modal"
       >
-        <div className="block p-10">
-          <NodeDetails {...selectedNode} />
-          <button
-            className="px-4 py-2 my-2 font-bold rounded"
-            onClick={toggleModal}
-          >
-            Close modal
-          </button>
-          <button
-            className="px-4 py-2 my-2 mr-4 font-bold text-white bg-blue-500 rounded"
-            onClick={navToModel}
-          >
-            Detail page
-          </button>
+        <div className="block p-6">
+          <NodeDetails {...selectedNode} closeModal={closeModal} />
+          <div className="flex justify-center pt-5">
+            <button
+              className="px-4 py-2 my-2 mr-4 font-bold text-white bg-blue-500 rounded"
+              onClick={navToModel}
+            >
+              Detail page
+            </button>
+          </div>
         </div>
       </Modal>
     </div>
@@ -77,13 +82,23 @@ export default function Datagraph() {
 const NodeDetails = ({
   id,
   array_relationships,
+  closeModal,
   object_relationships,
   remote_relationships,
   __typename
 }) => {
   return (
     <div className="flex-initial">
-      <h2 className="text-xl font-bold">{id}</h2>
+      <div className="flex justify-between">
+        <h2 className="text-xl font-bold">{id}</h2>
+        <div
+          className="w-8 h-8 rouded flex items-center justify-center close-btn"
+          role="button"
+          onClick={closeModal}
+        >
+          <img src="/closeIcon.svg" alt="close-icon" className="w-3" />
+        </div>
+      </div>
       <div className="flex-initial">
         <p>Array relationships: {array_relationships?.length || 0}</p>
         {array_relationships?.map(ar => (
