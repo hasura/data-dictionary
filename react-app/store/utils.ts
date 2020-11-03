@@ -47,14 +47,14 @@ export function buildGraphedData(
   params: GroupedMetadataAndPostgresTables
 ) {
   const nodes = Object.values(params)
-  const role = nodes[0].select_permissions[0].role
+  const role = nodes[0]?.select_permissions?.[0].role
   
   const links = nodes
       .map(val => {
         const arrays =
           val.array_relationships?.map(rel => {
             const source = nodes.find(n => n.id === rel.using.foreign_key_constraint_on.table.name)
-            if (source?.select_permissions[0].role === role) {
+            if (source?.select_permissions?.[0].role === role) {
               return {
                 ...rel,
                 target: val,
