@@ -38,7 +38,7 @@ a {
 }
 
 #hasura-logo {
-  width: 130px;
+  width: 115px;
   margin-right: 12px;
   margin-top: -5px;
 }
@@ -47,7 +47,31 @@ a {
   transition: all 0.2s ease 0s;
 }
 
-/* GraphiQL */
+#switch-icon {
+  width: 15px;
+  margin-right: 10px;
+}
+
+.role-change-btn {
+  width: 200px;
+  transition: all 0.2s ease 0s;
+  font-size: 15px;
+  font-weight: 550;
+  cursor: pointer;
+  background: linear-gradient(-45deg, rgb(236, 25, 67), rgb(240, 72, 106));
+  border: none;
+  color: rgb(255, 255, 255);
+  width: 150px;
+  height: 38px;
+  outline: none;
+  outline-color: none;
+}
+
+.role-change-btn:focus {
+  outline: none;
+}
+
+/**** GraphiQL ************************/
 
 .graphiql-container .doc-explorer-title,
 .graphiql-container .history-title {

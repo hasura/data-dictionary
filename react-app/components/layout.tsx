@@ -16,31 +16,26 @@ const Header = () => {
     actions => actions.loadMetadataAndDatabaseInfo
   )
 
+  const handleClick = () => {
+    if (!isModalOpen) {
+      setIsModalOpen(true)
+    }
+  }
+
   return (
-    <header className="absolute flex w-screen h-20 pl-10 py-1 shadow-md place-items-center place-content-start">
+    <header className="absolute flex w-screen h-20 px-12 py-1 shadow-md place-items-center justify-between">
       <div className="flex">
         <img src="/hasura_logo.svg" alt="hasura" id="hasura-logo" />
-        <h1 className="pr-10 text-3xl font-medium">Data Dictionary</h1>
+        <h1 className="text-2xl font-semibold ">Data Dictionary</h1>
       </div>
-      <div className="relative inline-block w-10 mr-2 align-middle transition duration-200 ease-in select-none pt-2">
-        <input
-          type="checkbox"
-          name="toggle"
-          id="toggle"
-          checked={isModalOpen}
-          onChange={() => setIsModalOpen(!isModalOpen)}
-          className="absolute block w-6 h-6 bg-white border-4 rounded-full appearance-none cursor-pointer toggle-checkbox"
-        />
-        <label
-          htmlFor="toggle"
-          className="block h-6 overflow-hidden bg-gray-500 rounded-full cursor-pointer toggle-label"
-        ></label>
-      </div>
-
-      <label htmlFor="toggle" className="text-lg text-gray-700 pt-2">
-        Show for specific roles only
-      </label>
-
+      <button
+        onClick={handleClick}
+        className="capitalize flex items-center justify-center  rounded role-change-btn hover:shadow-xl"
+      >
+        <img src="/changeIcon.svg" alt="Switch role" id="switch-icon" />
+        {`Role: ${currentRole}`}
+      </button>
+      {/* Persmissons selector modal */}
       <Modal
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}
