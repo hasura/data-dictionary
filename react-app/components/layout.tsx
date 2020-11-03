@@ -96,7 +96,7 @@ const NavMenu = () => {
   ]
 
   const styles =
-    "flex  w-full h-12 mt-6 text-center place-items-center cursor-pointer bg-white shadow-md justify-center rounded delay-75 hover:shadow-lg text-gray-800 border-l-4 border-transparent pr-4"
+    "flex  w-full h-12 mt-6 text-center place-items-center cursor-pointer bg-white shadow-md justify-center rounded hover:shadow-lg text-gray-800 border-l-4 border-transparent pr-4 nav-tab"
 
   return (
     <nav className="w-1/4 p-6 bg-gray-300">

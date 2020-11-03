@@ -40,7 +40,11 @@ a {
 #hasura-logo {
   width: 130px;
   margin-right: 12px;
-  margin-top: -4px;
+  margin-top: -5px;
+}
+
+.nav-tab {
+  transition: all 0.2s ease 0s;
 }
 
 .graphiql-container .doc-explorer-title,
