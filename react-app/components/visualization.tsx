@@ -59,6 +59,7 @@ export interface Node {
 }
 
 export interface Link {
+  type: string
   __typename: string
   index: number
   source: {
@@ -94,8 +95,11 @@ export function SchemaVisualizer({
     links: Link[]
   }>()
 
+  console.log("SchemaVisualizer render with nodes/links:", { nodes, links })
+
   async function loadSim() {
     const datacopy = Object.assign({}, { nodes, links })
+    console.log("loadSim called, datacopy is", datacopy)
     var simulation = forceSimulation()
       .nodes(datacopy.nodes)
       .force(
@@ -162,7 +166,7 @@ export function SchemaVisualizer({
       id="vizgraph"
       width={width}
       height={height}
-      style={{ backgroundColor: "#f0f0f0"}}
+      style={{ backgroundColor: "#f0f0f0" }}
     >
       <g>
         {simData.links.map((link, index) => (

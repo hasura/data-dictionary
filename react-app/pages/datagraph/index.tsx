@@ -23,7 +23,8 @@ export default function Datagraph() {
   const graphedData = useStoreState(store => store.graphedData)
 
   const toggleModal = () => setIsModalOpen(prev => !prev)
-  const navToModel = () => router.push(`/models/database/${selectedNode?.id}`)
+  const navToModel = () =>
+    router.push(`/models/database/${(selectedNode as any)?.id}`)
   const onSelectNode = node => {
     setSelectedNode(node)
     toggleModal()
