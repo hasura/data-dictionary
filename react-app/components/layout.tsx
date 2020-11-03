@@ -59,7 +59,7 @@ const Header = () => {
           <div className="flex justify-between">
             <span className="text-gray-700">Select role</span>
             <div
-              className="w-8 h-8 rouded flex items-center justify-center hover:bg-gray-200 close-btn"
+              className="w-8 h-8 rouded flex items-center justify-center close-btn"
               role="button"
               onClick={closeModal}
             >
@@ -126,7 +126,9 @@ const NavMenu = () => {
           }
         >
           <Link href={route}>
-            <p className="text-lg font-medium hover:text-indigo-700">{text}</p>
+            <p className="text-base font-medium hover:text-indigo-700">
+              {text}
+            </p>
           </Link>
         </div>
       ))}
