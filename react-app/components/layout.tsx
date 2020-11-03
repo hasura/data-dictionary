@@ -9,15 +9,15 @@ const customModalStyles = {
   content: {
     margin: "auto",
     maxHeight: "300px",
-    maxWidth: "400px"
+    maxWidth: "400px",
   },
-  overlay: { zIndex: 100, background: "rgba(0,0,0,0.5)" }
+  overlay: { zIndex: 100, background: "rgba(0,0,0,0.5)" },
 }
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   // TODO: Dynamically calculate these from the Metadata permissions values
-  const roles = ["admin", "user"]
+  const roles = useStoreState(state => state.allRoles)
   const currentRole = useStoreState(state => state.currentRole)
   const setCurrentRole = useStoreActions(actions => actions.setCurrentRole)
   const loadMetadataAndDatabaseInfo = useStoreActions(
@@ -37,14 +37,14 @@ const Header = () => {
   }
 
   return (
-    <header className="absolute flex w-screen h-20 px-12 py-1 shadow-md place-items-center justify-between">
+    <header className="absolute flex justify-between w-screen h-20 px-12 py-1 shadow-md place-items-center">
       <div className="flex">
         <img src="/hasura_logo.svg" alt="hasura" id="hasura-logo" />
         <h1 className="text-2xl font-semibold ">Data Dictionary</h1>
       </div>
       <button
         onClick={handleClick}
-        className="capitalize flex items-center justify-center  rounded role-change-btn hover:shadow-xl"
+        className="flex items-center justify-center capitalize rounded role-change-btn hover:shadow-xl"
       >
         <img src="/changeIcon.svg" alt="Switch role" id="switch-icon" />
         {`Role: ${currentRole}`}
@@ -59,7 +59,7 @@ const Header = () => {
           <div className="flex justify-between">
             <span className="text-gray-700">Select role</span>
             <div
-              className="w-8 h-8 rouded flex items-center justify-center close-btn"
+              className="flex items-center justify-center w-8 h-8 rouded close-btn"
               role="button"
               onClick={closeModal}
             >
@@ -67,7 +67,7 @@ const Header = () => {
             </div>
           </div>
           <div className="mt-2">
-            {roles.map(role => (
+            {roles?.map(role => (
               <div>
                 <label className="inline-flex items-center">
                   <input
@@ -99,16 +99,16 @@ const NavMenu = () => {
   const navItems = [
     {
       text: "Data Models",
-      route: "/"
+      route: "/",
     },
     {
       text: "Data Graph",
-      route: "/datagraph"
+      route: "/datagraph",
     },
     {
       text: "GraphiQL",
-      route: "/graphiql"
-    }
+      route: "/graphiql",
+    },
   ]
 
   const styles =

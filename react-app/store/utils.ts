@@ -8,9 +8,33 @@ interface GroupMetadataAndPostgresInfoParams {
 }
 
 /**
+ * Extracts all unique roles from Hasura metadata
+ * Used for display role-selection modal options
+ */
+export function findRoleNamesInMetadata(
+  metadata: MetadataAndPostgresQueryResult["metadata"]
+) {
+  if (!metadata || !metadata.tables) return ["admin"]
+
+  const allRoles = metadata.tables
+    .flatMap(table =>
+      [
+        table.select_permissions,
+        table.insert_permissions,
+        table.delete_permissions,
+        table.update_permissions,
+      ].flat()
+    )
+    .map(permission => permission?.role)
+    .filter(Boolean)
+
+  return Array.from(new Set(allRoles)).concat("admin")
+}
+
+/**
  * Takes the "Metadata" and "Postgres" query results from GraphQL API service,
  * and combines the table values by grouping/keying them by table name
- * 
+ *
  * NOTE: This could be memoized for performance, the results are deterministic
  */
 export function groupMetadataAndPostgresInfoByTableName(
@@ -20,14 +44,20 @@ export function groupMetadataAndPostgresInfoByTableName(
 
   // "Combined Tables" is the result of merging Hasura Metadata tables with Postgres Tables
   const combinedTables = params.metadata?.tables?.map(metadataTable => {
-    const table = allTables?.find(it => it?.table_name == metadataTable.table?.name)
-    return { id: metadataTable.table?.name, ...metadataTable, database_table: table }
+    const table = allTables?.find(
+      it => it?.table_name == metadataTable.table?.name
+    )
+    return {
+      id: metadataTable.table?.name,
+      ...metadataTable,
+      database_table: table,
+    }
   })
 
   // This could probably done in a single pass, in the code above
   const roleFilteredCombinedTables = combinedTables?.filter(it => {
     // If the selected role is "admin", always return every table
-    if (params.role == 'admin') return true
+    if (params.role == "admin") return true
     // Else, check whether the select permissions include the current role
     return it?.select_permissions?.some(perm => perm.role == params.role)
   })
@@ -43,29 +73,33 @@ export type GroupedMetadataAndPostgresTables = ReturnType<
 /**
  * Takes the grouped metadata and delivers a condensed set of nodes and links
  */
-export function buildGraphedData(
-  params: GroupedMetadataAndPostgresTables
-) {
+export function buildGraphedData(params: GroupedMetadataAndPostgresTables) {
   const nodes = Object.values(params)
   const role = nodes[0]?.select_permissions?.[0].role
-  
+
   const links = nodes
-      .map(val => {
-        const arrays =
-          val.array_relationships?.map(rel => {
-            const source = nodes.find(n => n.id === rel.using.foreign_key_constraint_on.table.name)
+    .map(val => {
+      const arrays =
+        val.array_relationships
+          ?.map(rel => {
+            const source = nodes.find(
+              n => n.id === rel.using.foreign_key_constraint_on.table.name
+            )
             if (source?.select_permissions?.[0].role === role) {
               return {
                 ...rel,
                 target: val,
-                source: nodes.find(n => n.id === rel.using.foreign_key_constraint_on.table.name)
+                source: nodes.find(
+                  n => n.id === rel.using.foreign_key_constraint_on.table.name
+                ),
               }
             }
             return null
           })
           .filter(x => x !== null) || []
-        const objects =
-          val.object_relationships?.map(rel => {
+      const objects =
+        val.object_relationships
+          ?.map(rel => {
             const target = nodes.find(x => x.id === val.id)
             const sourcekey =
               rel?.using?.foreign_key_constraint_on ||
@@ -78,31 +112,28 @@ export function buildGraphedData(
               return {
                 ...rel,
                 target,
-                source
+                source,
               }
             }
             return null
-          }).filter(x => x !== null) || []
-        const all_relationships = [...arrays, ...objects]
-        return all_relationships
-      })
-      .filter(l => l.length > 0)
-      .flat()
-      
+          })
+          .filter(x => x !== null) || []
+      const all_relationships = [...arrays, ...objects]
+      return all_relationships
+    })
+    .filter(l => l.length > 0)
+    .flat()
+
   return { nodes, links }
 }
 
-export type GraphedData = ReturnType<
-  typeof buildGraphedData
->
+export type GraphedData = ReturnType<typeof buildGraphedData>
 
 /**
  * Takes the set of nodes and links and delivers an "adjacency list"
  * https://www.educative.io/blog/data-structures-101-graphs-javascript
  */
-export function buildGraphedMap(
-  params: GraphedData
-) {
+export function buildGraphedMap(params: GraphedData) {
   const { nodes, links } = params
 
   const firstAdj = nodes
@@ -118,7 +149,7 @@ export function buildGraphedMap(
         }
       })
       return {
-        [n.id]: Array.from(new Set(adj))
+        [n.id]: Array.from(new Set(adj)),
       }
     })
     .reduce((obj, item) => Object.assign(obj, item), {})
@@ -126,19 +157,21 @@ export function buildGraphedMap(
   const graphedMap = nodes
     .map(n => {
       const adj = firstAdj[n.id]
-        .map(m => firstAdj[m] ? firstAdj[m].filter(x => x !== n.id && !firstAdj[n.id].includes(x)) : [])
+        .map(m =>
+          firstAdj[m]
+            ? firstAdj[m].filter(x => x !== n.id && !firstAdj[n.id].includes(x))
+            : []
+        )
         .flat()
       return {
         [n.id]: {
           first: firstAdj[n.id],
-          second: Array.from(new Set(adj))
-        }
+          second: Array.from(new Set(adj)),
+        },
       }
     })
     .reduce((obj, item) => Object.assign(obj, item), {})
   return graphedMap
 }
 
-export type GraphedMap = ReturnType<
-  typeof buildGraphedMap
->
+export type GraphedMap = ReturnType<typeof buildGraphedMap>
