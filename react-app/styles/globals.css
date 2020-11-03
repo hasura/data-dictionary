@@ -71,6 +71,12 @@ a {
   outline: none;
 }
 
+.close-btn {
+  border-radius: 50%;
+  transition: all 0.1s ease 0s;
+  margin: -3px -3px 0px 0px;
+}
+
 /**** GraphiQL ************************/
 
 .graphiql-container .doc-explorer-title,

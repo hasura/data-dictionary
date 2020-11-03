@@ -22,6 +22,12 @@ const Header = () => {
     }
   }
 
+  const closeModal = () => {
+    if (isModalOpen) {
+      setIsModalOpen(false)
+    }
+  }
+
   return (
     <header className="absolute flex w-screen h-20 px-12 py-1 shadow-md place-items-center justify-between">
       <div className="flex">
@@ -38,11 +44,20 @@ const Header = () => {
       {/* Persmissons selector modal */}
       <Modal
         isOpen={isModalOpen}
-        onRequestClose={() => setIsModalOpen(false)}
+        onRequestClose={closeModal}
         style={customModalStyles}
       >
         <div className="block">
-          <span className="text-gray-700">Select role</span>
+          <div className="flex justify-between">
+            <span className="text-gray-700">Select role</span>
+            <div
+              className="w-8 h-8 rouded flex items-center justify-center hover:bg-gray-200 close-btn"
+              role="button"
+              onClick={closeModal}
+            >
+              <img src="/closeIcon.svg" alt="close-icon" className="w-3" />
+            </div>
+          </div>
           <div className="mt-2">
             {roles.map(role => (
               <div>

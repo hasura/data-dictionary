@@ -11,7 +11,7 @@ import { select } from "d3-selection"
 
 const LinkComponent = ({ link }: { link: Link }) => {
   const isArray = link.__typename === "ArrayRelationship"
-  
+
   return (
     <line
       stroke={isArray ? "red" : "blue"}
