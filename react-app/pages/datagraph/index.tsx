@@ -13,7 +13,7 @@ export const customModalStyles = {
     maxHeight: "400px",
     maxWidth: "600px"
   },
-  overlay: { zIndex: 100 }
+  overlay: { zIndex: 100, background: "rgba(0,0,0,0.5)" }
 }
 
 export default function Datagraph() {
