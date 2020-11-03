@@ -10,7 +10,8 @@ import { zoom } from "d3-zoom"
 import { select } from "d3-selection"
 
 const LinkComponent = ({ link }: { link: Link }) => {
-  const isArray = link.type === "ArrayRelationship"
+  const isArray = link.__typename === "ArrayRelationship"
+  
   return (
     <line
       stroke={isArray ? "red" : "blue"}

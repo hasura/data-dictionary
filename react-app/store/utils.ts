@@ -48,8 +48,7 @@ export function buildGraphedData(
 ) {
   const nodes = Object.values(params)
   const role = nodes[0].select_permissions[0].role
-  console.log('nodes? ', nodes)
-  console.log('role? ', role)
+  
   const links = nodes
       .map(val => {
         const arrays =
@@ -62,9 +61,9 @@ export function buildGraphedData(
                 source: nodes.find(n => n.id === rel.using.foreign_key_constraint_on.table.name)
               }
             }
+            return null
           })
           .filter(x => x !== null) || []
-
         const objects =
           val.object_relationships?.map(rel => {
             const target = nodes.find(x => x.id === val.id)
@@ -82,13 +81,14 @@ export function buildGraphedData(
                 source
               }
             }
+            return null
           }).filter(x => x !== null) || []
         const all_relationships = [...arrays, ...objects]
         return all_relationships
       })
       .filter(l => l.length > 0)
       .flat()
-      console.log('links? ', links)
+      
   return { nodes, links }
 }
 
