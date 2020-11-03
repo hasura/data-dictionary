@@ -54,23 +54,26 @@ export default function Datagraph() {
         style={customModalStyles}
         className="react-modal"
       >
-        <NodeDetails {...selectedNode} />
-        <button
-          className="px-4 py-2 my-2 font-bold rounded"
-          onClick={toggleModal}
-        >
-          Close modal
-        </button>
-        <button
-          className="px-4 py-2 my-2 mr-4 font-bold text-white bg-blue-500 rounded"
-          onClick={navToModel}
-        >
-          Detail page
-        </button>
+        <div className="block p-10">
+          <NodeDetails {...selectedNode} />
+          <button
+            className="px-4 py-2 my-2 font-bold rounded"
+            onClick={toggleModal}
+          >
+            Close modal
+          </button>
+          <button
+            className="px-4 py-2 my-2 mr-4 font-bold text-white bg-blue-500 rounded"
+            onClick={navToModel}
+          >
+            Detail page
+          </button>
+        </div>
       </Modal>
     </div>
   )
 }
+
 const NodeDetails = ({
   id,
   array_relationships,
