@@ -47,15 +47,23 @@ export function buildGraphedData(
   params: GroupedMetadataAndPostgresTables
 ) {
   const nodes = Object.values(params)
-
+  const role = nodes[0].select_permissions[0].role
+  console.log('nodes? ', nodes)
+  console.log('role? ', role)
   const links = nodes
       .map(val => {
         const arrays =
-          val.array_relationships?.map(rel => ({
-            ...rel,
-            target: val,
-            source: nodes.find(n => n.id === rel.using.foreign_key_constraint_on.table.name)
-          })) || []
+          val.array_relationships?.map(rel => {
+            const source = nodes.find(n => n.id === rel.using.foreign_key_constraint_on.table.name)
+            if (source?.select_permissions[0].role === role) {
+              return {
+                ...rel,
+                target: val,
+                source: nodes.find(n => n.id === rel.using.foreign_key_constraint_on.table.name)
+              }
+            }
+          })
+          .filter(x => x !== null) || []
 
         const objects =
           val.object_relationships?.map(rel => {
@@ -67,18 +75,20 @@ export function buildGraphedData(
               fk => fk.column_mapping[sourcekey]
             )
             const source = nodes.find(x => x.id === sourcenode?.ref_table)
-            return {
-              ...rel,
-              target,
-              source
+            if (source) {
+              return {
+                ...rel,
+                target,
+                source
+              }
             }
-          }) || []
-
+          }).filter(x => x !== null) || []
         const all_relationships = [...arrays, ...objects]
         return all_relationships
       })
       .filter(l => l.length > 0)
       .flat()
+      console.log('links? ', links)
   return { nodes, links }
 }
 
