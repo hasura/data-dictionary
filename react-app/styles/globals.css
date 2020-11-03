@@ -47,7 +47,49 @@ a {
   transition: all 0.2s ease 0s;
 }
 
+/* GraphiQL */
+
 .graphiql-container .doc-explorer-title,
 .graphiql-container .history-title {
   height: 40px !important;
+}
+
+.doc-explorer-title-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 45px !important;
+  padding: 0 15px;
+  border-bottom: 0.5px solid #e5e5e5;
+}
+
+.doc-explorer-contents {
+  padding: 10px 0px 0px 10px !important;
+}
+
+.graphiql-container .topBar {
+  height: 45px !important;
+}
+
+.graphiql-explorer-field-view {
+  font-size: 14px !important;
+  letter-spacing: 0.5px;
+}
+
+.graphiql-operation-title-bar input {
+  width: 8ch !important;
+}
+
+.CodeMirror-linenumber {
+  width: 30px;
+  text-align: center !important;
+  background: #f6f6f6;
+}
+
+.cm-comment {
+  padding-left: 40px;
+}
+
+.graphiql-container .CodeMirror-lines {
+  padding: 0px 0 20px !important;
 }
