@@ -47,7 +47,7 @@ const Header = () => {
         style={customModalStyles}
       >
         <div className="block">
-          <span className="text-gray-700">Role</span>
+          <span className="text-gray-700">Select role</span>
           <div className="mt-2">
             {roles.map(role => (
               <div>
@@ -76,8 +76,6 @@ const Header = () => {
 
 const NavMenu = () => {
   const router = useRouter()
-
-  console.log(router)
 
   // TODO: Extract this maybe to make it cleaner
   const navItems = [

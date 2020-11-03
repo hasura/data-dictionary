@@ -12,7 +12,8 @@ export const customModalStyles = {
     margin: "auto",
     maxHeight: "400px",
     maxWidth: "600px"
-  }
+  },
+  overlay: { zIndex: 100 }
 }
 
 export default function Datagraph() {
@@ -49,6 +50,7 @@ export default function Datagraph() {
         onRequestClose={toggleModal}
         contentLabel="details modal"
         style={customModalStyles}
+        className="react-modal"
       >
         <NodeDetails {...selectedNode} />
         <button
