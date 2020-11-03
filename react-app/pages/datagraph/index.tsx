@@ -10,10 +10,12 @@ import { SchemaVisualizer } from "../../components/visualization"
 export const customModalStyles = {
   content: {
     margin: "auto",
+    minHeight: "400px",
     maxHeight: "400px",
-    maxWidth: "600px"
+    maxWidth: "600px",
+    background: "#fff"
   },
-  overlay: { zIndex: 100, background: "rgba(0,0,0,0.5)" }
+  overlay: { background: "rgba(0,0,0,0.5)" }
 }
 
 export default function Datagraph() {

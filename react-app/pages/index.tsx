@@ -112,7 +112,7 @@ const DataModels = () => {
             <td className="px-2 py-4 whitespace-no-wrap">
               <div className="flex items-center">
                 <div className="ml-4">
-                  <div className="text-sm font-medium leading-5 text-gray-900">
+                  <div className="text-sm font-medium leading-5 text-gray-900 cursor-pointer">
                     {cell.column[cell.header.key]}
                   </div>
                 </div>
