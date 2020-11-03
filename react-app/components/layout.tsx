@@ -4,7 +4,15 @@ import Link from "next/link"
 import Modal from "react-modal"
 
 import { useStoreActions, useStoreState, useStore } from "../store"
-import { customModalStyles } from "../pages/datagraph"
+
+const customModalStyles = {
+  content: {
+    margin: "auto",
+    maxHeight: "300px",
+    maxWidth: "400px"
+  },
+  overlay: { zIndex: 100, background: "rgba(0,0,0,0.5)" }
+}
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
