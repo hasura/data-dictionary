@@ -7,8 +7,9 @@ import {
   GraphQLObjectType,
   isObjectType,
   getNamedType,
-  assertObjectType
+  assertObjectType,
 } from "graphql"
+
 import { useStoreState } from "../store"
 import { useState } from "react"
 
@@ -21,12 +22,14 @@ function graphQLFetcher(graphQLParams) {
   return fetch(HASURA_ENDPOINT, {
     method: "post",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(graphQLParams)
+    body: JSON.stringify(graphQLParams),
   }).then(response => response.json())
 }
 
 export const GraphiQLRenderer = () => {
+  const [currentQuery, setCurrentQuery] = useState("")
   const [isExplorerOpen, setIsExplorerOpen] = useState(true)
+  const [graphiQLRef, setGraphiQLRef] = useState<GraphiQL>()
 
   // const currentTryItOutOperationName = useStoreState(
   //   state => state.currentTryItOutOperationName
@@ -43,9 +46,22 @@ export const GraphiQLRenderer = () => {
 
   return (
     <section className="flex w-full h-full">
-      <GraphiQLExplorer schema={schema} explorerIsOpen={isExplorerOpen} />
+      <GraphiQLExplorer
+        width={300}
+        schema={schema}
+        query={currentQuery}
+        onEdit={setCurrentQuery}
+        makeDefaultArg={() => false}
+        explorerIsOpen={isExplorerOpen}
+        getDefaultScalarArgValue={(parentField, arg, argType) =>
+          GraphiQLExplorer.defaultValue(argType)
+        }
+      />
       <GraphiQL
+        ref={graphiQL => setGraphiQLRef(graphiQL!)}
+        query={currentQuery}
         fetcher={graphQLFetcher}
+        onEditQuery={query => setCurrentQuery(query as string)}
         //   query={`
         //   query {
         //     ${currentTryItOutOperationName} {
@@ -60,6 +76,16 @@ export const GraphiQLRenderer = () => {
         // `}
       >
         <GraphiQL.Toolbar>
+          <GraphiQL.Button
+            onClick={() => graphiQLRef?.handlePrettifyQuery()}
+            label="Prettify"
+            title="Prettify Query (Shift-Ctrl-P)"
+          />
+          <GraphiQL.Button
+            onClick={() => graphiQLRef?.handleToggleHistory()}
+            label="History"
+            title="Show History"
+          />
           <GraphiQL.Button
             onClick={() => setIsExplorerOpen(!isExplorerOpen)}
             label="Explorer"
