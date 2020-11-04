@@ -11,7 +11,7 @@ export const SearchInput = ({ placeholder, onChange, onSubmit }) => (
       />
       <button
         type="submit"
-        className="transform -translate-x-8 translate-y-1 focus:outline-none"
+        className="transform -translate-x-4 translate-y-1 focus:outline-none"
         onClick={onSubmit}
       >
         <svg
