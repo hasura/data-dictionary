@@ -81,6 +81,24 @@ a {
   background: rgb(246, 246, 246);
 }
 
+.search-bar {
+  border: 1px solid transparent;
+  box-shadow: 0 4px 16px rgba(32, 33, 36, 0.16);
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  height: 39px;
+  width: 690px;
+  border-radius: 24px;
+  z-index: 3;
+  height: 44px;
+}
+
+.search-bar:hover {
+  box-shadow: 0 4px 16px rgba(32, 33, 36, 0.28);
+  border-color: rgba(223, 225, 229, 0);
+}
+
 /**** GraphiQL ************************/
 
 .graphiql-container .doc-explorer-title,

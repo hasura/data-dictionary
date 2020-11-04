@@ -16,9 +16,9 @@ const customModalStyles = {
     maxWidth: "600px",
     background: "#fff",
     outline: "none",
-    borderRadius: "6px"
+    borderRadius: "6px",
   },
-  overlay: { background: "rgba(0,0,0,0.5)" }
+  overlay: { background: "rgba(0,0,0,0.5)" },
 }
 
 export default function Datagraph() {
@@ -85,7 +85,7 @@ const NodeDetails = ({
   closeModal,
   object_relationships,
   remote_relationships,
-  __typename
+  __typename,
 }) => {
   return (
     <div className="flex-initial">
