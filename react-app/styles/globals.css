@@ -203,3 +203,7 @@ a {
 .query-editor .graphiql-container .CodeMirror-lines {
   padding: 0px 0 20px !important;
 }
+
+.variable-editor .CodeMirror pre {
+  padding-left: 40px !important;
+}
