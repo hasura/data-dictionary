@@ -66,7 +66,7 @@ export default function Datagraph() {
         <NodeDetails {...selectedNode} closeModal={closeModal} />
         <div className="flex justify-center pt-5">
           <button
-            className="px-4 py-2 my-2 mr-4 font-bold text-white bg-blue-500 rounded"
+            className="px-6 py-2 my-2 mr-4 font-semibold text-white bg-blue-500 rounded hover:shadow-lg"
             onClick={navToModel}
           >
             Details page →
