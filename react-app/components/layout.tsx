@@ -61,7 +61,7 @@ const Header = () => {
                   loadMetadataAndDatabaseInfo()
                 }}
               />
-              <span className="ml-2 pb-1">{role}</span>
+              <span className="ml-3 pb-1">{role}</span>
             </label>
           </div>
         ))}

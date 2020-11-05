@@ -53,7 +53,7 @@ a {
 }
 
 .role-change-btn {
-  padding: 0 20px;
+  padding: 0 15px;
   transition: all 0.2s ease 0s;
   font-size: 15px;
   font-weight: 550;
@@ -61,7 +61,6 @@ a {
   background: linear-gradient(-45deg, rgb(236, 25, 67), rgb(240, 72, 106));
   border: none;
   color: rgb(255, 255, 255);
-  width: 150px;
   height: 38px;
   outline: none;
   outline-color: none;
