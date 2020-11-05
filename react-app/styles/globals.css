@@ -132,18 +132,8 @@ a {
   width: 8ch !important;
 }
 
-.CodeMirror-linenumber {
-  width: 30px;
-  text-align: center !important;
-  background: #f6f6f6;
-}
-
 .cm-comment {
   padding-left: 40px;
-}
-
-.graphiql-container .CodeMirror-lines {
-  padding: 0px 0 20px !important;
 }
 
 .graphiql-container .doc-explorer-contents,
@@ -198,4 +188,18 @@ a {
 .graphiql-container .doc-explorer-contents {
   overflow-x: hidden;
   padding: 10px 20px !important;
+}
+
+.query-editor .CodeMirror pre {
+  padding-left: 40px !important;
+}
+
+.query-editor .CodeMirror-linenumber {
+  width: 30px;
+  text-align: center !important;
+  /* background: #f6f6f6; */
+}
+
+.query-editor .graphiql-container .CodeMirror-lines {
+  padding: 0px 0 20px !important;
 }
