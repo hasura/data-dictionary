@@ -10,13 +10,14 @@ import { SchemaVisualizer } from "../../components/visualization"
 const customModalStyles = {
   content: {
     margin: "auto",
-    marginTop: "100px",
     minHeight: "350px",
     maxHeight: "400px",
     maxWidth: "600px",
     background: "#fff",
     outline: "none",
     borderRadius: "6px",
+    border: "none",
+    padding: "0px",
   },
   overlay: { background: "rgba(0,0,0,0.5)" },
 }
@@ -61,18 +62,15 @@ export default function Datagraph() {
         onRequestClose={toggleModal}
         contentLabel="details modal"
         style={customModalStyles}
-        className="react-modal"
       >
-        <div className="block p-6">
-          <NodeDetails {...selectedNode} closeModal={closeModal} />
-          <div className="flex justify-center pt-5">
-            <button
-              className="px-4 py-2 my-2 mr-4 font-bold text-white bg-blue-500 rounded"
-              onClick={navToModel}
-            >
-              Detail page
-            </button>
-          </div>
+        <NodeDetails {...selectedNode} closeModal={closeModal} />
+        <div className="flex justify-center pt-5">
+          <button
+            className="px-4 py-2 my-2 mr-4 font-bold text-white bg-blue-500 rounded"
+            onClick={navToModel}
+          >
+            Details page →
+          </button>
         </div>
       </Modal>
     </div>
@@ -89,18 +87,20 @@ const NodeDetails = ({
 }) => {
   return (
     <div className="flex-initial">
-      <div className="flex justify-between">
-        <h2 className="text-xl font-bold">{id}</h2>
+      <div className="flex justify-between modal-header items-center">
+        <span className="font-semibold">{id}</span>
         <div
-          className="w-8 h-8 rouded flex items-center justify-center close-btn"
+          className="flex items-center justify-center w-8 h-8 rouded close-btn"
           role="button"
           onClick={closeModal}
         >
           <img src="/closeIcon.svg" alt="close-icon" className="w-3" />
         </div>
       </div>
-      <div className="flex-initial">
-        <p>Array relationships: {array_relationships?.length || 0}</p>
+      <div className="flex-initial p-6">
+        <p className="pb-2">
+          Array relationships: {array_relationships?.length || 0}
+        </p>
         {array_relationships?.map(ar => (
           <p key={ar.name} className="px-6">
             {ar.using.foreign_key_constraint_on

@@ -6,14 +6,25 @@ const smallModalSize = {
   maxHeight: "300px",
 }
 
+const largeModalSize = {
+  maxHeight: "400px",
+  maxWidth: "600px",
+}
+
 export const ReactModal = ({
   isModalOpen,
   closeModal,
   children,
   heading,
   size,
+  contentLabel,
 }) => {
-  const modalSize = size === "sm" ? smallModalSize : smallModalSize
+  const modalSize =
+    size === "sm"
+      ? smallModalSize
+      : size === "lg"
+      ? largeModalSize
+      : smallModalSize
 
   const customModalStyles = {
     content: {
@@ -32,9 +43,10 @@ export const ReactModal = ({
       isOpen={isModalOpen}
       onRequestClose={closeModal}
       style={customModalStyles}
+      contentLabel={contentLabel}
     >
       <div className="flex justify-between modal-header items-center">
-        <span className="font-medium">{heading}</span>
+        <span className="font-semibold">{heading}</span>
         <div
           className="flex items-center justify-center w-8 h-8 rouded close-btn"
           role="button"
