@@ -147,10 +147,6 @@ a {
   width: 28px;
 }
 
-#query-MyQuery {
-  max-height: 65vh;
-}
-
 .doc-explorer-contents form {
   margin: 0 !important;
   padding-top: 10px;
@@ -173,7 +169,7 @@ a {
 }
 
 .graphiql-container div .query-editor {
-  max-height: 69.5vh;
+  max-height: 55vh;
 }
 
 .graphiql-operation-title-bar {
@@ -206,4 +202,18 @@ a {
 
 .variable-editor .CodeMirror pre {
   padding-left: 40px !important;
+}
+
+.graphiql-container .secondary-editor {
+  min-height: 150px !important;
+}
+
+.graphiql-container {
+  border-left: 3px solid #eee;
+}
+
+#query-MyQuery {
+  height: 100%;
+  max-height: 70vh;
+  overflow: auto;
 }
