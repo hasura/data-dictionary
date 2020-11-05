@@ -1,18 +1,9 @@
 import React, { useState } from "react"
 import { useRouter } from "next/router"
 import Link from "next/link"
-import Modal from "react-modal"
 
 import { useStoreActions, useStoreState, useStore } from "../store"
-
-const customModalStyles = {
-  content: {
-    margin: "auto",
-    maxHeight: "300px",
-    maxWidth: "400px",
-  },
-  overlay: { zIndex: 100, background: "rgba(0,0,0,0.5)" },
-}
+import { ReactModal } from "../components/ReactModal"
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -50,44 +41,31 @@ const Header = () => {
         {`Role: ${currentRole}`}
       </button>
       {/* Persmissons selector modal */}
-      <Modal
-        isOpen={isModalOpen}
-        onRequestClose={closeModal}
-        style={customModalStyles}
+      <ReactModal
+        closeModal={closeModal}
+        isModalOpen={isModalOpen}
+        heading="Select role"
+        size="sm"
       >
-        <div className="block">
-          <div className="flex justify-between">
-            <span className="text-gray-700">Select role</span>
-            <div
-              className="flex items-center justify-center w-8 h-8 rouded close-btn"
-              role="button"
-              onClick={closeModal}
-            >
-              <img src="/closeIcon.svg" alt="close-icon" className="w-3" />
-            </div>
+        {roles?.map(role => (
+          <div>
+            <label className="inline-flex items-center">
+              <input
+                type="radio"
+                className="form-radio"
+                name="radio"
+                value={role}
+                checked={currentRole == role}
+                onChange={e => {
+                  setCurrentRole(e.target.value)
+                  loadMetadataAndDatabaseInfo()
+                }}
+              />
+              <span className="ml-2 pb-1">{role}</span>
+            </label>
           </div>
-          <div className="mt-2">
-            {roles?.map(role => (
-              <div>
-                <label className="inline-flex items-center">
-                  <input
-                    type="radio"
-                    className="form-radio"
-                    name="radio"
-                    value={role}
-                    checked={currentRole == role}
-                    onChange={e => {
-                      setCurrentRole(e.target.value)
-                      loadMetadataAndDatabaseInfo()
-                    }}
-                  />
-                  <span className="ml-2">{role}</span>
-                </label>
-              </div>
-            ))}
-          </div>
-        </div>
-      </Modal>
+        ))}
+      </ReactModal>
     </header>
   )
 }

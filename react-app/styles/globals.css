@@ -75,11 +75,12 @@ a {
 .close-btn {
   border-radius: 50%;
   transition: all 0.1s ease 0s;
-  margin: -3px -3px 0px 0px;
+  background: #fff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
 }
 
 .close-btn:hover {
-  background: rgb(246, 246, 246);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
 .search-bar {
@@ -98,6 +99,11 @@ a {
 .search-bar:hover {
   box-shadow: 0 4px 16px rgba(32, 33, 36, 0.28);
   border-color: rgba(223, 225, 229, 0);
+}
+
+.modal-header {
+  background: #f5f5f5;
+  padding: 15px 20px;
 }
 
 /**** GraphiQL ************************/
