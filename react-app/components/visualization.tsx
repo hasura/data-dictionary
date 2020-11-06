@@ -100,7 +100,6 @@ export function SchemaVisualizer({
 
   async function loadSim() {
     const datacopy = Object.assign({}, { nodes, links })
-    console.log("loadSim called, datacopy is", datacopy)
     var simulation = forceSimulation()
       .nodes(datacopy.nodes)
       .force(
@@ -159,7 +158,18 @@ export function SchemaVisualizer({
   }, [simData])
 
   if (!simData || !width) {
-    return null
+    return (
+      <div style={{
+        display: 'flex',
+        width: width || 800,
+        height: height || 400,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: "#f0f0f0"
+      }}>
+        <p>Loading...</p>
+      </div>
+    )
   }
 
   return (
