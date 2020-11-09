@@ -26,16 +26,16 @@ export default function DatabaseModelTableView() {
   const graphqlFieldsHeaders: TableProps["headers"] = [
     {
       key: "operationType",
-      displayName: "Type"
+      displayName: "Type",
     },
     {
       key: "operationName",
-      displayName: "Operation Name"
+      displayName: "Operation Name",
     },
     {
       key: "description",
-      displayName: "description"
-    }
+      displayName: "description",
+    },
   ]
 
   const queryType = graphqlSchema?.getQueryType()
@@ -57,7 +57,7 @@ export default function DatabaseModelTableView() {
       operationType: "Query",
       operationName: operation.name,
       description: operation.description,
-      tryItOut: "Try it out ↪"
+      tryItOut: "Try it out ↪",
     })
   }
 
@@ -69,7 +69,7 @@ export default function DatabaseModelTableView() {
       operationType: "Mutation",
       operationName: operation.name,
       description: operation.description,
-      tryItOut: "Try it out ↪"
+      tryItOut: "Try it out ↪",
     })
   }
 
@@ -104,29 +104,29 @@ export default function DatabaseModelTableView() {
 
   return (
     <div className="w-5/6 py-10 mx-auto">
-      <h1 className="mb-2 text-3xl font-bold text-gray-800 capitalize">
+      <h1 className="mb-2 text-3xl font-semibold text-gray-800 capitalize">
         {tableName}
       </h1>
-      <hr className="mb-4 border border-gray-400" />
-      <h1 className="mb-2 text-xl font-bold text-gray-800">Fields</h1>
+      <hr className="mb-4 border border-gray-300" />
+      <h1 className="text-xl font-semibold text-gray-800 py-6">Fields</h1>
       <Table
         headers={[
           {
             key: "column_name",
-            displayName: "Field Name"
+            displayName: "Field Name",
           },
           {
             key: "comment",
-            displayName: "Description"
+            displayName: "Description",
           },
           {
             key: "udt_name",
-            displayName: "Type"
+            displayName: "Type",
           },
           {
             key: "index",
-            displayName: "Index"
-          }
+            displayName: "Index",
+          },
         ]}
         columns={currentItem.database_table.columns?.map(it => ({
           column_name: it.column_name,
@@ -138,7 +138,7 @@ export default function DatabaseModelTableView() {
             )
             if (idx) return `${idx.index_type} (${idx.index_name})`
             else return "NULL"
-          })()
+          })(),
         }))}
         Header={header => (
           <th
@@ -163,20 +163,22 @@ export default function DatabaseModelTableView() {
           </td>
         )}
       />
-      <h1 className="mt-6 mb-2 text-xl font-bold text-gray-800">Root Fields</h1>
+      <h1 className="mt-6 mb-2 text-xl font-semibold text-gray-800 py-6">
+        Root Fields
+      </h1>
       <Table
         headers={[
           {
             key: "operationType",
-            displayName: "Type"
+            displayName: "Type",
           },
           {
             key: "operationName",
-            displayName: "Operation Name"
+            displayName: "Operation Name",
           },
           {
             key: "description",
-            displayName: "description"
+            displayName: "description",
           },
           {
             key: "tryItOut",
@@ -187,8 +189,8 @@ export default function DatabaseModelTableView() {
               )
               setCurrentTryItOutOperationName(column.operationName)
               router.push("/graphiql")
-            }
-          }
+            },
+          },
         ]}
         columns={graphqlOperationsColumns}
         Header={header => (
@@ -211,13 +213,13 @@ export default function DatabaseModelTableView() {
           </td>
         )}
       />
-      <h1 className="mt-6 mb-2 text-xl font-bold text-gray-800">
+      <h1 className="mt-6 mb-2 text-xl font-semibold text-gray-800 py-6">
         Related Types
       </h1>
 
       {data?.links?.length ? (
         <>
-          <div>
+          <div className="pb-">
             <button
               className={`btn mx-2 ${
                 showDegrees === 1 ? "text-gray-900  underline" : "text-gray-600"

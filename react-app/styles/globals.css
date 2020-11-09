@@ -52,6 +52,10 @@ a {
   margin-right: 12px;
 }
 
+button {
+  transition: all 0.2s ease 0s;
+}
+
 .role-change-btn {
   padding: 0 15px;
   transition: all 0.2s ease 0s;
