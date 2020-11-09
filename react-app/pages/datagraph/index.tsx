@@ -87,7 +87,7 @@ const NodeDetails = ({
 }) => {
   return (
     <div className="flex-initial">
-      <div className="flex justify-between modal-header items-center">
+      <div className="flex justify-between modal-header items-center shadow-xs">
         <span className="font-semibold">{id}</span>
         <div
           className="flex items-center justify-center w-8 h-8 rouded close-btn"
@@ -98,7 +98,7 @@ const NodeDetails = ({
         </div>
       </div>
       <div className="flex-initial p-6">
-        <p className="pb-2">
+        <p className="pb-2 font-medium">
           Array relationships: {array_relationships?.length || 0}
         </p>
         {array_relationships?.map(ar => (
@@ -110,7 +110,9 @@ const NodeDetails = ({
                 )}`}
           </p>
         ))}
-        <p>Object relationships: {object_relationships?.length || 0}</p>
+        <p className="pb-2 pt-4 font-medium">
+          Object relationships: {object_relationships?.length || 0}
+        </p>
         {object_relationships?.map(or => (
           <p key={or.name} className="px-6">
             {or.using.foreign_key_constraint_on

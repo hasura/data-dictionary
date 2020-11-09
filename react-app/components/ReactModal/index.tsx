@@ -45,7 +45,7 @@ export const ReactModal = ({
       style={customModalStyles}
       contentLabel={contentLabel}
     >
-      <div className="flex justify-between modal-header items-center">
+      <div className="flex justify-between modal-header items-center shadow-xs">
         <span className="font-semibold">{heading}</span>
         <div
           className="flex items-center justify-center w-8 h-8 rouded close-btn"
