@@ -38,6 +38,12 @@ export default function DatabaseModelTableView() {
     },
   ]
 
+  const tryItOutButton = (
+    <span className="cursor-pointer try-it-out-button" role="button">
+      Try it out <span className="pl-2 try-it-out-icon">↪</span>
+    </span>
+  )
+
   const queryType = graphqlSchema?.getQueryType()
   const queryFields = queryType?.getFields()
 
@@ -57,7 +63,7 @@ export default function DatabaseModelTableView() {
       operationType: "Query",
       operationName: operation.name,
       description: operation.description,
-      tryItOut: "Try it out ↪",
+      tryItOut: tryItOutButton,
     })
   }
 
@@ -69,7 +75,7 @@ export default function DatabaseModelTableView() {
       operationType: "Mutation",
       operationName: operation.name,
       description: operation.description,
-      tryItOut: "Try it out ↪",
+      tryItOut: tryItOutButton,
     })
   }
 
