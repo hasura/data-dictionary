@@ -3,6 +3,7 @@ import { useRouter } from "next/router"
 import { useStoreState, useStoreActions } from "../../../store"
 import { Table, TableProps } from "../../../components/table"
 import { RelatedVisualizer } from "../../../components/related-types"
+import { mapDatabaseColumnTypeToGraphQLType } from "../../../store/utils"
 
 export default function DatabaseModelTableView() {
   const router = useRouter()
@@ -22,21 +23,6 @@ export default function DatabaseModelTableView() {
 
   const tableName = router.query.table as string
   const currentItem = metadata?.[tableName]
-
-  const graphqlFieldsHeaders: TableProps["headers"] = [
-    {
-      key: "operationType",
-      displayName: "Type",
-    },
-    {
-      key: "operationName",
-      displayName: "Operation Name",
-    },
-    {
-      key: "description",
-      displayName: "description",
-    },
-  ]
 
   const tryItOutButton = (
     <span className="cursor-pointer try-it-out-button" role="button">
@@ -114,7 +100,7 @@ export default function DatabaseModelTableView() {
         {tableName}
       </h1>
       <hr className="mb-4 border border-gray-300" />
-      <h1 className="text-xl font-semibold text-gray-800 py-6">Fields</h1>
+      <h1 className="py-6 text-xl font-semibold text-gray-800">Fields</h1>
       <Table
         headers={[
           {
@@ -130,6 +116,10 @@ export default function DatabaseModelTableView() {
             displayName: "Type",
           },
           {
+            key: "graphql_type",
+            displayName: "GraphQL Type",
+          },
+          {
             key: "index",
             displayName: "Index",
           },
@@ -138,6 +128,11 @@ export default function DatabaseModelTableView() {
           column_name: it.column_name,
           comment: it.comment,
           udt_name: it.udt_name,
+          graphql_type: mapDatabaseColumnTypeToGraphQLType({
+            columnName: it.column_name,
+            tableName: it.table_name,
+            graphqlSchema: graphqlSchema!,
+          }),
           index: (() => {
             const idx = currentItem.database_table.indexes.find(idx =>
               (idx as any).index_keys.includes(it.column_name)
@@ -169,7 +164,7 @@ export default function DatabaseModelTableView() {
           </td>
         )}
       />
-      <h1 className="mt-6 mb-2 text-xl font-semibold text-gray-800 py-6">
+      <h1 className="py-6 mt-6 mb-2 text-xl font-semibold text-gray-800">
         Root Fields
       </h1>
       <Table
@@ -219,7 +214,7 @@ export default function DatabaseModelTableView() {
           </td>
         )}
       />
-      <h1 className="mt-6 mb-2 text-xl font-semibold text-gray-800 py-6">
+      <h1 className="py-6 mt-6 mb-2 text-xl font-semibold text-gray-800">
         Related Types
       </h1>
 
@@ -228,7 +223,7 @@ export default function DatabaseModelTableView() {
           <div className="pb-">
             <button
               className={`btn mx-2 ${
-                showDegrees === 1 ? "text-gray-900  underline" : "text-gray-600"
+                showDegrees === 1 ? "text-gray-900 underline" : "text-gray-600"
               }`}
               onClick={() => setShowDegrees(1)}
             >

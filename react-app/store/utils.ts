@@ -1,3 +1,9 @@
+import {
+  GraphQLSchema,
+  getNamedType,
+  getNullableType,
+  isObjectType,
+} from "graphql"
 import * as _ from "lodash"
 import type { MetadataAndPostgresQueryResult } from "../utils/querySelectionSets"
 
@@ -31,6 +37,37 @@ export function findRoleNamesInMetadata(
   return Array.from(new Set(allRoles)).concat("admin")
 }
 
+interface MapDatabaseColumnTypeToGraphQLTypeParams {
+  tableName: string
+  columnName: string
+  graphqlSchema: GraphQLSchema
+}
+
+/**
+ * Maps the type of a database column to it's GraphQL type.
+ * This only works by convention in Hasura: It assumes standard root query names.
+ *
+ * IE, for "albums" table and the field "title", there will be a default query "albums" which returns "[album!]"
+ * This method tries to look up the query name matching the table name, and then the field name matching the column name
+ * so it will break if these have been modified.
+ *
+ * There's probably a better solution for this that involves some fancy logic.
+ */
+export function mapDatabaseColumnTypeToGraphQLType(
+  params: MapDatabaseColumnTypeToGraphQLTypeParams
+) {
+  const queryRoot = params.graphqlSchema.getQueryType()
+  if (!queryRoot) throw new Error("No query root found")
+  const queries = queryRoot.getFields()
+  const table = queries[params.tableName]
+  const tableType = getNamedType(table.type)
+  if (!isObjectType(tableType)) throw new Error("Not an object type")
+  const fields = tableType.getFields()
+  const fieldType = fields[params.columnName].type
+  // Use "getNullableType" here to remove the bang "!" from types, like "String!"
+  return getNullableType(fieldType).toString()
+}
+
 /**
  * Takes the "Metadata" and "Postgres" query results from GraphQL API service,
  * and combines the table values by grouping/keying them by table name
@@ -40,30 +77,34 @@ export function findRoleNamesInMetadata(
 export function groupMetadataAndPostgresInfoByTableName(
   params: GroupMetadataAndPostgresInfoParams
 ) {
-  const allTables = params.postgres?.schemas?.flatMap(schema => schema.tables)
+  if (!params.metadata || !params.metadata.tables) return null
+  if (!params.postgres || !params.postgres.schemas) return null
+
+  const allTables = params.postgres.schemas.flatMap(schema => schema.tables)
 
   // "Combined Tables" is the result of merging Hasura Metadata tables with Postgres Tables
-  const combinedTables = params.metadata?.tables?.map(metadataTable => {
-    const table = allTables?.find(
+  const combinedTables = params.metadata.tables.map(metadataTable => {
+    const table = allTables.find(
       it => it?.table_name == metadataTable.table?.name
     )
+    if (!table) throw new Error("Could not find PG table matching metadata")
     return {
-      id: metadataTable.table?.name,
-      ...metadataTable,
+      id: table.table_name,
       database_table: table,
+      ...metadataTable,
     }
   })
 
   // This could probably done in a single pass, in the code above
-  const roleFilteredCombinedTables = combinedTables?.filter(it => {
+  const roleFilteredCombinedTables = combinedTables.filter(it => {
     // If the selected role is "admin", always return every table
     if (params.role == "admin") return true
     // Else, check whether the select permissions include the current role
-    return it?.select_permissions?.some(perm => perm.role == params.role)
+    return it.select_permissions?.some(perm => perm.role == params.role)
   })
 
   // Key the results by table name to turn it into a dictionary for easier name-based lookups
-  return _.keyBy(roleFilteredCombinedTables, it => it?.table?.name)
+  return _.keyBy(roleFilteredCombinedTables, it => it.database_table.table_name)
 }
 
 export type GroupedMetadataAndPostgresTables = ReturnType<
@@ -74,8 +115,12 @@ export type GroupedMetadataAndPostgresTables = ReturnType<
  * Takes the grouped metadata and delivers a condensed set of nodes and links
  */
 export function buildGraphedData(params: GroupedMetadataAndPostgresTables) {
+  if (!params) return null
+
   const nodes = Object.values(params)
+
   const role = nodes[0]?.select_permissions?.[0].role
+  if (!role) throw new Error("Failed to find role from nodes")
 
   const links = nodes
     .map(val => {
@@ -83,14 +128,14 @@ export function buildGraphedData(params: GroupedMetadataAndPostgresTables) {
         val.array_relationships
           ?.map(rel => {
             const source = nodes.find(
-              n => n.id === rel.using.foreign_key_constraint_on.table.name
+              n => n.id === rel.using.foreign_key_constraint_on?.table.name
             )
             if (source?.select_permissions?.[0].role === role) {
               return {
                 ...rel,
                 target: val,
                 source: nodes.find(
-                  n => n.id === rel.using.foreign_key_constraint_on.table.name
+                  n => n.id === rel.using.foreign_key_constraint_on?.table.name
                 ),
               }
             }
@@ -134,11 +179,12 @@ export type GraphedData = ReturnType<typeof buildGraphedData>
  * https://www.educative.io/blog/data-structures-101-graphs-javascript
  */
 export function buildGraphedMap(params: GraphedData) {
+  if (!params) return null
   const { nodes, links } = params
 
   const firstAdj = nodes
     .map(n => {
-      let adj = []
+      let adj: string[] = []
       links.map(l => {
         const tar = l.target?.id ? l.target?.id : l.target
         const sor = l.source?.id ? l.source?.id : l.source
