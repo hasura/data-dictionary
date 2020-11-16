@@ -190,6 +190,9 @@ export default function DatabaseModelTableView() {
           {
             key: "operationName",
             displayName: "Operation Name",
+            onClick: column => {
+              router.push("/models/graphql/" + column.operationName)
+            },
           },
           {
             key: "description",
