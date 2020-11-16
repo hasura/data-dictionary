@@ -87,7 +87,13 @@ export function groupMetadataAndPostgresInfoByTableName(
     const table = allTables.find(
       it => it?.table_name == metadataTable.table?.name
     )
-    if (!table) throw new Error("Could not find PG table matching metadata")
+
+    if (!table) {
+      throw new Error(
+        `Could not find PG table matching metadata table: ${metadataTable.table?.name}`
+      )
+    }
+
     return {
       id: table.table_name,
       database_table: table,
@@ -119,8 +125,11 @@ export function buildGraphedData(params: GroupedMetadataAndPostgresTables) {
 
   const nodes = Object.values(params)
 
-  const role = nodes[0]?.select_permissions?.[0].role
-  if (!role) throw new Error("Failed to find role from nodes")
+  const role = nodes[0]?.select_permissions?.[0].role || "admin"
+  if (!role) {
+    return null
+    // throw new Error("Failed to find role from nodes")
+  }
 
   const links = nodes
     .map(val => {

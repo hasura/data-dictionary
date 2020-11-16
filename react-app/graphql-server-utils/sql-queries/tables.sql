@@ -1,9 +1,10 @@
+/* @name GetTables */
 SELECT
-  c.oid AS id,
-  table_catalog AS catalog,
-  table_schema,
-  table_name,
-  obj_description(c.oid) AS comment
+  c.oid::integer AS id,
+  table_catalog::text AS catalog,
+  table_schema::text,
+  table_name::text,
+  obj_description(c.oid)::text AS comment
 FROM
   information_schema.tables
   JOIN pg_class c ON quote_ident(table_schema)::regnamespace = c.relnamespace

@@ -4,6 +4,7 @@ import { useStoreState, useStoreActions } from "../../../store"
 import { Table, TableProps } from "../../../components/table"
 import { RelatedVisualizer } from "../../../components/related-types"
 import { mapDatabaseColumnTypeToGraphQLType } from "../../../store/utils"
+import Link from "next/link"
 
 export default function DatabaseModelTableView() {
   const router = useRouter()
@@ -149,20 +150,33 @@ export default function DatabaseModelTableView() {
             {header.displayName}
           </th>
         )}
-        Cell={(cell, index) => (
-          <td
-            key={cell.header.key + index}
-            className="px-2 py-4 whitespace-no-wrap"
-          >
-            <div className="flex items-center">
-              <div className="ml-4">
-                <div className="text-sm font-medium leading-5 text-gray-900">
-                  {cell.column[cell.header.key]}
+        Cell={(cell, index) => {
+          const content = (
+            <td
+              key={cell.header.key + index}
+              className="px-2 py-4 whitespace-no-wrap"
+            >
+              <div className="flex items-center">
+                <div className="ml-4">
+                  <div className="text-sm font-medium leading-5 text-gray-900">
+                    {cell.column[cell.header.key]}
+                  </div>
                 </div>
               </div>
-            </div>
-          </td>
-        )}
+            </td>
+          )
+          if (cell.header.key == "graphql_type")
+            return (
+              <Link
+                href={`https://spec.graphql.org/June2018/#sec-${
+                  cell.column[cell.header.key]
+                }`}
+              >
+                {content}
+              </Link>
+            )
+          else return content
+        }}
       />
       <h1 className="py-6 mt-6 mb-2 text-xl font-semibold text-gray-800">
         Root Fields

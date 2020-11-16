@@ -6,11 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "generate-sql-query-types": "npx pgtyped -w -c pgtyped-config.json",
     "generate-gql-client": "genql --esm --endpoint http://localhost:3000/api/graphql --output ./generated-gql-client"
   },
   "dependencies": {
     "@genql/runtime": "^2.3.3",
     "@mrblenny/react-flow-chart": "^0.0.14",
+    "@pgtyped/cli": "^0.8.2",
+    "@pgtyped/query": "^0.8.2",
     "ag-grid-community": "^24.1.0",
     "ag-grid-react": "^24.1.0",
     "apollo-server-micro": "^2.18.2",

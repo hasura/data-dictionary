@@ -1,7 +1,8 @@
+/* @name GetPrimaryKeys */
 SELECT
-    tc.table_schema,
-    tc.table_name,
-    tc.constraint_name,
+    tc.table_schema::text,
+    tc.table_name::text,
+    tc.constraint_name::text,
     json_agg(constraint_column_usage.column_name) AS columns
 FROM
     information_schema.table_constraints tc
