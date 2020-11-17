@@ -55,8 +55,11 @@ export default function GraphQLOperationView() {
   const router = useRouter()
   const operationName = router.query.operation as string
   const graphqlSchema = useStoreState(store => store.graphqlSchema)
+
+  if (!graphqlSchema) return <p>No schema</p>
+
   const fields = getGraphQLOperationFields({
-    graphqlSchema: graphqlSchema!,
+    graphqlSchema,
     operationName,
   })
 
