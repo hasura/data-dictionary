@@ -15,13 +15,12 @@ import { getPrimaryKeys } from "../../graphql-server-utils/sql-queries/primary-k
 import { getTables } from "../../graphql-server-utils/sql-queries/tables.queries"
 import { getViews } from "../../graphql-server-utils/sql-queries/views.queries"
 
-// TODO: Environment variable for endpoint or something
 const runMetadataQuery = createHasuraMetadataClient({
   endpoint: process.env.NEXT_PUBLIC_HASURA_URL
     ? process.env.NEXT_PUBLIC_HASURA_URL + "/v1/query"
     : "http://localhost:8085/v1/query",
   headers: {
-    "X-Hasura-Admin-Secret": process.env.HASURA_ADMIN_SECRET || "mysecret",
+    "X-Hasura-Admin-Secret": process.env.NEXT_PUBLIC_HASURA_ADMIN_SECRET,
   },
 })
 

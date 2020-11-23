@@ -191,10 +191,26 @@ export var isEventTriggerDefinition = function(obj) {
 
 
 
-var OperationSpec_possibleTypes = ['OperationSpec']
+var OperationSpec_possibleTypes = ['OperationSpecAllColumns','OperationSpecIndividualColumns']
 export var isOperationSpec = function(obj) {
   if (!obj || !obj.__typename) throw new Error('__typename is missing in "isOperationSpec"')
   return OperationSpec_possibleTypes.includes(obj.__typename)
+}
+
+
+
+var OperationSpecAllColumns_possibleTypes = ['OperationSpecAllColumns']
+export var isOperationSpecAllColumns = function(obj) {
+  if (!obj || !obj.__typename) throw new Error('__typename is missing in "isOperationSpecAllColumns"')
+  return OperationSpecAllColumns_possibleTypes.includes(obj.__typename)
+}
+
+
+
+var OperationSpecIndividualColumns_possibleTypes = ['OperationSpecIndividualColumns']
+export var isOperationSpecIndividualColumns = function(obj) {
+  if (!obj || !obj.__typename) throw new Error('__typename is missing in "isOperationSpecIndividualColumns"')
+  return OperationSpecIndividualColumns_possibleTypes.includes(obj.__typename)
 }
 
 

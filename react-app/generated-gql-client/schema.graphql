@@ -188,9 +188,16 @@ type EventTriggerDefinition {
   update: OperationSpec
 }
 
-type OperationSpec {
+union OperationSpec = OperationSpecAllColumns | OperationSpecIndividualColumns
+
+type OperationSpecAllColumns {
+  columns: String!
+  payload: [String!]
+}
+
+type OperationSpecIndividualColumns {
   columns: [String!]!
-  payload: [String]
+  payload: [String!]
 }
 
 type RetryConf {

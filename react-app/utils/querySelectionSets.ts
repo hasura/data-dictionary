@@ -11,9 +11,9 @@ export const metadataSelectionSet = {
         arguments: everything,
         headers: {
           on_HeaderFromEnv: everything,
-          on_HeaderFromValue: everything
-        }
-      }
+          on_HeaderFromValue: everything,
+        },
+      },
     },
     allowlist: everything,
     cron_triggers: {
@@ -21,34 +21,34 @@ export const metadataSelectionSet = {
       retry_conf: everything,
       headers: {
         on_HeaderFromEnv: everything,
-        on_HeaderFromValue: everything
-      }
+        on_HeaderFromValue: everything,
+      },
     },
     custom_types: {
       enums: {
         ...everything,
-        values: everything
+        values: everything,
       },
       input_objects: {
         ...everything,
-        fields: everything
+        fields: everything,
       },
       objects: {
         ...everything,
         fields: everything,
         relationships: {
           ...everything,
-          remote_table: everything
-        }
-      }
+          remote_table: everything,
+        },
+      },
     },
     functions: {
       configuration: everything,
-      function: everything
+      function: everything,
     },
     query_collections: {
       ...everything,
-      definition: { queries: everything }
+      definition: { queries: everything },
     },
     remote_schemas: {
       ...everything,
@@ -56,9 +56,9 @@ export const metadataSelectionSet = {
         ...everything,
         headers: {
           on_HeaderFromEnv: everything,
-          on_HeaderFromValue: everything
-        }
-      }
+          on_HeaderFromValue: everything,
+        },
+      },
     },
     tables: {
       ...everything,
@@ -67,42 +67,51 @@ export const metadataSelectionSet = {
         using: {
           foreign_key_constraint_on: {
             ...everything,
-            table: everything
-          }
-        }
+            table: everything,
+          },
+        },
       },
       computed_fields: {
         ...everything,
         definition: {
           ...everything,
-          function: everything
-        }
+          function: everything,
+        },
       },
       configuration: {
         ...everything,
-        custom_root_fields: everything
+        custom_root_fields: everything,
       },
       delete_permissions: {
         ...everything,
-        permission: everything
+        permission: everything,
       },
-      event_triggers: {
-        ...everything,
-        definition: {
-          ...everything,
-          delete: everything,
-          insert: everything,
-          update: everything
-        },
-        headers: {
-          on_HeaderFromEnv: everything,
-          on_HeaderFromValue: everything
-        },
-        retry_conf: everything
-      },
+      // event_triggers: {
+      //   ...everything,
+      //   definition: {
+      //     ...everything,
+      //     delete: {
+      //       // on_OperationSpecAllColumns: everything,
+      //       on_OperationSpecIndividualColumns: everything,
+      //     },
+      //     insert: {
+      //       // on_OperationSpecAllColumns: everything,
+      //       on_OperationSpecIndividualColumns: everything,
+      //     },
+      //     update: {
+      //       // on_OperationSpecAllColumns: everything,
+      //       on_OperationSpecIndividualColumns: everything,
+      //     },
+      //   },
+      //   headers: {
+      //     on_HeaderFromEnv: everything,
+      //     on_HeaderFromValue: everything,
+      //   },
+      //   retry_conf: everything,
+      // },
       insert_permissions: {
         ...everything,
-        permission: everything
+        permission: everything,
       },
       object_relationships: {
         ...everything,
@@ -110,25 +119,25 @@ export const metadataSelectionSet = {
           foreign_key_constraint_on: true,
           manual_configuration: {
             column_mapping: true,
-            remote_table: everything
-          }
-        }
+            remote_table: everything,
+          },
+        },
       },
       remote_relationships: {
         ...everything,
-        definition: everything
+        definition: everything,
       },
       select_permissions: {
         ...everything,
-        permission: everything
+        permission: everything,
       },
       table: everything,
       update_permissions: {
         ...everything,
-        permission: everything
-      }
-    }
-  }
+        permission: everything,
+      },
+    },
+  },
 }
 
 export const postgresSelectionSet = {
@@ -141,15 +150,15 @@ export const postgresSelectionSet = {
         columns: everything,
         foreign_keys: everything,
         indexes: everything,
-        primary_key: everything
-      }
-    }
-  }
+        primary_key: everything,
+      },
+    },
+  },
 }
 
 export const metadataAndPostgresSelectionSet = {
   ...metadataSelectionSet,
-  ...postgresSelectionSet
+  ...postgresSelectionSet,
 }
 
 export type MetadataQueryResult = QueryResult<typeof metadataSelectionSet>

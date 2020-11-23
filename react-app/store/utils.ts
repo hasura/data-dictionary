@@ -15,7 +15,7 @@ interface GroupMetadataAndPostgresInfoParams {
 
 /**
  * Extracts all unique roles from Hasura metadata
- * Used for display role-selection modal options
+ * Used for displaying role-selection modal options
  */
 export function findRoleNamesInMetadata(
   metadata: MetadataAndPostgresQueryResult["metadata"]
@@ -89,13 +89,16 @@ export function groupMetadataAndPostgresInfoByTableName(
     )
 
     if (!table) {
-      throw new Error(
+      console.log(
         `Could not find PG table matching metadata table: ${metadataTable.table?.name}`
       )
+      // throw new Error(
+      //   `Could not find PG table matching metadata table: ${metadataTable.table?.name}`
+      // )
     }
 
     return {
-      id: table.table_name,
+      id: table?.table_name,
       database_table: table,
       ...metadataTable,
     }
@@ -110,7 +113,10 @@ export function groupMetadataAndPostgresInfoByTableName(
   })
 
   // Key the results by table name to turn it into a dictionary for easier name-based lookups
-  return _.keyBy(roleFilteredCombinedTables, it => it.database_table.table_name)
+  return _.keyBy(
+    roleFilteredCombinedTables,
+    it => it.database_table?.table_name
+  )
 }
 
 export type GroupedMetadataAndPostgresTables = ReturnType<

@@ -194,9 +194,19 @@ export const typeDefs = gql`
     update: OperationSpec
   }
 
-  type OperationSpec {
+  # The "columns" value can either be "*" for "all columns", an array of strings for column names
+  union OperationSpec = OperationSpecAllColumns | OperationSpecIndividualColumns
+
+  # Case when columns = "*"
+  type OperationSpecAllColumns {
+    columns: String!
+    payload: [String!]
+  }
+
+  # Case when individual columns provided
+  type OperationSpecIndividualColumns {
     columns: [String!]!
-    payload: [String]
+    payload: [String!]
   }
 
   type RetryConf {

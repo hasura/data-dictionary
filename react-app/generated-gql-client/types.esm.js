@@ -5,8 +5,8 @@ export default {
         5,
         14,
         16,
-        70,
-        71
+        72,
+        73
     ],
     "types": {
         "JSON": {},
@@ -220,22 +220,22 @@ export default {
                 18
             ],
             "custom_types": [
-                51
+                53
             ],
             "functions": [
-                60
-            ],
-            "remote_schemas": [
                 62
             ],
-            "query_collections": [
+            "remote_schemas": [
                 64
             ],
+            "query_collections": [
+                66
+            ],
             "allowlist": [
-                67
+                69
             ],
             "cron_triggers": [
-                68
+                70
             ],
             "__typename": [
                 5
@@ -256,28 +256,28 @@ export default {
                 27
             ],
             "computed_fields": [
-                31
+                33
             ],
             "object_relationships": [
-                34
+                36
             ],
             "array_relationships": [
-                37
+                39
             ],
             "remote_relationships": [
-                41
-            ],
-            "insert_permissions": [
                 43
             ],
-            "select_permissions": [
+            "insert_permissions": [
                 45
             ],
-            "update_permissions": [
+            "select_permissions": [
                 47
             ],
-            "delete_permissions": [
+            "update_permissions": [
                 49
+            ],
+            "delete_permissions": [
+                51
             ],
             "__typename": [
                 5
@@ -441,7 +441,7 @@ export default {
                 28
             ],
             "retry_conf": [
-                30
+                32
             ],
             "webhook": [
                 5
@@ -474,6 +474,28 @@ export default {
             ]
         },
         "OperationSpec": {
+            "on_OperationSpecAllColumns": [
+                30
+            ],
+            "on_OperationSpecIndividualColumns": [
+                31
+            ],
+            "__typename": [
+                5
+            ]
+        },
+        "OperationSpecAllColumns": {
+            "columns": [
+                5
+            ],
+            "payload": [
+                5
+            ],
+            "__typename": [
+                5
+            ]
+        },
+        "OperationSpecIndividualColumns": {
             "columns": [
                 5
             ],
@@ -503,7 +525,7 @@ export default {
                 5
             ],
             "definition": [
-                33
+                35
             ],
             "comment": [
                 5
@@ -525,7 +547,7 @@ export default {
         },
         "ComputedFieldDefinition": {
             "function": [
-                32
+                34
             ],
             "table_argument": [
                 5
@@ -542,7 +564,7 @@ export default {
                 5
             ],
             "using": [
-                35
+                37
             ],
             "comment": [
                 5
@@ -556,7 +578,7 @@ export default {
                 5
             ],
             "manual_configuration": [
-                36
+                38
             ],
             "__typename": [
                 5
@@ -578,7 +600,7 @@ export default {
                 5
             ],
             "using": [
-                38
+                40
             ],
             "comment": [
                 5
@@ -589,10 +611,10 @@ export default {
         },
         "ArrRelUsing": {
             "foreign_key_constraint_on": [
-                39
+                41
             ],
             "manual_configuration": [
-                40
+                42
             ],
             "__typename": [
                 5
@@ -625,7 +647,7 @@ export default {
                 5
             ],
             "definition": [
-                42
+                44
             ],
             "__typename": [
                 5
@@ -650,7 +672,7 @@ export default {
                 5
             ],
             "permission": [
-                44
+                46
             ],
             "comment": [
                 5
@@ -681,7 +703,7 @@ export default {
                 5
             ],
             "permission": [
-                46
+                48
             ],
             "comment": [
                 5
@@ -715,7 +737,7 @@ export default {
                 5
             ],
             "permission": [
-                48
+                50
             ],
             "comment": [
                 5
@@ -746,7 +768,7 @@ export default {
                 5
             ],
             "permission": [
-                50
+                52
             ],
             "comment": [
                 5
@@ -765,16 +787,16 @@ export default {
         },
         "CustomTypes": {
             "input_objects": [
-                52
-            ],
-            "objects": [
                 54
             ],
+            "objects": [
+                56
+            ],
             "scalars": [
-                57
+                59
             ],
             "enums": [
-                58
+                60
             ],
             "__typename": [
                 5
@@ -785,7 +807,7 @@ export default {
                 5
             ],
             "fields": [
-                53
+                55
             ],
             "description": [
                 5
@@ -813,10 +835,10 @@ export default {
                 5
             ],
             "fields": [
-                55
+                57
             ],
             "relationships": [
-                56
+                58
             ],
             "description": [
                 5
@@ -872,7 +894,7 @@ export default {
                 5
             ],
             "values": [
-                59
+                61
             ],
             "description": [
                 5
@@ -897,10 +919,10 @@ export default {
         },
         "CustomFunction": {
             "function": [
-                32
+                34
             ],
             "configuration": [
-                61
+                63
             ],
             "__typename": [
                 5
@@ -919,7 +941,7 @@ export default {
                 5
             ],
             "definition": [
-                63
+                65
             ],
             "comment": [
                 5
@@ -953,7 +975,7 @@ export default {
                 5
             ],
             "definition": [
-                65
+                67
             ],
             "comment": [
                 5
@@ -964,7 +986,7 @@ export default {
         },
         "QueryCollectionDefinition": {
             "queries": [
-                66
+                68
             ],
             "__typename": [
                 5
@@ -1006,7 +1028,7 @@ export default {
                 24
             ],
             "retry_conf": [
-                69
+                71
             ],
             "include_in_metadata": [
                 16

@@ -67,7 +67,7 @@ const DataModels = () => {
           if (!tableName.match(search)) return {}
           return {
             name: it.table.name,
-            comment: it.database_table?.comment || "lorem upsum",
+            comment: it.database_table?.comment,
             source: "Postgres",
           }
         })}

@@ -206,10 +206,18 @@ export interface EventTriggerDefinition {
     __typename?: 'EventTriggerDefinition'
 }
 
-export interface OperationSpec {
+export type OperationSpec = (OperationSpecAllColumns | OperationSpecIndividualColumns) & { __isUnion?: true }
+
+export interface OperationSpecAllColumns {
+    columns: Scalars['String']
+    payload?: Scalars['String'][]
+    __typename?: 'OperationSpecAllColumns'
+}
+
+export interface OperationSpecIndividualColumns {
     columns: Scalars['String'][]
-    payload?: (Scalars['String'] | undefined)[]
-    __typename?: 'OperationSpec'
+    payload?: Scalars['String'][]
+    __typename?: 'OperationSpecIndividualColumns'
 }
 
 export interface RetryConf {
@@ -719,7 +727,16 @@ export interface EventTriggerDefinitionRequest{
     __scalar?: boolean | number
 }
 
-export interface OperationSpecRequest{
+export interface OperationSpecRequest{on_OperationSpecAllColumns?:OperationSpecAllColumnsRequest,on_OperationSpecIndividualColumns?:OperationSpecIndividualColumnsRequest,__typename?:boolean | number}
+
+export interface OperationSpecAllColumnsRequest{
+    columns?: boolean | number
+    payload?: boolean | number
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+export interface OperationSpecIndividualColumnsRequest{
     columns?: boolean | number
     payload?: boolean | number
     __typename?: boolean | number
@@ -1236,10 +1253,26 @@ export const isEventTriggerDefinition = (obj?: { __typename?: any } | null): obj
 
 
 
-const OperationSpec_possibleTypes = ['OperationSpec']
+const OperationSpec_possibleTypes = ['OperationSpecAllColumns','OperationSpecIndividualColumns']
 export const isOperationSpec = (obj?: { __typename?: any } | null): obj is OperationSpec => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isOperationSpec"')
   return OperationSpec_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const OperationSpecAllColumns_possibleTypes = ['OperationSpecAllColumns']
+export const isOperationSpecAllColumns = (obj?: { __typename?: any } | null): obj is OperationSpecAllColumns => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isOperationSpecAllColumns"')
+  return OperationSpecAllColumns_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const OperationSpecIndividualColumns_possibleTypes = ['OperationSpecIndividualColumns']
+export const isOperationSpecIndividualColumns = (obj?: { __typename?: any } | null): obj is OperationSpecIndividualColumns => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isOperationSpecIndividualColumns"')
+  return OperationSpecIndividualColumns_possibleTypes.includes(obj.__typename)
 }
 
 
@@ -1903,26 +1936,36 @@ export interface EventTriggerObservableChain{
 
 export interface EventTriggerDefinitionPromiseChain{
     enable_manual: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Promise<Scalars['Boolean']>}),
-    insert: (OperationSpecPromiseChain & {get: <R extends OperationSpecRequest>(request: R, defaultValue?: (FieldsSelection<OperationSpec, R> | undefined)) => Promise<(FieldsSelection<OperationSpec, R> | undefined)>}),
-    delete: (OperationSpecPromiseChain & {get: <R extends OperationSpecRequest>(request: R, defaultValue?: (FieldsSelection<OperationSpec, R> | undefined)) => Promise<(FieldsSelection<OperationSpec, R> | undefined)>}),
-    update: (OperationSpecPromiseChain & {get: <R extends OperationSpecRequest>(request: R, defaultValue?: (FieldsSelection<OperationSpec, R> | undefined)) => Promise<(FieldsSelection<OperationSpec, R> | undefined)>})
+    insert: ({get: <R extends OperationSpecRequest>(request: R, defaultValue?: (FieldsSelection<OperationSpec, R> | undefined)) => Promise<(FieldsSelection<OperationSpec, R> | undefined)>}),
+    delete: ({get: <R extends OperationSpecRequest>(request: R, defaultValue?: (FieldsSelection<OperationSpec, R> | undefined)) => Promise<(FieldsSelection<OperationSpec, R> | undefined)>}),
+    update: ({get: <R extends OperationSpecRequest>(request: R, defaultValue?: (FieldsSelection<OperationSpec, R> | undefined)) => Promise<(FieldsSelection<OperationSpec, R> | undefined)>})
 }
 
 export interface EventTriggerDefinitionObservableChain{
     enable_manual: ({get: (request?: boolean|number, defaultValue?: Scalars['Boolean']) => Observable<Scalars['Boolean']>}),
-    insert: (OperationSpecObservableChain & {get: <R extends OperationSpecRequest>(request: R, defaultValue?: (FieldsSelection<OperationSpec, R> | undefined)) => Observable<(FieldsSelection<OperationSpec, R> | undefined)>}),
-    delete: (OperationSpecObservableChain & {get: <R extends OperationSpecRequest>(request: R, defaultValue?: (FieldsSelection<OperationSpec, R> | undefined)) => Observable<(FieldsSelection<OperationSpec, R> | undefined)>}),
-    update: (OperationSpecObservableChain & {get: <R extends OperationSpecRequest>(request: R, defaultValue?: (FieldsSelection<OperationSpec, R> | undefined)) => Observable<(FieldsSelection<OperationSpec, R> | undefined)>})
+    insert: ({get: <R extends OperationSpecRequest>(request: R, defaultValue?: (FieldsSelection<OperationSpec, R> | undefined)) => Observable<(FieldsSelection<OperationSpec, R> | undefined)>}),
+    delete: ({get: <R extends OperationSpecRequest>(request: R, defaultValue?: (FieldsSelection<OperationSpec, R> | undefined)) => Observable<(FieldsSelection<OperationSpec, R> | undefined)>}),
+    update: ({get: <R extends OperationSpecRequest>(request: R, defaultValue?: (FieldsSelection<OperationSpec, R> | undefined)) => Observable<(FieldsSelection<OperationSpec, R> | undefined)>})
 }
 
-export interface OperationSpecPromiseChain{
+export interface OperationSpecAllColumnsPromiseChain{
+    columns: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
+    payload: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'][] | undefined)) => Promise<(Scalars['String'][] | undefined)>})
+}
+
+export interface OperationSpecAllColumnsObservableChain{
+    columns: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>}),
+    payload: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'][] | undefined)) => Observable<(Scalars['String'][] | undefined)>})
+}
+
+export interface OperationSpecIndividualColumnsPromiseChain{
     columns: ({get: (request?: boolean|number, defaultValue?: Scalars['String'][]) => Promise<Scalars['String'][]>}),
-    payload: ({get: (request?: boolean|number, defaultValue?: ((Scalars['String'] | undefined)[] | undefined)) => Promise<((Scalars['String'] | undefined)[] | undefined)>})
+    payload: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'][] | undefined)) => Promise<(Scalars['String'][] | undefined)>})
 }
 
-export interface OperationSpecObservableChain{
+export interface OperationSpecIndividualColumnsObservableChain{
     columns: ({get: (request?: boolean|number, defaultValue?: Scalars['String'][]) => Observable<Scalars['String'][]>}),
-    payload: ({get: (request?: boolean|number, defaultValue?: ((Scalars['String'] | undefined)[] | undefined)) => Observable<((Scalars['String'] | undefined)[] | undefined)>})
+    payload: ({get: (request?: boolean|number, defaultValue?: (Scalars['String'][] | undefined)) => Observable<(Scalars['String'][] | undefined)>})
 }
 
 export interface RetryConfPromiseChain{
