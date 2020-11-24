@@ -1,7 +1,12 @@
 # Hasura Data Dictionary
 
 ---
-
+- [Hasura Data Dictionary](#hasura-data-dictionary)
+  - [Introduction](#introduction)
+  - [Demo](#demo)
+  - [Architecture](#architecture)
+  - [Setup Instructions](#setup-instructions)
+  
 ## Introduction
 
 The Data Dictionary is a set of tools which allow users and organizations to explore & collaborate on their data.
@@ -21,26 +26,26 @@ In this repository, there is a Next.js reference application which showcases bri
 
 At a high-level, here are some of the tools and libraries used to build this experience:
 
-- TypeScript
+- **TypeScript**
   - JavaScript, but with types
   - https://github.com/microsoft/TypeScript
-- React
+- **React**
   - JavaScript framework
   - https://github.com/facebook/react
-- Next.js
+- **Next.js**
   - React framework. Used for lazy file-based routing and because the `/pages/api` functionality provides an easy way to run and host/deploy the GraphQL service on the serverside (along with the client layer)
   - https://github.com/vercel/next.js
-- TailwindCSS
+- **TailwindCSS**
   - Utility-first CSS framework
   - https://github.com/tailwindlabs/tailwindcss
-- PgTyped
+- **PgTyped**
   - Used to auto-generate TS types from SQL queries, so that the queries run to get DB information (tables, schemas, columns, views, etc) have strongly-typed results
   - https://github.com/adelsz/pgtyped
-- genql
+- **genql**
   - Auto-generates a typesafe GraphQL query client (differs from `graphql-codegen` in that you don't need to provide manual operations in files, it does dynamic type inference)
   - https://github.com/remorses/genql
   - _Note: This library is also basically the same as https://github.com/graphql-editor/graphql-zeus. They are both solid._
-- easy-peasy
+- **Easy Peasy**
   - Redux, but wrapped with Immer and a better API
   - https://github.com/ctrlplusb/easy-peasy
 
