@@ -44,7 +44,16 @@ type PostgresTable {
   columns: [PostgresColumn!]
   primary_key: PostgresPrimaryKey
   foreign_keys: [PostgresForeignKey]
+  checks: [PostgresCheck]
   indexes: [PostgresIndex]
+}
+
+type PostgresCheck implements BelongsToTable {
+  table_schema: String!
+  table_name: String!
+  constraint_name: String!
+  column_name: String!
+  definition: String!
 }
 
 type PostgresColumn implements BelongsToTable {

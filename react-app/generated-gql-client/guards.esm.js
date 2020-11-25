@@ -23,7 +23,7 @@ export var isSchema = function(obj) {
 
 
 
-var BelongsToTable_possibleTypes = ['PostgresColumn','PostgresIndex','PostgresPrimaryKey','PostgresForeignKey']
+var BelongsToTable_possibleTypes = ['PostgresCheck','PostgresColumn','PostgresIndex','PostgresPrimaryKey','PostgresForeignKey']
 export var isBelongsToTable = function(obj) {
   if (!obj || !obj.__typename) throw new Error('__typename is missing in "isBelongsToTable"')
   return BelongsToTable_possibleTypes.includes(obj.__typename)
@@ -43,6 +43,14 @@ var PostgresTable_possibleTypes = ['PostgresTable']
 export var isPostgresTable = function(obj) {
   if (!obj || !obj.__typename) throw new Error('__typename is missing in "isPostgresTable"')
   return PostgresTable_possibleTypes.includes(obj.__typename)
+}
+
+
+
+var PostgresCheck_possibleTypes = ['PostgresCheck']
+export var isPostgresCheck = function(obj) {
+  if (!obj || !obj.__typename) throw new Error('__typename is missing in "isPostgresCheck"')
+  return PostgresCheck_possibleTypes.includes(obj.__typename)
 }
 
 

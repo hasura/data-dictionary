@@ -126,6 +126,9 @@ export function postgresMetadataQueryToGQLResult(
           foreign_keys: metadata.foreignKeys.filter(
             it => it.table_name == table.table_name
           ),
+          checks: metadata.checks.filter(
+            it => it.table_name == table.table_name
+          ),
           indexes: metadata.indexes.filter(
             it => it.table_name == table.table_name
           ),
