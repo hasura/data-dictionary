@@ -44,7 +44,17 @@ export const typeDefs = gql`
     columns: [PostgresColumn!]
     primary_key: PostgresPrimaryKey
     foreign_keys: [PostgresForeignKey]
+    checks: [PostgresCheck]
     indexes: [PostgresIndex]
+  }
+
+  # Using: checks.sql
+  type PostgresCheck implements BelongsToTable {
+    table_schema: String!
+    table_name: String!
+    constraint_name: String!
+    column_name: String!
+    definition: String!
   }
 
   # Using: columns.sql

@@ -1,3 +1,4 @@
+import { IGetChecksResult } from "../sql-queries/checks.queries"
 import type { IGetColumnsResult } from "../sql-queries/columns.queries"
 import type { IGetForeignKeysResult } from "../sql-queries/foreign-keys.queries"
 import type { IGetIndexesResult } from "../sql-queries/indexes.queries"
@@ -12,4 +13,5 @@ export interface PostgresMetadataQueryResult {
   indexes: IGetIndexesResult[]
   primaryKeys: IGetPrimaryKeysResult[]
   foreignKeys: IGetForeignKeysResult[]
+  checks: IGetChecksResult[]
 }

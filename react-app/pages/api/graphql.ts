@@ -12,6 +12,7 @@ import { getColumns } from "../../graphql-server-utils/sql-queries/columns.queri
 import { getForeignKeys } from "../../graphql-server-utils/sql-queries/foreign-keys.queries"
 import { getIndexes } from "../../graphql-server-utils/sql-queries/indexes.queries"
 import { getPrimaryKeys } from "../../graphql-server-utils/sql-queries/primary-keys.queries"
+import { getChecks } from "../../graphql-server-utils/sql-queries/checks.queries"
 import { getTables } from "../../graphql-server-utils/sql-queries/tables.queries"
 import { getViews } from "../../graphql-server-utils/sql-queries/views.queries"
 
@@ -59,6 +60,10 @@ const resolvers = {
         }),
         foreignKeys: await sqlQuery({
           query: getForeignKeys,
+          metadataClientQuery: runMetadataQuery,
+        }),
+        checks: await sqlQuery({
+          query: getChecks,
           metadataClientQuery: runMetadataQuery,
         }),
       }
