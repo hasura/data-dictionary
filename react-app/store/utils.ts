@@ -37,10 +37,34 @@ export function findRoleNamesInMetadata(
   return Array.from(new Set(allRoles)).concat("admin")
 }
 
+interface GetColumnAliasParams {
+  tableName: string
+  columnName: string
+  metadata: MetadataAndPostgresQueryResult["metadata"]
+}
+
+/**
+ * Tries to find an alias/custom column mapping in
+ * metadata for a particular column.
+ *
+ * If a custom column name exists, that is returned,
+ * else the original column name is returned.
+ */
+export function getColumnAliasIfExists(params: GetColumnAliasParams) {
+  const metadataTable = params.metadata?.tables?.find(
+    it => it.table?.name == params.tableName
+  )
+  const customColumnMapping =
+    metadataTable?.configuration?.custom_column_names[params.columnName]
+  const trueColumnName = customColumnMapping || params.columnName
+  return trueColumnName
+}
+
 interface MapDatabaseColumnTypeToGraphQLTypeParams {
   tableName: string
   columnName: string
   graphqlSchema: GraphQLSchema
+  metadata: MetadataAndPostgresQueryResult["metadata"]
 }
 
 /**
@@ -63,7 +87,8 @@ export function mapDatabaseColumnTypeToGraphQLType(
   const tableType = getNamedType(table.type)
   if (!isObjectType(tableType)) throw new Error("Not an object type")
   const fields = tableType.getFields()
-  const fieldType = fields[params.columnName].type
+  const column = getColumnAliasIfExists(params)
+  const fieldType = fields[column].type
   // Use "getNullableType" here to remove the bang "!" from types, like "String!"
   return getNullableType(fieldType).toString()
 }

@@ -13,9 +13,12 @@ export default function DatabaseModelTableView() {
   const setCurrentTryItOutOperationName = useStoreActions(
     store => store.setCurrentTryItOutOperationName
   )
-  const metadata = useStoreState(
+
+  const metadata = useStoreState(store => store.metadata)
+  const groupedMetadata = useStoreState(
     store => store.groupedMetadataAndDatabaseTables
   )
+
   const graphData = useStoreState(store => store.graphedData)
   const graphMap = useStoreState(store => store.graphedMap)
 
@@ -23,7 +26,7 @@ export default function DatabaseModelTableView() {
   const [showDegrees, setShowDegrees] = useState(2)
 
   const tableName = router.query.table as string
-  const currentItem = metadata?.[tableName]
+  const currentItem = groupedMetadata?.[tableName]
 
   const tryItOutButton = (
     <span className="cursor-pointer try-it-out-button" role="button">
@@ -130,6 +133,7 @@ export default function DatabaseModelTableView() {
           comment: it.comment,
           udt_name: it.udt_name,
           graphql_type: mapDatabaseColumnTypeToGraphQLType({
+            metadata,
             columnName: it.column_name,
             tableName: it.table_name,
             graphqlSchema: graphqlSchema!,
