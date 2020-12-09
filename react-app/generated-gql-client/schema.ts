@@ -27,7 +27,7 @@ export interface Schema {
     __typename?: 'Schema'
 }
 
-export type BelongsToTable = (PostgresColumn | PostgresIndex | PostgresPrimaryKey | PostgresForeignKey) & { __isUnion?: true }
+export type BelongsToTable = (PostgresCheck | PostgresColumn | PostgresIndex | PostgresPrimaryKey | PostgresForeignKey) & { __isUnion?: true }
 
 export interface PostgresView {
     table_schema: Scalars['String']
@@ -44,8 +44,18 @@ export interface PostgresTable {
     columns?: PostgresColumn[]
     primary_key?: PostgresPrimaryKey
     foreign_keys?: (PostgresForeignKey | undefined)[]
+    checks?: (PostgresCheck | undefined)[]
     indexes?: (PostgresIndex | undefined)[]
     __typename?: 'PostgresTable'
+}
+
+export interface PostgresCheck {
+    table_schema: Scalars['String']
+    table_name: Scalars['String']
+    constraint_name: Scalars['String']
+    column_name: Scalars['String']
+    definition: Scalars['String']
+    __typename?: 'PostgresCheck'
 }
 
 export interface PostgresColumn {
@@ -523,6 +533,7 @@ export interface SchemaRequest{
 export interface BelongsToTableRequest{
     table_schema?: boolean | number
     table_name?: boolean | number
+    on_PostgresCheck?: PostgresCheckRequest
     on_PostgresColumn?: PostgresColumnRequest
     on_PostgresIndex?: PostgresIndexRequest
     on_PostgresPrimaryKey?: PostgresPrimaryKeyRequest
@@ -547,7 +558,18 @@ export interface PostgresTableRequest{
     columns?: PostgresColumnRequest
     primary_key?: PostgresPrimaryKeyRequest
     foreign_keys?: PostgresForeignKeyRequest
+    checks?: PostgresCheckRequest
     indexes?: PostgresIndexRequest
+    __typename?: boolean | number
+    __scalar?: boolean | number
+}
+
+export interface PostgresCheckRequest{
+    table_schema?: boolean | number
+    table_name?: boolean | number
+    constraint_name?: boolean | number
+    column_name?: boolean | number
+    definition?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
@@ -1085,7 +1107,7 @@ export const isSchema = (obj?: { __typename?: any } | null): obj is Schema => {
 
 
 
-const BelongsToTable_possibleTypes = ['PostgresColumn','PostgresIndex','PostgresPrimaryKey','PostgresForeignKey']
+const BelongsToTable_possibleTypes = ['PostgresCheck','PostgresColumn','PostgresIndex','PostgresPrimaryKey','PostgresForeignKey']
 export const isBelongsToTable = (obj?: { __typename?: any } | null): obj is BelongsToTable => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isBelongsToTable"')
   return BelongsToTable_possibleTypes.includes(obj.__typename)
@@ -1105,6 +1127,14 @@ const PostgresTable_possibleTypes = ['PostgresTable']
 export const isPostgresTable = (obj?: { __typename?: any } | null): obj is PostgresTable => {
   if (!obj?.__typename) throw new Error('__typename is missing in "isPostgresTable"')
   return PostgresTable_possibleTypes.includes(obj.__typename)
+}
+
+
+
+const PostgresCheck_possibleTypes = ['PostgresCheck']
+export const isPostgresCheck = (obj?: { __typename?: any } | null): obj is PostgresCheck => {
+  if (!obj?.__typename) throw new Error('__typename is missing in "isPostgresCheck"')
+  return PostgresCheck_possibleTypes.includes(obj.__typename)
 }
 
 
@@ -1657,6 +1687,7 @@ export interface PostgresTablePromiseChain{
     columns: ({get: <R extends PostgresColumnRequest>(request: R, defaultValue?: (FieldsSelection<PostgresColumn, R>[] | undefined)) => Promise<(FieldsSelection<PostgresColumn, R>[] | undefined)>}),
     primary_key: (PostgresPrimaryKeyPromiseChain & {get: <R extends PostgresPrimaryKeyRequest>(request: R, defaultValue?: (FieldsSelection<PostgresPrimaryKey, R> | undefined)) => Promise<(FieldsSelection<PostgresPrimaryKey, R> | undefined)>}),
     foreign_keys: ({get: <R extends PostgresForeignKeyRequest>(request: R, defaultValue?: ((FieldsSelection<PostgresForeignKey, R> | undefined)[] | undefined)) => Promise<((FieldsSelection<PostgresForeignKey, R> | undefined)[] | undefined)>}),
+    checks: ({get: <R extends PostgresCheckRequest>(request: R, defaultValue?: ((FieldsSelection<PostgresCheck, R> | undefined)[] | undefined)) => Promise<((FieldsSelection<PostgresCheck, R> | undefined)[] | undefined)>}),
     indexes: ({get: <R extends PostgresIndexRequest>(request: R, defaultValue?: ((FieldsSelection<PostgresIndex, R> | undefined)[] | undefined)) => Promise<((FieldsSelection<PostgresIndex, R> | undefined)[] | undefined)>})
 }
 
@@ -1667,7 +1698,24 @@ export interface PostgresTableObservableChain{
     columns: ({get: <R extends PostgresColumnRequest>(request: R, defaultValue?: (FieldsSelection<PostgresColumn, R>[] | undefined)) => Observable<(FieldsSelection<PostgresColumn, R>[] | undefined)>}),
     primary_key: (PostgresPrimaryKeyObservableChain & {get: <R extends PostgresPrimaryKeyRequest>(request: R, defaultValue?: (FieldsSelection<PostgresPrimaryKey, R> | undefined)) => Observable<(FieldsSelection<PostgresPrimaryKey, R> | undefined)>}),
     foreign_keys: ({get: <R extends PostgresForeignKeyRequest>(request: R, defaultValue?: ((FieldsSelection<PostgresForeignKey, R> | undefined)[] | undefined)) => Observable<((FieldsSelection<PostgresForeignKey, R> | undefined)[] | undefined)>}),
+    checks: ({get: <R extends PostgresCheckRequest>(request: R, defaultValue?: ((FieldsSelection<PostgresCheck, R> | undefined)[] | undefined)) => Observable<((FieldsSelection<PostgresCheck, R> | undefined)[] | undefined)>}),
     indexes: ({get: <R extends PostgresIndexRequest>(request: R, defaultValue?: ((FieldsSelection<PostgresIndex, R> | undefined)[] | undefined)) => Observable<((FieldsSelection<PostgresIndex, R> | undefined)[] | undefined)>})
+}
+
+export interface PostgresCheckPromiseChain{
+    table_schema: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
+    table_name: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
+    constraint_name: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
+    column_name: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>}),
+    definition: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Promise<Scalars['String']>})
+}
+
+export interface PostgresCheckObservableChain{
+    table_schema: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>}),
+    table_name: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>}),
+    constraint_name: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>}),
+    column_name: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>}),
+    definition: ({get: (request?: boolean|number, defaultValue?: Scalars['String']) => Observable<Scalars['String']>})
 }
 
 export interface PostgresColumnPromiseChain{

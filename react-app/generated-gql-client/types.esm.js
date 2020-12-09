@@ -3,17 +3,17 @@ export default {
         0,
         1,
         5,
-        14,
-        16,
-        72,
-        73
+        15,
+        17,
+        73,
+        74
     ],
     "types": {
         "JSON": {},
         "JSONObject": {},
         "Query": {
             "metadata": [
-                13
+                14
             ],
             "postgres": [
                 3
@@ -52,17 +52,20 @@ export default {
             "table_name": [
                 5
             ],
-            "on_PostgresColumn": [
+            "on_PostgresCheck": [
                 9
             ],
-            "on_PostgresIndex": [
+            "on_PostgresColumn": [
                 10
             ],
-            "on_PostgresPrimaryKey": [
+            "on_PostgresIndex": [
                 11
             ],
-            "on_PostgresForeignKey": [
+            "on_PostgresPrimaryKey": [
                 12
+            ],
+            "on_PostgresForeignKey": [
+                13
             ],
             "__typename": [
                 5
@@ -79,7 +82,7 @@ export default {
                 5
             ],
             "columns": [
-                9
+                10
             ],
             "__typename": [
                 5
@@ -96,16 +99,39 @@ export default {
                 5
             ],
             "columns": [
-                9
+                10
             ],
             "primary_key": [
-                11
-            ],
-            "foreign_keys": [
                 12
             ],
+            "foreign_keys": [
+                13
+            ],
+            "checks": [
+                9
+            ],
             "indexes": [
-                10
+                11
+            ],
+            "__typename": [
+                5
+            ]
+        },
+        "PostgresCheck": {
+            "table_schema": [
+                5
+            ],
+            "table_name": [
+                5
+            ],
+            "constraint_name": [
+                5
+            ],
+            "column_name": [
+                5
+            ],
+            "definition": [
+                5
             ],
             "__typename": [
                 5
@@ -211,31 +237,31 @@ export default {
         },
         "HasuraMetadata": {
             "version": [
-                14
-            ],
-            "tables": [
                 15
             ],
+            "tables": [
+                16
+            ],
             "actions": [
-                18
+                19
             ],
             "custom_types": [
-                53
+                54
             ],
             "functions": [
-                62
+                63
             ],
             "remote_schemas": [
-                64
+                65
             ],
             "query_collections": [
-                66
+                67
             ],
             "allowlist": [
-                69
+                70
             ],
             "cron_triggers": [
-                70
+                71
             ],
             "__typename": [
                 5
@@ -244,40 +270,40 @@ export default {
         "Int": {},
         "TableEntry": {
             "table": [
-                17
+                18
             ],
             "is_enum": [
-                16
+                17
             ],
             "configuration": [
-                25
+                26
             ],
             "event_triggers": [
-                27
+                28
             ],
             "computed_fields": [
-                33
+                34
             ],
             "object_relationships": [
-                36
+                37
             ],
             "array_relationships": [
-                39
+                40
             ],
             "remote_relationships": [
-                43
+                44
             ],
             "insert_permissions": [
-                45
+                46
             ],
             "select_permissions": [
-                47
+                48
             ],
             "update_permissions": [
-                49
+                50
             ],
             "delete_permissions": [
-                51
+                52
             ],
             "__typename": [
                 5
@@ -300,13 +326,13 @@ export default {
                 5
             ],
             "definition": [
-                20
+                21
             ],
             "comment": [
                 5
             ],
             "permissions": [
-                19
+                20
             ],
             "__typename": [
                 5
@@ -322,7 +348,7 @@ export default {
         },
         "ActionDefinition": {
             "arguments": [
-                21
+                22
             ],
             "output_type": [
                 5
@@ -331,10 +357,10 @@ export default {
                 5
             ],
             "headers": [
-                24
+                25
             ],
             "forward_client_headers": [
-                16
+                17
             ],
             "handler": [
                 5
@@ -381,10 +407,10 @@ export default {
         },
         "Header": {
             "on_HeaderFromEnv": [
-                22
+                23
             ],
             "on_HeaderFromValue": [
-                23
+                24
             ],
             "__typename": [
                 5
@@ -392,7 +418,7 @@ export default {
         },
         "TableConfig": {
             "custom_root_fields": [
-                26
+                27
             ],
             "custom_column_names": [
                 1
@@ -438,10 +464,10 @@ export default {
                 5
             ],
             "definition": [
-                28
+                29
             ],
             "retry_conf": [
-                32
+                33
             ],
             "webhook": [
                 5
@@ -450,7 +476,7 @@ export default {
                 5
             ],
             "headers": [
-                24
+                25
             ],
             "__typename": [
                 5
@@ -458,16 +484,16 @@ export default {
         },
         "EventTriggerDefinition": {
             "enable_manual": [
-                16
+                17
             ],
             "insert": [
-                29
+                30
             ],
             "delete": [
-                29
+                30
             ],
             "update": [
-                29
+                30
             ],
             "__typename": [
                 5
@@ -475,10 +501,10 @@ export default {
         },
         "OperationSpec": {
             "on_OperationSpecAllColumns": [
-                30
+                31
             ],
             "on_OperationSpecIndividualColumns": [
-                31
+                32
             ],
             "__typename": [
                 5
@@ -508,13 +534,13 @@ export default {
         },
         "RetryConf": {
             "num_retries": [
-                14
+                15
             ],
             "interval_sec": [
-                14
+                15
             ],
             "timeout_sec": [
-                14
+                15
             ],
             "__typename": [
                 5
@@ -525,7 +551,7 @@ export default {
                 5
             ],
             "definition": [
-                35
+                36
             ],
             "comment": [
                 5
@@ -547,7 +573,7 @@ export default {
         },
         "ComputedFieldDefinition": {
             "function": [
-                34
+                35
             ],
             "table_argument": [
                 5
@@ -564,7 +590,7 @@ export default {
                 5
             ],
             "using": [
-                37
+                38
             ],
             "comment": [
                 5
@@ -578,7 +604,7 @@ export default {
                 5
             ],
             "manual_configuration": [
-                38
+                39
             ],
             "__typename": [
                 5
@@ -586,7 +612,7 @@ export default {
         },
         "ObjRelUsingManualMapping": {
             "remote_table": [
-                17
+                18
             ],
             "column_mapping": [
                 1
@@ -600,7 +626,7 @@ export default {
                 5
             ],
             "using": [
-                40
+                41
             ],
             "comment": [
                 5
@@ -611,10 +637,10 @@ export default {
         },
         "ArrRelUsing": {
             "foreign_key_constraint_on": [
-                41
+                42
             ],
             "manual_configuration": [
-                42
+                43
             ],
             "__typename": [
                 5
@@ -625,7 +651,7 @@ export default {
                 5
             ],
             "table": [
-                17
+                18
             ],
             "__typename": [
                 5
@@ -633,7 +659,7 @@ export default {
         },
         "ArrRelUsingManualMapping": {
             "remote_table": [
-                17
+                18
             ],
             "column_mapping": [
                 1
@@ -647,7 +673,7 @@ export default {
                 5
             ],
             "definition": [
-                44
+                45
             ],
             "__typename": [
                 5
@@ -672,7 +698,7 @@ export default {
                 5
             ],
             "permission": [
-                46
+                47
             ],
             "comment": [
                 5
@@ -692,7 +718,7 @@ export default {
                 5
             ],
             "backend_only": [
-                16
+                17
             ],
             "__typename": [
                 5
@@ -703,7 +729,7 @@ export default {
                 5
             ],
             "permission": [
-                48
+                49
             ],
             "comment": [
                 5
@@ -720,10 +746,10 @@ export default {
                 5
             ],
             "limit": [
-                14
+                15
             ],
             "allow_aggregations": [
-                16
+                17
             ],
             "filter": [
                 1
@@ -737,7 +763,7 @@ export default {
                 5
             ],
             "permission": [
-                50
+                51
             ],
             "comment": [
                 5
@@ -768,7 +794,7 @@ export default {
                 5
             ],
             "permission": [
-                52
+                53
             ],
             "comment": [
                 5
@@ -787,16 +813,16 @@ export default {
         },
         "CustomTypes": {
             "input_objects": [
-                54
+                55
             ],
             "objects": [
-                56
+                57
             ],
             "scalars": [
-                59
+                60
             ],
             "enums": [
-                60
+                61
             ],
             "__typename": [
                 5
@@ -807,7 +833,7 @@ export default {
                 5
             ],
             "fields": [
-                55
+                56
             ],
             "description": [
                 5
@@ -835,10 +861,10 @@ export default {
                 5
             ],
             "fields": [
-                57
+                58
             ],
             "relationships": [
-                58
+                59
             ],
             "description": [
                 5
@@ -869,7 +895,7 @@ export default {
                 5
             ],
             "remote_table": [
-                17
+                18
             ],
             "field_mapping": [
                 1
@@ -894,7 +920,7 @@ export default {
                 5
             ],
             "values": [
-                61
+                62
             ],
             "description": [
                 5
@@ -908,7 +934,7 @@ export default {
                 5
             ],
             "is_deprecated": [
-                16
+                17
             ],
             "description": [
                 5
@@ -919,10 +945,10 @@ export default {
         },
         "CustomFunction": {
             "function": [
-                34
+                35
             ],
             "configuration": [
-                63
+                64
             ],
             "__typename": [
                 5
@@ -941,7 +967,7 @@ export default {
                 5
             ],
             "definition": [
-                65
+                66
             ],
             "comment": [
                 5
@@ -958,13 +984,13 @@ export default {
                 5
             ],
             "headers": [
-                24
+                25
             ],
             "forward_client_headers": [
-                16
+                17
             ],
             "timeout_seconds": [
-                14
+                15
             ],
             "__typename": [
                 5
@@ -975,7 +1001,7 @@ export default {
                 5
             ],
             "definition": [
-                67
+                68
             ],
             "comment": [
                 5
@@ -986,7 +1012,7 @@ export default {
         },
         "QueryCollectionDefinition": {
             "queries": [
-                68
+                69
             ],
             "__typename": [
                 5
@@ -1025,13 +1051,13 @@ export default {
                 1
             ],
             "headers": [
-                24
+                25
             ],
             "retry_conf": [
-                71
+                72
             ],
             "include_in_metadata": [
-                16
+                17
             ],
             "comment": [
                 5
@@ -1042,16 +1068,16 @@ export default {
         },
         "RetryConfST": {
             "num_retries": [
-                14
+                15
             ],
             "retry_interval_seconds": [
-                14
+                15
             ],
             "timeout_seconds": [
-                14
+                15
             ],
             "tolerance_seconds": [
-                14
+                15
             ],
             "__typename": [
                 5
