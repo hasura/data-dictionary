@@ -23784,8 +23784,7 @@ BEGIN
 END $BODY$
   LANGUAGE plpgsql VOLATILE
   COST 100;
-ALTER FUNCTION last_updated()
-  OWNER TO postgres;
+
 
 
 -- ----------------------------
